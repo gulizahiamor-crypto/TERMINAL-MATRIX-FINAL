@@ -15,7 +15,6 @@ Sistema de trading inteligente con asistencia de IA para análisis de mercados f
 
 - 💬 **Chat con IA**: Asistente de trading basado en Gemini API
 - 📈 **Generador de Señales**: Señales de COMPRA/VENTA basadas en estrategias profesionales
-- 📊 **Datos de Mercado**: Flujo en tiempo real de XAUUSD
 - 🎨 **Interfaz Cyberpunk**: Diseño estilo Matrix con efectos neón
 
 ## Estrategias Incluidas
