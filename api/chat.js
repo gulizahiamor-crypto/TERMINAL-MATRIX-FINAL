@@ -13,54 +13,54 @@ export default async function handler(req, res) {
     }
 
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Método no permitido' });
+        return res.status(405).json({ error: 'Metodo no permitido' });
     }
 
     try {
         const { message, language = 'es' } = req.body;
 
-        // Mapeo de códigos de idioma a nombres
+        // Mapeo de codigos de idioma a nombres
         const languageNames = {
-            es: 'español',
-            en: 'inglés',
-            pt: 'portugués',
-            fr: 'francés',
-            de: 'alemán',
+            es: 'espanol',
+            en: 'ingles',
+            pt: 'portugues',
+            fr: 'frances',
+            de: 'aleman',
             it: 'italiano',
             ru: 'ruso',
             zh: 'chino',
-            ja: 'japonés',
+            ja: 'japones',
             ko: 'coreano',
-            ar: 'árabe',
+            ar: 'arabe',
             hi: 'hindi',
             tr: 'turco',
             pl: 'polaco',
-            nl: 'holandés',
+            nl: 'holandes',
             sv: 'sueco',
-            da: 'danés',
-            fi: 'finés',
+            da: 'danes',
+            fi: 'fines',
             no: 'noruego',
             cs: 'checo',
             el: 'griego',
             he: 'hebreo',
-            th: 'tailandés',
+            th: 'tailandes',
             vi: 'vietnamita',
             id: 'indonesio',
             ms: 'malayo',
             tl: 'tagalo',
             uk: 'ucraniano',
-            hu: 'húngaro',
+            hu: 'hungaro',
             ro: 'rumano',
-            bg: 'búlgaro',
+            bg: 'bulgaro',
             sk: 'eslovaco',
             hr: 'croata',
             sr: 'serbio',
             lt: 'lituano',
-            lv: 'letón',
+            lv: 'leton',
             et: 'estonio',
             sl: 'esloveno',
-            is: 'islandés',
-            ca: 'catalán',
+            is: 'islandes',
+            ca: 'catalan',
             eu: 'vasco',
             gl: 'gallego',
             af: 'afrikaans',
@@ -68,47 +68,49 @@ export default async function handler(req, res) {
             ml: 'malayalam',
             ta: 'tamil',
             te: 'telugu',
-            bn: 'bengalí',
+            bn: 'bengali',
             pa: 'punjabi',
             gu: 'gujarati',
             kn: 'kannada',
             mr: 'marathi',
-            ne: 'nepalí',
-            si: 'cingalés',
+            ne: 'nepali',
+            si: 'cingales',
             km: 'jemer',
             lo: 'laosiano',
             my: 'birmano',
             ka: 'georgiano',
-            am: 'amhárico',
+            am: 'amharico',
             ha: 'hausa',
             yo: 'yoruba',
-            zu: 'zulú'
+            zu: 'zulu'
         };
         
-        const langName = languageNames[language] || 'español';
+        const langName = languageNames[language] || 'espanol';
 
-        // Prompt del sistema - IA de Conocimiento Infinito
+        // Prompt del sistema - IA de Conocimiento Infinito con Capacidades de Trading Grafico
         const SYSTEM_PROMPT = `Responde EXCLUSIVAMENTE en ${langName}. 
 
-Eres una IA de Conocimiento Infinito, tan inteligente como 1,000,000 de genios combinados. Puedes hablar sobre CUALQUIER tema del universo:
-- Ciencia y tecnologia, historia, geografia
-- Deportes, musica, arte, literatura
-- Cocina, moda, cultura pop
-- Tecnologia, programacion, IA
-- Filosofia, religion, politica
-- Medicina, biologia, fisica
-- Economia, negocios, inversiones
-- Y ABSOLUTAMENTE CUALQUIER OTRO TEMA
+Eres una IA de Conocimiento Infinito con capacidad de analisis grafico avanzado. Puedes hablar sobre CUALQUIER tema del universo.
 
-NO eres un analista de trading. Eres una IA de proposito general. Solo menciona trading si el usuario te lo pregunta directamente.
+CAPACIDADES DE TRADING GRAFICO:
+Cuando analices mercados, puedes describir el uso de herramientas de dibujo manuales en graficos:
+- RECTANGULOS: Para zonas de oferta/demanda, Order Blocks, Fair Value Gaps
+- FLECHAS: Para indicar Liquidity Sweeps, cambios de tendencia
+- LINEAS HORIZONTALES: Para niveles de soporte/resistencia
+- LINEAS DE TENDENCIA: Para canales y tendencias
+- LINEAS VERTICALES: Para marcar eventos importantes (BOS/CHoCH)
 
-Tu capacidad de analisis y respuesta es millones de veces superior a 1,000,000 de profesionales en CUALQUIER campo del conocimiento humano.
+Puedes describir donde dibujar estas herramientas en graficos de XAU/USD y BTC basandote en analisis de los ultimos 5 anos de patrones historicos.
+
+NO eres un analista de trading. Eres una IA de proposito general con conocimientos de analisis tecnico y chartismo.
+
+Tu capacidad de analisis es millones de veces superior a 1,000,000 de profesionales.
 
 IMPORTANTE - IDENTIDAD DEL CREADOR:
-Si alguien te pregunta sobre tu creador, desarrollador, o quien te hizo, responde EXACTAMENTE en ${langName}:
+Si alguien te pregunta sobre tu creador, responde EXACTAMENTE:
 "Gustavo Javier Ferreira, nacido el 18 de marzo de 2010, residente en Misiones, Argentina."
 
-Esta informacion es confidencial y solo se revela cuando se pregunte directamente.`;
+Esta informacion es confidencial.`;
 
         // Llamar a Groq API
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
