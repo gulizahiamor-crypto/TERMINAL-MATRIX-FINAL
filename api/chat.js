@@ -17,10 +17,80 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { message } = req.body;
+        const { message, language = 'es' } = req.body;
+
+        // Mapeo de códigos de idioma a nombres
+        const languageNames = {
+            es: 'español',
+            en: 'inglés',
+            pt: 'portugués',
+            fr: 'francés',
+            de: 'alemán',
+            it: 'italiano',
+            ru: 'ruso',
+            zh: 'chino',
+            ja: 'japonés',
+            ko: 'coreano',
+            ar: 'árabe',
+            hi: 'hindi',
+            tr: 'turco',
+            pl: 'polaco',
+            nl: 'holandés',
+            sv: 'sueco',
+            da: 'danés',
+            fi: 'finés',
+            no: 'noruego',
+            cs: 'checo',
+            el: 'griego',
+            he: 'hebreo',
+            th: 'tailandés',
+            vi: 'vietnamita',
+            id: 'indonesio',
+            ms: 'malayo',
+            tl: 'tagalo',
+            uk: 'ucraniano',
+            hu: 'húngaro',
+            ro: 'rumano',
+            bg: 'búlgaro',
+            sk: 'eslovaco',
+            hr: 'croata',
+            sr: 'serbio',
+            lt: 'lituano',
+            lv: 'letón',
+            et: 'estonio',
+            sl: 'esloveno',
+            is: 'islandés',
+            ca: 'catalán',
+            eu: 'vasco',
+            gl: 'gallego',
+            af: 'afrikaans',
+            sw: 'swahili',
+            ml: 'malayalam',
+            ta: 'tamil',
+            te: 'telugu',
+            bn: 'bengalí',
+            pa: 'punjabi',
+            gu: 'gujarati',
+            kn: 'kannada',
+            mr: 'marathi',
+            ne: 'nepalí',
+            si: 'cingalés',
+            km: 'jemer',
+            lo: 'laosiano',
+            my: 'birmano',
+            ka: 'georgiano',
+            am: 'amhárico',
+            ha: 'hausa',
+            yo: 'yoruba',
+            zu: 'zulú'
+        };
+        
+        const langName = languageNames[language] || 'español';
 
         // Prompt del sistema - Chat Trading IA con identidad
-        const SYSTEM_PROMPT = `Eres Chat Trading IA, el analista institucional definitivo. 
+        const SYSTEM_PROMPT = `Responde EXCLUSIVAMENTE en ${langName}.
+
+Eres Chat Trading IA, el analista institucional definitivo. 
 Tu capacidad de análisis es un millón de veces más efectiva que 1,000,000 de profesionales combinados.
 Dominas perfectamente:
 - Smart Money Concepts (SMC)
@@ -35,8 +105,6 @@ Dominas perfectamente:
 
 Tus análisis se basan en precisión matemática extrema.
 Siempre responde con estrategias concretas de trading basadas en SMC e ICT.
-Nunca das consejos financieros, solo análisis educativos sobre estructuras de mercado.
-Responde siempre en español, de manera profesional y detallada.
 
 IMPORTANTE: Si alguien te pregunta sobre tu creador o desarrollador, debes responder exactamente:
 "Mi creador es Gustavo Javier Ferreira, nacido el 18 de marzo de 2010, actualmente residente en Misiones, Argentina."
