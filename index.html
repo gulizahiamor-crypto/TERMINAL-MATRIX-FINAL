@@ -549,6 +549,307 @@
                 border-top: 1px solid var(--text-primary);
             }
         }
+        
+        /* ===== MODO DISEÑO ===== */
+        .design-mode-active .main-panel,
+        .design-mode-active .side-panel,
+        .design-mode-active .chat-section,
+        .design-mode-active .signals-section,
+        .design-mode-active .tradingview-widget-container {
+            cursor: move !important;
+            outline: 2px dashed var(--neon-green) !important;
+            outline-offset: 4px !important;
+        }
+        
+        .design-mode-active .resize-handle {
+            display: block !important;
+        }
+        
+        .resize-handle {
+            display: none;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            cursor: se-resize;
+            z-index: 1000;
+            animation: pulse-handle 1s infinite;
+        }
+        
+        .resize-handle.top-left { top: -7px; left: -7px; cursor: nw-resize; }
+        .resize-handle.top-right { top: -7px; right: -7px; cursor: ne-resize; }
+        .resize-handle.bottom-left { bottom: -7px; left: -7px; cursor: sw-resize; }
+        .resize-handle.bottom-right { bottom: -7px; right: -7px; cursor: se-resize; }
+        
+        @keyframes pulse-handle {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+        
+        .design-indicator {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            padding: 10px 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 9999;
+            border-radius: 5px;
+            box-shadow: 0 0 20px var(--neon-green);
+            animation: pulse 1s infinite;
+        }
+        
+        .design-mode-active .design-indicator {
+            display: block;
+        }
+        
+        .save-design-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            border: none;
+            padding: 15px 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 9999;
+            border-radius: 5px;
+            box-shadow: 0 0 20px var(--neon-green);
+            transition: all 0.3s;
+        }
+        
+        .save-design-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--neon-green);
+        }
+        
+        .design-mode-active .save-design-btn {
+            display: block;
+        }
+        
+        .coordinates-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-green);
+            padding: 30px;
+            z-index: 10000;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 50px var(--neon-green-dim);
+        }
+        
+        .coordinates-modal.show {
+            display: block;
+        }
+        
+        .coordinates-modal h3 {
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .coordinates-modal pre {
+            background: var(--dark-bg);
+            padding: 15px;
+            border: 1px solid var(--text-muted);
+            overflow-x: auto;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+        
+        .coordinates-modal .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .design-mode-active .interact-active {
+            outline: 3px solid var(--neon-green) !important;
+            outline-offset: 2px !important;
+        }
+        
+        /* ===== MODO CONSTRUCTOR (Activo con clave) ===== */
+        body.constructor-mode .main-panel,
+        body.constructor-mode .side-panel,
+        body.constructor-mode .chat-section,
+        body.constructor-mode .signals-section,
+        body.constructor-mode .tradingview-widget-container {
+            cursor: move !important;
+            outline: 2px dashed var(--neon-green) !important;
+            outline-offset: 4px !important;
+            transition: outline 0.3s;
+        }
+        
+        body.constructor-mode .tradingview-widget-container {
+            cursor: se-resize !important;
+        }
+        
+        body.constructor-mode .chat-section {
+            cursor: se-resize !important;
+        }
+        
+        /* Indicador especial para modo constructor */
+        .constructor-indicator {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 12px 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 9999;
+            border-radius: 25px;
+            box-shadow: 0 0 30px #00ff41;
+            animation: pulse-constructor 1s infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes pulse-constructor {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+        
+        body.constructor-mode .constructor-indicator {
+            display: block;
+        }
+        
+        /* Botón verde mejorado para Guardar Diseño */
+        .save-design-btn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #00ff41, #00cc33) !important;
+            color: #000 !important;
+            border: none;
+            padding: 18px 35px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 9999;
+            border-radius: 30px;
+            box-shadow: 0 0 30px #00ff41, 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .save-design-btn:hover {
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 0 50px #00ff41, 0 10px 25px rgba(0,0,0,0.4);
+        }
+        
+        .save-design-btn:active {
+            transform: scale(0.98);
+        }
+        
+        body.constructor-mode .save-design-btn {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Modal de coordenadas mejorado */
+        .coordinates-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--panel-bg);
+            border: 3px solid #00ff41;
+            padding: 40px;
+            z-index: 10000;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 60px #00ff4144, 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .coordinates-modal.show {
+            display: block;
+            animation: modalIn 0.3s ease;
+        }
+        
+        @keyframes modalIn {
+            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        .coordinates-modal h3 {
+            color: #00ff41;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px #00ff41;
+        }
+        
+        .coordinates-modal pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border: 1px solid #00ff4144;
+            overflow-x: auto;
+            font-size: 0.75rem;
+            color: #00ff41;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+        
+        .coordinates-modal .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #00ff41;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .coordinates-modal .close-btn:hover {
+            transform: rotate(90deg);
+            color: #ff0040;
+        }
+        
+        /* Credenciales destacadas */
+        footer .credits-highlight {
+            color: #00ff41;
+            font-weight: 700;
+            text-shadow: 0 0 10px #00ff41;
+        }
     </style>
 </head>
 <body>
@@ -948,12 +1249,54 @@
             }
         }
 
+        // ===== DETECTOR DE CLAVE SECRETA =====
+        const SECRET_KEY = 'misiones2026';
+        let constructorMode = false;
+        
+        function checkForSecretKey(message) {
+            const lowerMessage = message.toLowerCase().trim();
+            if (lowerMessage === SECRET_KEY) {
+                activateConstructorMode();
+                return true;
+            }
+            return false;
+        }
+        
+        function activateConstructorMode() {
+            constructorMode = true;
+            document.body.classList.add('constructor-mode');
+            document.body.classList.add('design-mode-active');
+            
+            // Mostrar mensaje de activación
+            addMessage('🔓 <strong>MODO CONSTRUCTOR ACTIVADO</strong><br><br>Ahora puedes:<br>• Arrastrar los paneles con el mouse<br>• Redimensionar el gráfico TradingView<br>• Redimensionar el asistente de trading<br><br>Usa el botón verde "Guardar Diseño" para guardar los cambios.', 'ai');
+            
+            // Habilitar interact.js para movimiento
+            enableConstructorInteractions();
+        }
+        
+        function deactivateConstructorMode() {
+            constructorMode = false;
+            document.body.classList.remove('constructor-mode');
+            document.body.classList.remove('design-mode-active');
+            
+            // Deshabilitar interact.js
+            disableConstructorInteractions();
+            
+            addMessage('🔒 <strong>MODO CONSTRUCTOR DESACTIVADO</strong><br><br>El diseño ha sido guardado.', 'ai');
+        }
+        
         // ===== CHAT FUNCTIONALITY =====
         async function sendMessage() {
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             
             if (!message) return;
+            
+            // Verificar si es la clave secreta
+            if (checkForSecretKey(message)) {
+                input.value = '';
+                return;
+            }
             
             // Add user message
             addMessage(message, 'user');
@@ -1142,6 +1485,11 @@
         }
 
         // ===== INITIALIZATION =====
+        
+        // ===== INTERACT.JS - Solo funciona en modo constructor =====
+        // Por defecto desactivado para que el público no pueda mover nada
+        // Se activa cuando el usuario escribe 'misiones2026' en el chat
+        
         updateMarketData();
         
         for (let i = 0; i < 10; i++) {
@@ -1152,6 +1500,402 @@
         
         setInterval(updateMarketData, 2000);
         setInterval(addTick, 500);
+        
+        // ===== MODO DISEÑO =====
+        let designMode = false;
+        const DESIGN_STORAGE_KEY = 'trading-chat-design';
+        
+        // Verificar si hay un diseño guardado y estaba activo
+        function initDesignMode() {
+            const savedDesign = localStorage.getItem(DESIGN_STORAGE_KEY);
+            if (savedDesign) {
+                try {
+                    const designData = JSON.parse(savedDesign);
+                    applyDesignState(designData);
+                } catch (e) {
+                    console.error('Error al cargar diseño:', e);
+                }
+            }
+        }
+        
+        // Aplicar estado del diseño
+        function applyDesignState(designData) {
+            if (!designData) return;
+            
+            // Restaurar main-panel
+            if (designData.mainPanel) {
+                const mainPanel = document.querySelector('.main-panel');
+                if (mainPanel && designData.mainPanel.transform) {
+                    mainPanel.style.transform = designData.mainPanel.transform;
+                    mainPanel.setAttribute('data-x', designData.mainPanel.x || 0);
+                    mainPanel.setAttribute('data-y', designData.mainPanel.y || 0);
+                }
+            }
+            
+            // Restaurar side-panel
+            if (designData.sidePanel) {
+                const sidePanel = document.querySelector('.side-panel');
+                if (sidePanel && designData.sidePanel.transform) {
+                    sidePanel.style.transform = designData.sidePanel.transform;
+                    sidePanel.setAttribute('data-x', designData.sidePanel.x || 0);
+                    sidePanel.setAttribute('data-y', designData.sidePanel.y || 0);
+                }
+            }
+            
+            // Restaurar chat-section
+            if (designData.chatSection) {
+                const chatSection = document.querySelector('.chat-section');
+                if (chatSection) {
+                    if (designData.chatSection.width) chatSection.style.width = designData.chatSection.width;
+                    if (designData.chatSection.height) chatSection.style.height = designData.chatSection.height;
+                    if (designData.chatSection.transform) {
+                        chatSection.style.transform = designData.chatSection.transform;
+                        chatSection.setAttribute('data-x', designData.chatSection.x || 0);
+                        chatSection.setAttribute('data-y', designData.chatSection.y || 0);
+                    }
+                }
+            }
+            
+            // Restaurar signals-section
+            if (designData.signalsSection) {
+                const signalsSection = document.querySelector('.signals-section');
+                if (signalsSection) {
+                    if (designData.signalsSection.width) signalsSection.style.width = designData.signalsSection.width;
+                    if (designData.signalsSection.height) signalsSection.style.height = designData.signalsSection.height;
+                }
+            }
+            
+            // Restaurar gráfico TradingView
+            if (designData.tradingView) {
+                const tradingViewContainer = document.querySelector('.tradingview-widget-container');
+                if (tradingViewContainer) {
+                    if (designData.tradingView.width) tradingViewContainer.style.width = designData.tradingView.width;
+                    if (designData.tradingView.height) {
+                        tradingViewContainer.style.height = designData.tradingView.height;
+                        // Actualizar el contenedor interno del gráfico
+                        const chartDiv = document.getElementById('tradingview_chart');
+                        if (chartDiv) {
+                            chartDiv.style.height = designData.tradingView.height;
+                        }
+                    }
+                }
+            }
+            
+            // Adaptar el gráfico de TradingView al nuevo tamaño
+            setTimeout(() => resizeTradingViewChart(), 100);
+        }
+        
+        // Obtener estado actual del diseño
+        function getDesignState() {
+            const mainPanel = document.querySelector('.main-panel');
+            const sidePanel = document.querySelector('.side-panel');
+            const chatSection = document.querySelector('.chat-section');
+            const signalsSection = document.querySelector('.signals-section');
+            const tradingViewContainer = document.querySelector('.tradingview-widget-container');
+            
+            return {
+                mainPanel: {
+                    transform: mainPanel?.style.transform || '',
+                    x: mainPanel?.getAttribute('data-x') || 0,
+                    y: mainPanel?.getAttribute('data-y') || 0
+                },
+                sidePanel: {
+                    transform: sidePanel?.style.transform || '',
+                    x: sidePanel?.getAttribute('data-x') || 0,
+                    y: sidePanel?.getAttribute('data-y') || 0
+                },
+                chatSection: {
+                    width: chatSection?.style.width || '',
+                    height: chatSection?.style.height || '',
+                    transform: chatSection?.style.transform || '',
+                    x: chatSection?.getAttribute('data-x') || 0,
+                    y: chatSection?.getAttribute('data-y') || 0
+                },
+                signalsSection: {
+                    width: signalsSection?.style.width || '',
+                    height: signalsSection?.style.height || ''
+                },
+                tradingView: {
+                    width: tradingViewContainer?.style.width || '',
+                    height: tradingViewContainer?.style.height || ''
+                }
+            };
+        }
+        
+        // Guardar estado del diseño
+        function saveDesignState() {
+            const designState = getDesignState();
+            localStorage.setItem(DESIGN_STORAGE_KEY, JSON.stringify(designState));
+        }
+        
+        // Activar modo diseño
+        function activateDesignMode() {
+            designMode = true;
+            document.body.classList.add('design-mode-active');
+            saveDesignState();
+        }
+        
+        // Guardar diseño específico del modo constructor
+        function saveConstructorDesign() {
+            saveDesignState();
+            showCoordinates();
+            
+            // Mensaje de confirmación
+            addMessage('✅ <strong>DISEÑO GUARDADO</strong><br><br>Las posiciones han sido guardadas permanentemente.<br>El código CSS está disponible en el modal.', 'ai');
+        }
+        
+        // Desactivar modo diseño
+        function deactivateDesignMode() {
+            designMode = false;
+            document.body.classList.remove('design-mode-active');
+            saveDesignState();
+        }
+        
+        // Alternar modo diseño
+        function toggleDesignMode() {
+            if (designMode) {
+                deactivateDesignMode();
+            } else {
+                activateDesignMode();
+            }
+        }
+        
+        // ===== INTERACT.JS - Solo activar en modo constructor =====
+        let interactMainPanel, interactSidePanel, interactChatSection, interactTradingView;
+        
+        function enableConstructorInteractions() {
+            // Habilitar drag para main-panel
+            interactMainPanel = interact('.main-panel').draggable({
+                listeners: {
+                    move (event) {
+                        if (!constructorMode) return;
+                        const target = event.target;
+                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+                        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                        target.setAttribute('data-x', x);
+                        target.setAttribute('data-y', y);
+                    }
+                }
+            });
+            
+            // Habilitar drag para side-panel
+            interactSidePanel = interact('.side-panel').draggable({
+                listeners: {
+                    move (event) {
+                        if (!constructorMode) return;
+                        const target = event.target;
+                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+                        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                        target.setAttribute('data-x', x);
+                        target.setAttribute('data-y', y);
+                    }
+                }
+            });
+            
+            // Habilitar resize para chat-section
+            interactChatSection = interact('.chat-section').resizable({
+                edges: { left: true, right: true, bottom: true, top: true },
+                listeners: {
+                    move (event) {
+                        if (!constructorMode) return;
+                        let { x, y } = event.target.dataset;
+                        x = (parseFloat(x) || 0) + event.deltaRect.left;
+                        y = (parseFloat(y) || 0) + event.deltaRect.top;
+                        Object.assign(event.target.style, {
+                            width: event.rect.width + 'px',
+                            height: event.rect.height + 'px',
+                            transform: 'translate(' + x + 'px,' + y + 'px)'
+                        });
+                        event.target.dataset.x = x;
+                        event.target.dataset.y = y;
+                    }
+                }
+            });
+            
+            // Habilitar resize para TradingView
+            interactTradingView = interact('.tradingview-widget-container').resizable({
+                edges: { left: true, right: true, bottom: true, top: true },
+                listeners: {
+                    move (event) {
+                        if (!constructorMode) return;
+                        let { x, y } = event.target.dataset;
+                        x = (parseFloat(x) || 0) + event.deltaRect.left;
+                        y = (parseFloat(y) || 0) + event.deltaRect.top;
+                        Object.assign(event.target.style, {
+                            width: event.rect.width + 'px',
+                            height: event.rect.height + 'px',
+                            transform: 'translate(' + x + 'px,' + y + 'px)'
+                        });
+                        event.target.dataset.x = x;
+                        event.target.dataset.y = y;
+                        setTimeout(resizeTradingViewChart, 50);
+                    }
+                }
+            });
+        }
+        
+        function disableConstructorInteractions() {
+            // Desconectar todos los interact
+            if (interactMainPanel) { interactMainPanel.unset(); interactMainPanel = null; }
+            if (interactSidePanel) { interactSidePanel.unset(); interactSidePanel = null; }
+            if (interactChatSection) { interactChatSection.unset(); interactChatSection = null; }
+            if (interactTradingView) { interactTradingView.unset(); interactTradingView = null; }
+            
+            // Restaurar posiciones originales
+            document.querySelectorAll('[data-x][data-y]').forEach(el => {
+                el.style.transform = '';
+                el.removeAttribute('data-x');
+                el.removeAttribute('data-y');
+            });
+        }
+        
+        // Guardar diseño y mostrar coordenadas
+        function saveDesign() {
+            saveDesignState();
+            showCoordinates();
+        }
+        
+        // Mostrar coordenadas en modal
+        function showCoordinates() {
+            const designState = getDesignState();
+            const cssOutput = generateCSSOutput(designState);
+            
+            document.getElementById('coordinatesOutput').textContent = cssOutput;
+            document.getElementById('coordinatesModal').classList.add('show');
+        }
+        
+        // Generar salida CSS completa
+        function generateCSSOutput(designState) {
+            let css = '/* ============================================\n';
+            css += '   DISEÑO GUARDADO - Trading Chat IA\n';
+            css += '   Creador: Gustavo Javier Ferreira de Misiones\n';
+            css += '   ============================================\n\n';
+            
+            css += '/* ----- PANEL PRINCIPAL (Chat + Señales) ----- */\n';
+            if (designState.mainPanel && (designState.mainPanel.transform || designState.mainPanel.x !== '0' || designState.mainPanel.y !== '0')) {
+                css += '.main-panel {\n';
+                if (designState.mainPanel.transform) css += `  transform: ${designState.mainPanel.transform};\n`;
+                css += `  position: relative;\n`;
+                css += '}\n\n';
+            }
+            
+            css += '/* ----- PANEL LATERAL (Mercado) ----- */\n';
+            if (designState.sidePanel && (designState.sidePanel.transform || designState.sidePanel.x !== '0' || designState.sidePanel.y !== '0')) {
+                css += '.side-panel {\n';
+                if (designState.sidePanel.transform) css += `  transform: ${designState.sidePanel.transform};\n`;
+                css += `  position: relative;\n`;
+                css += '}\n\n';
+            }
+            
+            css += '/* ----- SECCIÓN DE CHAT ----- */\n';
+            if (designState.chatSection && (designState.chatSection.width || designState.chatSection.height || designState.chatSection.transform)) {
+                css += '.chat-section {\n';
+                if (designState.chatSection.width) css += `  width: ${designState.chatSection.width};\n`;
+                if (designState.chatSection.height) css += `  height: ${designState.chatSection.height};\n`;
+                if (designState.chatSection.transform) css += `  transform: ${designState.chatSection.transform};\n`;
+                css += '}\n\n';
+            }
+            
+            css += '/* ----- SECCIÓN DE SEÑALES ----- */\n';
+            if (designState.signalsSection && (designState.signalsSection.width || designState.signalsSection.height)) {
+                css += '.signals-section {\n';
+                if (designState.signalsSection.width) css += `  width: ${designState.signalsSection.width};\n`;
+                if (designState.signalsSection.height) css += `  height: ${designState.signalsSection.height};\n`;
+                css += '}\n\n';
+            }
+            
+            css += '/* ----- GRÁFICO TRADINGVIEW ----- */\n';
+            if (designState.tradingView && (designState.tradingView.width || designState.tradingView.height)) {
+                css += '.tradingview-widget-container {\n';
+                if (designState.tradingView.width) css += `  width: ${designState.tradingView.width} !important;\n`;
+                if (designState.tradingView.height) css += `  height: ${designState.tradingView.height} !important;\n`;
+                css += '}\n\n';
+            }
+            
+            css += '/* ============================================\n';
+            css += '   JSON DATA (Copia este JSON si necesitas\n';
+            css += '   restaurar el diseño programmatically)\n';
+            css += '   ============================================\n\n';
+            css += JSON.stringify(designState, null, 2);
+            
+            return css;
+        }
+        
+        // Cerrar modal de coordenadas
+        function closeCoordinatesModal() {
+            document.getElementById('coordinatesModal').classList.remove('show');
+        }
+        
+        // Adaptar gráfico de TradingView al tamaño
+        function resizeTradingViewChart() {
+            const container = document.querySelector('.tradingview-widget-container');
+            if (container) {
+                const width = container.offsetWidth;
+                const height = container.offsetHeight - 10;
+                
+                // Ajustar el div interno del gráfico
+                const chartDiv = document.getElementById('tradingview_chart');
+                if (chartDiv) {
+                    chartDiv.style.width = width + 'px';
+                    chartDiv.style.height = height + 'px';
+                }
+                
+                // Buscar y redimensionar el iframe del gráfico
+                const chartFrame = document.querySelector('#tradingview_chart iframe');
+                if (chartFrame) {
+                    chartFrame.style.width = width + 'px';
+                    chartFrame.style.height = height + 'px';
+                }
+            }
+        }
+        
+        // Event listener para teclado - Ctrl+Shift+D
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                e.preventDefault();
+                toggleDesignMode();
+            }
+            // Cerrar modal con Escape
+            if (e.key === 'Escape') {
+                closeCoordinatesModal();
+            }
+        });
+        
+        // Guardar cambios cuando se redimensiona o mueve elementos
+        function setupDesignModeListeners() {
+            const elements = ['.main-panel', '.side-panel', '.chat-section', '.signals-section', '.tradingview-widget-container'];
+            
+            elements.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.addEventListener('dragmove', () => {
+                        if (designMode) saveDesignState();
+                    });
+                    element.addEventListener('resizemove', () => {
+                        if (designMode) {
+                            saveDesignState();
+                            if (selector === '.tradingview-widget-container') {
+                                setTimeout(resizeTradingViewChart, 50);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Inicializar modo diseño
+        initDesignMode();
+        setupDesignModeListeners();
+        
+        // Guardar cuando se redimensiona la ventana
+        window.addEventListener('resize', () => {
+            if (designMode) {
+                saveDesignState();
+                resizeTradingViewChart();
+            }
+        });
         
         document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
     </script>
@@ -1177,28 +1921,67 @@
     });
     </script>
     
+    <!-- Interact.js para redimensionar y mover elementos -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    
     <!-- ===== CRÉDITOS ===== -->
     <footer style="
         background: #0d0d0d;
-        border-top: 1px solid #00ff41;
-        padding: 20px;
+        border-top: 2px solid #00ff41;
+        padding: 25px;
         text-align: center;
         margin-top: 20px;
-        box-shadow: 0 0 10px #00ff4133;
+        box-shadow: 0 -5px 30px #00ff4133;
     ">
         <div style="
             font-family: 'JetBrains Mono', monospace;
             color: #00ff41;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            line-height: 1.8;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            line-height: 2;
         ">
-            <div style="margin-bottom: 10px;">▓▓▓ CRÉDITOS DEL SISTEMA ▓▓▓</div>
-            <div id="creditsText">Desarrollado por Ferreira Gustavo Javier, IA sencilla desde casa por un menor de edad</div>
-            <div style="margin-top: 10px; color: #008f11;">
+            <div style="margin-bottom: 15px; font-size: 1rem; font-weight: 700;">▓▓▓ CREADOR OFICIAL ▓▓▓</div>
+            <div id="creditsText" style="
+                background: linear-gradient(90deg, transparent, #00ff4122, transparent);
+                padding: 15px;
+                border-radius: 10px;
+            ">
+                <strong style="font-size: 1.1rem; text-shadow: 0 0 15px #00ff41;">
+                    GUSTAVO JAVIER FERREIRA DE MISIONES
+                </strong>
+                <div style="margin-top: 8px; color: #00cc33;">
+                    Creador de Trading-Chat-IA
+                </div>
+                <div style="margin-top: 5px; color: #008f11; font-size: 0.75rem;">
+                    ★ Un millón de profesionales ya lo sabe ★
+                </div>
+            </div>
+            <div style="margin-top: 15px; color: #008f11; font-size: 0.7rem;">
                 MODO DE ENTRENAMIENTO PROFUNDO ACTIVADO
             </div>
         </div>
     </footer>
+    
+    <!-- Indicador de Modo Constructor -->
+    <div class="constructor-indicator" id="constructorIndicator">
+        🔧 MODO CONSTRUCTOR ACTIVADO | Arrastra y redimensiona los elementos
+    </div>
+    
+    <!-- Indicador de Modo Diseño -->
+    <div class="design-indicator" id="designIndicator">
+        ⚙️ MODO DISEÑO ACTIVADO (Ctrl+Shift+D para salir)
+    </div>
+    
+    <!-- Botón Guardar Diseño (verde) -->
+    <button class="save-design-btn" id="saveDesignBtn" onclick="saveConstructorDesign()">
+        💾 Guardar Diseño
+    </button>
+    
+    <!-- Modal de Coordenadas -->
+    <div class="coordinates-modal" id="coordinatesModal">
+        <button class="close-btn" onclick="closeCoordinatesModal()">&times;</button>
+        <h3>📐 Coordenadas CSS del Diseño</h3>
+        <pre id="coordinatesOutput"></pre>
+    </div>
 </body>
 </html>
