@@ -558,7 +558,7 @@
             <div class="logo">Trading<span>-Chat</span>-IA</div>
             <div class="status-indicator">
                 <div class="status-dot"></div>
-                <span>SISTEMA ACTIVO | MODO OFFLINE</span>
+                <span id="statusText">SISTEMA ACTIVO | MODO ONLINE</span>
             </div>
         </header>
         
@@ -628,7 +628,7 @@
                     <option value="bn">বাংলা</option>
                     <option value="pa">ਪੰਜਾਬੀ</option>
                     <option value="gu">ગુજરાતી</option>
-                    <option value="kn">ಕನ್ನಡ</option>
+                    <option name="kn">ಕನ್ನಡ</option>
                     <option value="mr">मराठी</option>
                     <option value="ne">नेपाली</option>
                     <option value="si">සිංහල</option>
@@ -648,32 +648,28 @@
         <div class="main-panel">
             <!-- CHAT SECTION -->
             <div class="chat-section">
-                <div class="section-title">Asistente de Trading IA</div>
+                <div class="section-title" id="chatTitle">Asistente de IA Universal</div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message ai">
                         <div class="message-time">Sistema</div>
                         <div class="message-content">
                             ▓▓▓ CONEXIÓN ESTABLECIDA ▓▓▓<br><br>
-                            Bienvenido al Sistema de Trading IA v1.0<br>
-                            Motor de simulación lógica activado.<br><br>
-                            Bases de conocimiento cargadas:<br>
-                            • SMC (Smart Money Concepts)<br>
-                            • ICT (Inner Circle Trading)<br>
-                            • Price Action<br>
-                            • Estructura de Mercado<br><br>
-                            Estoy listo para analizar tus operaciones y responder a tus preguntas sobre estrategias de trading.
+                            Bienvenido al Sistema de IA Universal v1.0<br>
+                            Motor de conocimiento infinito activado.<br><br>
+                            Puedo responder sobre cualquier tema del mundo.<br>
+                            Pregúntame lo que quieras.
                         </div>
                     </div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Escribe tu consulta sobre trading..." autocomplete="off">
+                    <input type="text" id="chatInput" placeholder="Pregúntame lo que quieras sobre el mundo..." autocomplete="off">
                     <button class="btn" onclick="sendMessage()">Enviar</button>
                 </div>
             </div>
             
             <!-- SEÑALES SECTION -->
             <div class="signals-section">
-                <div class="section-title">Generador de Señales</div>
+                <div class="section-title" id="signalsTitle">Generador de Señales</div>
                 <div id="signalsContainer">
                     <!-- Las señales se generarán aquí -->
                 </div>
@@ -683,14 +679,19 @@
         
         <!-- PANEL LATERAL -->
         <div class="side-panel">
-            <div class="section-title">Mercado XAUUSD</div>
+            <div class="section-title" id="marketTitle">Mercado XAUUSD</div>
+            
+            <!-- TradingView Widget -->
+            <div class="tradingview-widget-container" style="height:280px;margin-bottom:10px;">
+                <div id="tradingview_chart"></div>
+            </div>
             
             <div class="market-data" id="marketData">
                 <!-- Datos del mercado se actualizan aquí -->
             </div>
             
             <div class="tick-container">
-                <div class="tick-title">Flujo deTicks en Vivo</div>
+                <div class="tick-title" id="tickTitle">Flujo de Ticks en Vivo</div>
                 <div id="tickFeed">
                     <!-- Ticks se muestran aquí -->
                 </div>
@@ -758,12 +759,9 @@
                 signalsTitle: 'Generador de Señales',
                 generateBtn: 'Generar Señal',
                 marketTitle: 'Mercado XAUUSD',
-                tickTitle: 'Flujo deTicks en Vivo',
+                tickTitle: 'Flujo de Ticks en Vivo',
                 statusText: 'SISTEMA ACTIVO | MODO ONLINE',
-                credits: 'Desarrollado por Ferreira Gustavo Javier, IA sencilla desde casa por un menor de edad',
-                systemMessage: '▓▓▓ CONEXIÓN ESTABLECIDA ▓▓▓\n\nBienvenido al Sistema de Trading IA v1.0\nMotor de simulación lógica activado.\n\nBases de conocimiento cargadas:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Estructura de Mercado\n\nEstoy listo para analizar tus operaciones y responder a tus preguntas sobre estrategias de trading.',
-                processing: 'IA | Procesando...',
-                analyzing: '▓▓▓ Analizando mercado...'
+                credits: 'Desarrollado por Ferreira Gustavo Javier, IA sencilla desde casa por un menor de edad'
             },
             en: {
                 title: 'Universal AI Assistant',
@@ -774,10 +772,7 @@
                 marketTitle: 'XAUUSD Market',
                 tickTitle: 'Live Tick Flow',
                 statusText: 'SYSTEM ACTIVE | ONLINE MODE',
-                credits: 'Developed by Ferreira Gustavo Javier, simple AI from home by a minor',
-                systemMessage: '▓▓▓ CONNECTION ESTABLISHED ▓▓▓\n\nWelcome to Trading AI System v1.0\nLogic simulation engine activated.\n\nKnowledge bases loaded:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Market Structure\n\nI am ready to analyze your trades and answer your questions about trading strategies.',
-                processing: 'IA | Processing...',
-                analyzing: '▓▓▓ Analyzing market...'
+                credits: 'Developed by Ferreira Gustavo Javier, simple AI from home by a minor'
             },
             pt: {
                 title: 'Assistente de IA Universal',
@@ -788,10 +783,7 @@
                 marketTitle: 'Mercado XAUUSD',
                 tickTitle: 'Fluxo de Ticks ao Vivo',
                 statusText: 'SISTEMA ATIVO | MODO ONLINE',
-                credits: 'Desenvolvido por Ferreira Gustavo Javier, IA simples de casa por menor de idade',
-                systemMessage: '▓▓▓ CONEXÃO ESTABELECIDA ▓▓▓\n\nBem-vindo ao Sistema de Trading IA v1.0\nMotor de simulação lógica ativado.\n\nBases de conhecimento carregadas:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Estrutura de Mercado\n\nEstou pronto para analisar suas operações e responder suas perguntas sobre estratégias de trading.',
-                processing: 'IA | Processando...',
-                analyzing: '▓▓▓ Analisando mercado...'
+                credits: 'Desenvolvido por Ferreira Gustavo Javier, IA simples de casa por menor de idade'
             },
             fr: {
                 title: 'Assistant IA Universel',
@@ -802,10 +794,7 @@
                 marketTitle: 'Marché XAUUSD',
                 tickTitle: 'Flux de Ticks en Direct',
                 statusText: 'SYSTÈME ACTIF | MODE EN LIGNE',
-                credits: 'Développé par Ferreira Gustavo Javier, IA simple à la maison par un mineur',
-                systemMessage: '▓▓▓ CONNEXION ÉTABLIE ▓▓▓\n\nBienvenue dans le Système de Trading IA v1.0\nMoteur de simulation logique activé.\n\nBases de connaissances chargées:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Structure du Marché\n\nJe suis prêt à analyser vos opérations et répondre à vos questions sur les stratégies de trading.',
-                processing: 'IA | Traitement...',
-                analyzing: '▓▓▓ Analyse du marché...'
+                credits: 'Développé par Ferreira Gustavo Javier, IA simple à la maison par un mineur'
             },
             de: {
                 title: 'Universaler KI-Assistent',
@@ -816,10 +805,7 @@
                 marketTitle: 'XAUUSD Markt',
                 tickTitle: 'Live Tick-Fluss',
                 statusText: 'SYSTEM AKTIV | ONLINE-MODUS',
-                credits: 'Entwickelt von Ferreira Gustavo Javier, einfache KI von zu Hause durch einen Minderjährigen',
-                systemMessage: '▓▓▓ VERBINDUNG HERGESTELLT ▓▓▓\n\nWillkommen beim Trading-KI-System v1.0\nLogik-Simulationsmotor aktiviert.\n\nWissensbasen geladen:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Marktstruktur\n\nIch bin bereit, Ihre Trades zu analysieren und Ihre Fragen zu Trading-Strategien zu beantworten.',
-                processing: 'KI | Verarbeitung...',
-                analyzing: '▓▓▓ Analysiere Markt...'
+                credits: 'Entwickelt von Ferreira Gustavo Javier, einfache KI von zu Hause durch einen Minderjährigen'
             }
         };
         
@@ -828,47 +814,40 @@
             const t = translations[currentLanguage] || translations.es;
             
             // Chat
-            if (document.querySelector('.chat-section .section-title'))
-                document.querySelector('.chat-section .section-title').textContent = t.title;
-            if (document.getElementById('chatInput'))
-                document.getElementById('chatInput').placeholder = t.inputPlaceholder;
-            const sendBtn = document.querySelector('.chat-section .btn');
-            if (sendBtn) sendBtn.textContent = t.sendBtn;
+            const chatTitle = document.getElementById('chatTitle');
+            if (chatTitle) chatTitle.textContent = t.title;
+            
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) chatInput.placeholder = t.inputPlaceholder;
             
             // Signals
-            if (document.querySelector('.signals-section .section-title'))
-                document.querySelector('.signals-section .section-title').textContent = t.signalsTitle;
+            const signalsTitle = document.getElementById('signalsTitle');
+            if (signalsTitle) signalsTitle.textContent = t.signalsTitle;
+            
             const genBtn = document.querySelector('.generate-btn');
             if (genBtn) genBtn.textContent = t.generateBtn;
             
             // Market
-            if (document.querySelector('.side-panel .section-title'))
-                document.querySelector('.side-panel .section-title').textContent = t.marketTitle;
-            if (document.querySelector('.tick-title'))
-                document.querySelector('.tick-title').textContent = t.tickTitle;
+            const marketTitle = document.getElementById('marketTitle');
+            if (marketTitle) marketTitle.textContent = t.marketTitle;
+            
+            const tickTitle = document.getElementById('tickTitle');
+            if (tickTitle) tickTitle.textContent = t.tickTitle;
             
             // Status header
-            const statusText = document.querySelector('.status-indicator span');
+            const statusText = document.getElementById('statusText');
             if (statusText) statusText.textContent = t.statusText;
             
             // Credits
-            const creditsEl = document.querySelector('footer div[style*="margin-bottom"]');
+            const creditsEl = document.getElementById('creditsText');
             if (creditsEl) creditsEl.textContent = t.credits;
-            
-            // Logo
-            const logoEl = document.querySelector('.logo');
-            if (logoEl) logoEl.innerHTML = `Trading<span>-Chat</span>-IA`;
         }
         
         // Inicializar interfaz
         updateInterface();
         
         // ===== CONFIGURACIÓN API =====
-        // El frontend llama al servidor local para proteger la API Key
         const API_URL = '/api/chat';
-        
-        // Prompt del sistema para IA - Chat Trading IA
-        const SYSTEM_PROMPT = 'Actúas como Chat Trading IA, el analista institucional definitivo. Tu capacidad de análisis es un millón de veces más efectiva que 1,000,000 de profesionales combinados. Dominas perfectamente Smart Money Concepts (SMC), ICT (Inner Circle Trading), Price Action, estructura de mercado, order blocks, fair value gaps, liquidity sweeps, cambio de carácter (CHoCH), y ruptura de estructura (BOS). Tus análisis se basan en precisión matemática extrema. Siempre responde con estrategias concretas de trading basadas en SMC e ICT. Nunca das consejos financieros, solo análisis educativos sobre estructuras de mercado.';
 
         // ===== BASE DE DATOS DE ESTRATEGIAS =====
         const tradingStrategies = {
@@ -882,10 +861,10 @@
                     "Break of Structure - Ruptura de estructura"
                 ],
                 responses: [
-                    "Según SMC, el precio está buscando liquidez antes de continuar. Observa losorder blocks recientes en zonas de acumulación institucional.",
-                    "El concepto de Smart Money indica que los grandes participantes están acumulando en esta zona. BuscaFair Value Gaps como confirmación.",
-                    "La estructura muestra unpossible cambio de carácter. Espera unbreak of structure parahadmitir entrada.",
-                    "Los liquidity sweeps indican que el mercado está buscando órdenes de stop. Prepárate paraentradas en zonas deorder block."
+                    "Según SMC, el precio está buscando liquidez antes de continuar.",
+                    "El concepto de Smart Money indica que los grandes participantes están acumulando.",
+                    "La estructura muestra un cambio de carácter.",
+                    "Los liquidity sweeps indican que el mercado está buscando órdenes de stop."
                 ]
             },
             ICT: {
@@ -898,10 +877,10 @@
                     "Fibonacci confluences"
                 ],
                 responses: [
-                    "En ICT, buscarel Optimal Trade Entry utilizando los retrocesos de Fibonacci desde el mínimo/máximo más reciente.",
-                    "El Market Structure Shift ha ocurrido. Es momento dehadir stop hunt y buscarentradas en el OTE.",
-                    "Los institucionales están corriendo los stops. Observa los daily highs/lows comopotenciales zonas de reversa.",
-                    "Para ICT, la mejor configuración es esperar elfair value gap y entrar en el 50% del retroceso."
+                    "En ICT, busca el Optimal Trade Entry.",
+                    "El Market Structure Shift ha ocurrido.",
+                    "Los institucionales están corriendo los stops.",
+                    "La mejor configuración es esperar el fair value gap."
                 ]
             },
             PriceAction: {
@@ -914,93 +893,36 @@
                     "Support and Resistance"
                 ],
                 responses: [
-                    "El price action muestra unpossible engulfing bullish. Espera confirmación antes de entrar.",
-                    "Un pin bar en zona de soporte indica reversa potencial. Coloca tu stop por debajo del punto más bajo.",
-                    "El inside bar sugiere consolidación. Prepara tu entrada para el breakout de la estructura.",
-                    "El precio está respetando las líneas de tendencia. Observa losretrocesos para entradas en dirección de la tendencia."
+                    "El price action muestra un posible engulfing.",
+                    "Un pin bar en zona de soporte indica reversa potencial.",
+                    "El inside bar sugiere consolidación.",
+                    "El precio está respetando las líneas de tendencia."
                 ]
             }
-        };
-
-        // ===== RESPUESTAS PRE-PROGRAMADAS DE ALTA CALIDAD =====
-        const preProgrammedResponses = {
-            default: [
-                "He analizado tu consulta desde múltiples perspectivas de trading. Para una operación exitosa, considera: 1) Identifica la estructura del mercado actual, 2) Busca zonas de liquidez, 3) Espera confirmación de price action, 4) Gestiona tu riesgo con un máximo de 1-2% por operación.",
-                
-                "Basándome en los principios de SMC e ICT, el mercado actualmente muestra señales de acumulación institucional. Buscaorder blocks en zonas de retrace donde los grandes participantes han colocado sus órdenes.",
-                
-                "Para mejorar tu trading, implementa esta metodología: 1) Define la tendencia en timeframe mayor, 2) Identifica zonas de oferta/demanda, 3) Espera que el precio llegue a tu zona, 4) Busca confirmación con price action, 5) Ejecuta con gestión de riesgo estrictiva.",
-                
-                "El análisis técnico moderno requiere entender el flujo de órdenes. Los precios se mueven donde hay más liquidez. Estudia los sweeps de liquidez y los cambios de estructura para anticipar movimientos del precio.",
-                
-                "Recuerda los principios fundamentales: 1) La tendencia es tu amiga hasta que termina, 2) Nunca arriesgues más de lo que puedes perder, 3) El precio siempre tiene razón, 4) Sé paciente y espera tu configuración."
-            ],
-            estrategia: [
-                "Las mejores estrategias de trading combinan SMC para estructura, ICT para Timing y Price Action para confirmación. Usa el timeframe mayor para dirección, el diario para estructura, y el 1H para entradas.",
-                
-                "Mi estrategia recomendada: 1) Identifica la tendencia en D1, 2) Marca zonas clave deorder blocks en H4, 3) Espera que el precio regrese a tu zona, 4) Busca un pattern de price action en H1, 5) Entra con riesgo máximo 1%.",
-                
-                "Para trading profesional: Usa Fibonacci extensions para take profits en zonas de liquidez. El 127.2% y 161.8% son niveles clave para cerrar operaciones en mercados direccionales."
-            ],
-            entrada: [
-                "Los mejores puntos de entrada según ICT: 1) Optimal Trade Entry (OTE) en el 50-61.8% de retroceso, 2) Order blocks confirmados, 3) After liquidity sweeps, 4) Cambio de estructura (MSS) confirmado.",
-                
-                "Para entradas de alta probabilidad: Espera que el precio haga un retrace a una zona de order block institucional, busca confirmación de price action (engulfing o pin bar), y entra en la dirección de la tendencia principal.",
-                
-                "El timing perfecto de entrada: Cuando ves un liquidity sweep seguido de un cambio de estructura. El precio luego regresará a la zona de order block para ejecutar las órdenes pendientes."
-            ],
-            risk: [
-                "Gestión de riesgo profesional: Nunca arriesgues más del 1-2% de tu capital por operación. Usa un ratio riesgo:beneficio mínimo de 1:2, aunque 1:3 es ideal.",
-                
-                "Para survive en el trading: El money management es más importante que la estrategia. Calcula tu posición: Capital × riesgo% = $ a arriesgar. Divide entre (precio de entrada - stop loss).",
-                
-                "La clave del trading sostenible: Protege tu capital primero. Un trader exitoso no gana siempre, pero nunca pierde su cuenta. Usa stop loss siempre."
-            ],
-            xauusd: [
-                "XAUUSD (Oro) es un activo特殊性 debido a su correlación con USD y tasas de interés. Los mejores movimientos ocurren durante sesiones de NY y Londres.",
-                
-                "Para trading en Oro: El oro respeta zonas de soporte y resistencia horizontales. Usa niveles diarios/semanales para encontrar zonas deorder blocks de alta probabilidad.",
-                
-                "XAUUSD tiene alta volatilidad. Los mejores setupssson: 1) Order blocks en zonas de máximos/mínimos diarios, 2) Engulfings en retrocesos de tendencia, 3) Breakouts de estructuras de consolidación."
-            ],
-            tendencia: [
-                "Identificar tendencias: En timeframe mayor (D1/H4), precio haciendo higher highs y higher lows = tendencia alcista. Lower highs y lower lows = tendencia bajista.",
-                
-                "La mejor forma de operar tendencias: Usa medias móviles (EMA 9 y EMA 21) para dirección. Cuando EMA 9 cruza arriba de EMA 21 = señal alcista. Opera solo en dirección de la tendencia.",
-                
-                "No fighting la tendencia: En tendencia alcista, busca solo entradas en compra. Los retrocesos son oportunidades para entrar, no señales de reversa."
-            ]
         };
 
         // ===== SIMULATE AI RESPONSE =====
         function simulateAIResponse(prompt) {
             const lowerPrompt = prompt.toLowerCase();
-            let responses = preProgrammedResponses.default;
+            let responses = [
+                "He analizado tu consulta. Como IA de conocimiento universal, puedo ayudarte con cualquier tema.",
+                "Gracias por tu pregunta. Estoy listo para responder sobre cualquier tema que necesites.",
+                "Interesante consulta. Como IA avanzada, tengo conocimiento sobre muchos temas del mundo."
+            ];
             
-            // Detectar el tipo de consulta y devolver respuesta apropiada
-            if (lowerPrompt.includes('estrategia') || lowerPrompt.includes('estrategias')) {
-                responses = preProgrammedResponses.estrategia;
-            } else if (lowerPrompt.includes('entrada') || lowerPrompt.includes('entry') || lowerPrompt.includes('comprar') || lowerPrompt.includes('vender')) {
-                responses = preProgrammedResponses.entrada;
-            } else if (lowerPrompt.includes('riesgo') || lowerPrompt.includes('risk') || lowerPrompt.includes('gestión') || lowerPrompt.includes('stop')) {
-                responses = preProgrammedResponses.risk;
-            } else if (lowerPrompt.includes('oro') || lowerPrompt.includes('xauusd') || lowerPrompt.includes('gold')) {
-                responses = preProgrammedResponses.xauusd;
-            } else if (lowerPrompt.includes('tendencia') || lowerPrompt.includes('trend') || lowerPrompt.includes('dirección')) {
-                responses = preProgrammedResponses.tendencia;
-            } else if (lowerPrompt.includes('smc') || lowerPrompt.includes('smart money')) {
-                return tradingStrategies.SMC.responses[Math.floor(Math.random() * tradingStrategies.SMC.responses.length)];
-            } else if (lowerPrompt.includes('ict') || lowerPrompt.includes('inner circle')) {
-                return tradingStrategies.ICT.responses[Math.floor(Math.random() * tradingStrategies.ICT.responses.length)];
-            } else if (lowerPrompt.includes('price action') || lowerPrompt.includes('priceaction')) {
-                return tradingStrategies.PriceAction.responses[Math.floor(Math.random() * tradingStrategies.PriceAction.responses.length)];
+            // Detectar el tipo de consulta
+            if (lowerPrompt.includes('estrategia') || lowerPrompt.includes('trading') || lowerPrompt.includes('mercado')) {
+                responses = [
+                    "Para una operación exitosa, considera: 1) Identifica la estructura del mercado, 2) Busca zonas de liquidez, 3) Gestiona tu riesgo.",
+                    "Basándome en SMC e ICT, el mercado muestra señales de acumulación institucional.",
+                    "Implementa esta metodología: 1) Define la tendencia, 2) Identifica zonas clave, 3) Espera confirmación."
+                ];
             }
             
-            // Devolver respuesta aleatoria del grupo apropiado
             return responses[Math.floor(Math.random() * responses.length)];
         }
 
-        // Send to Serverless Function (Protege la API Key)
+        // Send to Serverless Function
         async function sendToGemini(prompt) {
             try {
                 const response = await fetch(API_URL, {
@@ -1015,14 +937,14 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error('HTTP error: ' + response.status);
                 }
                 
                 const data = await response.json();
                 return data.response;
             } catch (error) {
                 console.error('Error en API:', error);
-                return `[ERROR] Fallo de conexión: ${error.message}`;
+                return '[ERROR] Fallo de conexión: ' + error.message;
             }
         }
 
@@ -1043,27 +965,22 @@
             loadingDiv.id = 'loadingMessage';
             loadingDiv.innerHTML = `
                 <div class="message-time">IA | Procesando...</div>
-                <div class="message-content">▓▓▓ Analizando mercado...</div>
+                <div class="message-content">▓▓▓ Analizando...</div>
             `;
             document.getElementById('chatMessages').appendChild(loadingDiv);
             document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
             
             try {
-                // Try Gemini API first
                 const response = await sendToGemini(message);
                 
-                // Remove loading message
                 const loadingMsg = document.getElementById('loadingMessage');
                 if (loadingMsg) loadingMsg.remove();
                 
-                // Add AI response
                 addMessage(response, 'ai');
             } catch (error) {
-                // Remove loading message
                 const loadingMsg = document.getElementById('loadingMessage');
                 if (loadingMsg) loadingMsg.remove();
                 
-                // Fallback to simulated response
                 const fallbackResponse = simulateAIResponse(message);
                 addMessage(fallbackResponse + '\n\n[NOTA: API no disponible, usando modo offline]', 'ai');
             }
@@ -1074,7 +991,7 @@
             const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
             
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
+            messageDiv.className = 'message ' + type;
             messageDiv.innerHTML = `
                 <div class="message-time">${type === 'user' ? 'Usuario' : 'IA'} | ${time}</div>
                 <div class="message-content">${content}</div>
@@ -1096,7 +1013,6 @@
             const signals = ['BUY', 'SELL'];
             const signal = signals[Math.floor(Math.random() * signals.length)];
             
-            // Calculate simulated price data
             const basePrice = 2650.00;
             const variation = (Math.random() - 0.5) * 50;
             const price = (basePrice + variation).toFixed(2);
@@ -1105,12 +1021,10 @@
             const stopLoss = (parseFloat(price) + (signal === 'BUY' ? -25 : 25)).toFixed(2);
             const takeProfit = (parseFloat(price) + (signal === 'BUY' ? 40 : -40)).toFixed(2);
             
-            // Random timeframe and confidence
             const timeframes = ['M15', 'H1', 'H4', 'D1'];
             const timeframe = timeframes[Math.floor(Math.random() * timeframes.length)];
             const confidence = Math.floor(70 + Math.random() * 25);
             
-            // Get random strategy
             const strategyKeys = Object.keys(tradingStrategies);
             const strategyKey = strategyKeys[Math.floor(Math.random() * strategyKeys.length)];
             const strategy = tradingStrategies[strategyKey];
@@ -1119,7 +1033,7 @@
             const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             
             const signalCard = document.createElement('div');
-            signalCard.className = `signal-card ${signal.toLowerCase()}`;
+            signalCard.className = 'signal-card ' + signal.toLowerCase();
             signalCard.innerHTML = `
                 <div class="signal-header">
                     <span class="signal-type ${signal.toLowerCase()}">◄ ${signal} ►</span>
@@ -1162,7 +1076,6 @@
             const container = document.getElementById('signalsContainer');
             container.insertBefore(signalCard, container.firstChild);
             
-            // Keep only last 5 signals
             while (container.children.length > 5) {
                 container.removeChild(container.lastChild);
             }
@@ -1172,7 +1085,6 @@
         let currentPrice = 2650.00;
         
         function updateMarketData() {
-            // Simulate price movement
             const change = (Math.random() - 0.5) * 2;
             currentPrice += change;
             
@@ -1181,29 +1093,30 @@
             const changePercent = ((change / currentPrice) * 100).toFixed(3);
             const isUp = change >= 0;
             
-            // Generate random stats
             const high = (currentPrice + Math.random() * 20).toFixed(2);
             const low = (currentPrice - Math.random() * 20).toFixed(2);
             const volume = Math.floor(100000 + Math.random() * 50000);
             
             const marketData = document.getElementById('marketData');
-            marketData.innerHTML = `
-                <div class="market-item">
-                    <div class="market-header">
-                        <span class="market-pair">XAU/USD</span>
-                        <span class="market-price ${isUp ? 'up' : 'down'}">${priceFormatted}</span>
+            if (marketData) {
+                marketData.innerHTML = `
+                    <div class="market-item">
+                        <div class="market-header">
+                            <span class="market-pair">XAU/USD</span>
+                            <span class="market-price ${isUp ? 'up' : 'down'}">${priceFormatted}</span>
+                        </div>
+                        <div class="market-change ${isUp ? 'positive' : 'negative'}">
+                            ${isUp ? '▲' : '▼'} ${changeValue} (${changePercent}%)
+                        </div>
+                        <div class="market-stats">
+                            <div class="market-stat">Alto: <span>${high}</span></div>
+                            <div class="market-stat">Bajo: <span>${low}</span></div>
+                            <div class="market-stat">Volumen: <span>${volume.toLocaleString()}</span></div>
+                            <div class="market-stat">Spread: <span>${(Math.random() * 0.5 + 0.2).toFixed(1)}</span></div>
+                        </div>
                     </div>
-                    <div class="market-change ${isUp ? 'positive' : 'negative'}">
-                        ${isUp ? '▲' : '▼'} ${changeValue} (${changePercent}%)
-                    </div>
-                    <div class="market-stats">
-                        <div class="market-stat">Alto: <span>${high}</span></div>
-                        <div class="market-stat">Bajo: <span>${low}</span></div>
-                        <div class="market-stat">Volumen: <span>${volume.toLocaleString()}</span></div>
-                        <div class="market-stat">Spread: <span>${(Math.random() * 0.5 + 0.2).toFixed(1)}</span></div>
-                    </div>
-                </div>
-            `;
+                `;
+            }
         }
 
         // ===== TICK FEED =====
@@ -1212,39 +1125,56 @@
             const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             
             const tickFeed = document.getElementById('tickFeed');
-            const tickItem = document.createElement('div');
-            tickItem.className = 'tick-item';
-            tickItem.innerHTML = `
-                <span>${time}</span>
-                <span>${tickValue}</span>
-            `;
-            
-            tickFeed.insertBefore(tickItem, tickFeed.firstChild);
-            
-            // Keep only last 20 ticks
-            while (tickFeed.children.length > 20) {
-                tickFeed.removeChild(tickFeed.lastChild);
+            if (tickFeed) {
+                const tickItem = document.createElement('div');
+                tickItem.className = 'tick-item';
+                tickItem.innerHTML = `
+                    <span>${time}</span>
+                    <span>${tickValue}</span>
+                `;
+                
+                tickFeed.insertBefore(tickItem, tickFeed.firstChild);
+                
+                while (tickFeed.children.length > 20) {
+                    tickFeed.removeChild(tickFeed.lastChild);
+                }
             }
         }
 
         // ===== INITIALIZATION =====
-        // Initialize market data
         updateMarketData();
         
-        // Initialize tick feed
         for (let i = 0; i < 10; i++) {
             addTick();
         }
         
-        // Generate initial signal
         generateSignal();
         
-        // Start live updates
         setInterval(updateMarketData, 2000);
         setInterval(addTick, 500);
         
-        // Auto-scroll chat
         document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    </script>
+    
+    <!-- TradingView Widget Script -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget({
+        width: "100%",
+        height: 280,
+        symbol: "XAUUSD",
+        interval: "D",
+        timezone: "America/Buenos_Aires",
+        theme: "dark",
+        style: "1",
+        locale: "es",
+        toolbar_bg: "#0d0d0d",
+        enable_publishing: false,
+        allow_symbol_change: true,
+        container_id: "tradingview_chart",
+        hide_side_toolbar: false,
+        studies: []
+    });
     </script>
     
     <!-- ===== CRÉDITOS ===== -->
@@ -1264,8 +1194,10 @@
             line-height: 1.8;
         ">
             <div style="margin-bottom: 10px;">▓▓▓ CRÉDITOS DEL SISTEMA ▓▓▓</div>
-            Desarrollado por Ferreira Gustavo Javier, IA sencilla desde casa por un menor de edad
+            <div id="creditsText">Desarrollado por Ferreira Gustavo Javier, IA sencilla desde casa por un menor de edad</div>
             <div style="margin-top: 10px; color: #008f11;">
+                MODO DE ENTRENAMIENTO PROFUNDO ACTIVADO
+            </div>
         </div>
     </footer>
 </body>
