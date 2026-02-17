@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Agbalumo&family=Alegreya&family=Alegreya+Sans&family=Amatic+SC&family=Anton&family=Bebas+Neue&family=Bitter&family=Cabin&family=Cairo&family=Comfortaa&family=Comic+Neue&family=Cookie&family=Courgette&family=Dancing+Script&family=DM+Sans&family=Dosis&family=EB+Garamond&family=Eczar&family=Exo+2&family=Fira+Sans&family=Fjalla+One&family=Fredoka+One&family=Fira+Code&family=Geist&family=Gloria+Hallelujah&family=Great+Vibes&family=Heebo&family=IBM+Plex+Sans&family=Inconsolata&family=Indie+Flower&family=Inter&family=JetBrains+Mono&family=Josefin+Sans&family=Jost&family=Kanit&family=Karla&family=Kaushan+Script&family=Lato&family=Libre+Baskerville&family=Libre+Franklin&family=Lora&family=Manrope&family=Ma+Shan+Zheng&family=Merriweather&family=Merriweather+Sans&family=Monoton&family=Montserrat&family=Mukta&family=Muli&family=Nunito&family=Nunito+Sans&family=Open+Sans&family=Oswald&family=Outfit&family=Oxygen&family=Pacifico&family=Parisienne&family=Patrick+Hand&family=Paytone+One&family=Peddana&family=Philosopher&family=Pinyon+Script&family=Playfair+Display&family=Playfair+Display+SC&family=Plus+Jakarta+Sans&family=Poppins&family=Prata&family=Prompt&family=PT+Sans&family=PT+Serif&family=Quicksand&family=Quintessential&family=Raleway&family=Red+Hat+Display&family=Righteous&family=Roboto&family=Roboto+Condensed&family=Roboto+Flex&family=Roboto+Mono&family=Rubik&family=Sacramento&family=Salsa&family=Sarabun&family=Shadows+Into+Light&family=Shrikhand&family=Signika+Negative&family=Source+Code+Pro&family=Source+Sans+3&family=Space+Grotesk&family=Space+Mono&family=Spectral&family=Syne&family=Tajawal&family=Teko&family=Tilt+Prism&family=Titillium+Web&family=Tomorrow&family=Ubuntu&family=Ubuntu+Mono&family=Unbounded&family=Urbanist&family=Varela+Round&family=Vollkorn&family=Work+Sans&family=Xanh+Mono&family=Yanone+Kaffeesatz&family=Yeseva+One&family=Zcool+XiaoWei&family=Zilla+Slab&display=swap" rel="stylesheet">
     
+    <!-- Interact.js para drag & resize -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    
     <style>
         /* ===== ESTILO MODERNO TIPO GEMINI/IA ===== */
         
@@ -25,10 +28,10 @@
         }
         
         :root {
-            --bg-primary: #1e1e1e;
-            --bg-secondary: #252525;
-            --bg-tertiary: #2d2d2d;
-            --bg-card: #333333;
+            --bg-primary: #0e0e0e;
+            --bg-secondary: #141414;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #1f1f1f;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
             --text-muted: #808080;
@@ -36,7 +39,7 @@
             --accent-dim: #8ab4f833;
             --buy-color: #4ade80;
             --sell-color: #f87171;
-            --border-radius: 24px;
+            --border-radius: 30px;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
@@ -275,24 +278,25 @@
         
         /* ===== MENSAJES TIPO GEMINI ===== */
         .message {
-            margin-bottom: 12px;
-            padding: 16px 20px;
-            border-radius: 24px;
+            margin-bottom: 10px;
+            padding: 14px 18px;
+            border-radius: 20px;
             animation: fadeIn 0.3s ease;
-            max-width: 85%;
+            max-width: 80%;
+            font-size: 0.95rem;
         }
         
         .message.user {
-            background: var(--accent);
-            color: #000;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
             margin-left: auto;
-            border-bottom-right-radius: 8px;
+            border-bottom-right-radius: 6px;
         }
         
         .message.ai {
-            background: var(--bg-tertiary);
+            background: var(--bg-card);
             color: var(--text-primary);
-            border-bottom-left-radius: 8px;
+            border-bottom-left-radius: 6px;
         }
         
         @keyframes fadeIn {
@@ -324,14 +328,13 @@
             flex: 1;
             background: var(--bg-tertiary);
             border: none;
-            border-radius: 30px;
+            border-radius: 28px;
             color: var(--text-primary);
-            padding: 14px 24px;
+            padding: 16px 24px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1rem;
             outline: none;
             transition: all 0.3s;
-            box-shadow: var(--shadow);
         }
         
         #chatInput:focus {
@@ -1140,6 +1143,70 @@
             border-radius: 5px 0 0 5px;
         }
         
+        /* Esquinas para redimensionar diagonal */
+        .resize-handle-nw {
+            top: -5px;
+            left: -5px;
+            width: 20px;
+            height: 20px;
+            cursor: nw-resize;
+            background: #00ff41;
+            opacity: 0.7;
+            border-radius: 5px 0 0 0;
+        }
+        
+        .resize-handle-ne {
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            cursor: ne-resize;
+            background: #00ff41;
+            opacity: 0.7;
+            border-radius: 0 5px 0 0;
+        }
+        
+        .resize-handle-sw {
+            bottom: -5px;
+            left: -5px;
+            width: 20px;
+            height: 20px;
+            cursor: sw-resize;
+            background: #00ff41;
+            opacity: 0.7;
+            border-radius: 0 0 0 5px;
+        }
+        
+        .resize-handle-se {
+            bottom: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            cursor: se-resize;
+            background: #00ff41;
+            opacity: 0.7;
+            border-radius: 0 0 5px 0;
+        }
+        
+        /* Indicador visual de modo constructor */
+        .constructor-indicator {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 12px 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 30px;
+            z-index: 10000;
+            box-shadow: 0 0 30px #00ff41;
+            animation: pulse 2s infinite;
+        }
+        
         .resize-handle-ne {
             top: -8px;
             right: -8px;
@@ -1314,13 +1381,22 @@
             <!-- TradingView Widget - ÁREA PRINCIPAL -->
             <div class="tradingview-section">
                 <div class="section-title" id="chartTitle">Análisis de Mercado XAUUSD</div>
-                <div class="tradingview-widget-container" id="tradingViewContainer" style="height:400px;">
+                <div class="tradingview-widget-container" id="tradingViewContainer" style="height:400px; position: relative;">
                     <div id="tradingview_chart"></div>
+                    <!-- Resize handles para Modo Constructor -->
+                    <div class="resize-handle resize-handle-n"></div>
+                    <div class="resize-handle resize-handle-s"></div>
+                    <div class="resize-handle resize-handle-e"></div>
+                    <div class="resize-handle resize-handle-w"></div>
+                    <div class="resize-handle resize-handle-ne"></div>
+                    <div class="resize-handle resize-handle-nw"></div>
+                    <div class="resize-handle resize-handle-se"></div>
+                    <div class="resize-handle resize-handle-sw"></div>
                 </div>
             </div>
             
             <!-- CHAT SECTION - Debajo del gráfico -->
-            <div class="chat-section" id="chatSection">
+            <div class="chat-section" id="chatSection" style="position: relative;">
                 <div class="section-title" id="chatTitle">Asistente de IA Universal</div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message ai">
@@ -1338,6 +1414,15 @@
                     <input type="text" id="chatInput" placeholder="Pregúntame lo que quieras sobre el mundo..." autocomplete="off">
                     <button class="btn" onclick="sendMessage()">Enviar</button>
                 </div>
+                <!-- Resize handles para chat -->
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-nw"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
             </div>
         </div>
         
@@ -2125,6 +2210,10 @@
             document.getElementById('adminStylesPanel').classList.remove('show');
         }
         
+        function toggleAdminPanel() {
+            document.getElementById('adminStylesPanel').classList.toggle('show');
+        }
+        
         function updateAdminPreview() {
             const bgColor = document.getElementById('adminBgColor').value;
             const borderColor = document.getElementById('adminBorderColor').value;
@@ -2175,6 +2264,7 @@
             // Generar CSS completo
             let cssCode = `/* ============================================\n   DISEÑO DEFINITIVO - Trading Chat IA\n`;
             cssCode += `   Creador: Gustavo Javier Ferreira de Misiones\n`;
+            cssCode += `   Nacido el 18 de marzo de 2010\n`;
             cssCode += `   Un millón de profesionales ya lo sabe\n`;
             cssCode += `   ============================================\n\n`;
             
@@ -2415,6 +2505,8 @@
             let css = '/* ============================================\n';
             css += '   DISEÑO GUARDADO - Trading Chat IA\n';
             css += '   Creador: Gustavo Javier Ferreira de Misiones\n';
+            css += '   Nacido el 18 de marzo de 2010 - Misiones, Argentina\n';
+            css += '   Un millón de profesionales ya lo sabe\n';
             css += '   ============================================\n\n';
             
             css += '/* ----- PANEL PRINCIPAL (Chat + Señales) ----- */\n';
@@ -2470,6 +2562,24 @@
         // Cerrar modal de coordenadas
         function closeCoordinatesModal() {
             document.getElementById('coordinatesModal').classList.remove('show');
+        }
+        
+        // Copiar código CSS al portapapeles
+        function copyToClipboard() {
+            const cssCode = document.getElementById('coordinatesOutput').textContent;
+            navigator.clipboard.writeText(cssCode).then(function() {
+                alert('¡Código CSS copiado al portapapeles!\n\nGuarda este código para restaurar tu diseño cuando quieras.');
+            }, function(err) {
+                console.error('Error al copiar: ', err);
+                // Fallback para navegadores más antiguos
+                const textArea = document.createElement('textarea');
+                textArea.value = cssCode;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('¡Código CSS copiado! (modo alternativo)');
+            });
         }
         
         // Adaptar gráfico de TradingView al tamaño
@@ -2608,117 +2718,25 @@
         </div>
     </footer>
     
-
+    <!-- Botón Guardar Diseño - Solo visible en Modo Constructor -->
+    <button class="save-design-btn" onclick="showCoordinates()">
+        GUARDAR DISEÑO
+    </button>
     
-
-</body>
-</html>
-        <h3>⚙️ Panel de Estilos</h3>
-        
-        <div class="admin-section">
-            <div class="admin-section-title">🎨 Colores</div>
-            
-            <div class="admin-control">
-                <label>Color de Fondo</label>
-                <div class="color-picker-wrapper">
-                    <input type="color" id="adminBgColor" value="#0a0a0a" onchange="updateAdminPreview()">
-                    <span class="color-value" id="bgColorValue">#0a0a0a</span>
-                </div>
-            </div>
-            
-            <div class="admin-control">
-                <label>Color de Bordes</label>
-                <div class="color-picker-wrapper">
-                    <input type="color" id="adminBorderColor" value="#00ff41" onchange="updateAdminPreview()">
-                    <span class="color-value" id="borderColorValue">#00ff41</span>
-                </div>
-            </div>
-            
-            <div class="admin-control">
-                <label>Color de Texto</label>
-                <div class="color-picker-wrapper">
-                    <input type="color" id="adminTextColor" value="#00ff41" onchange="updateAdminPreview()">
-                    <span class="color-value" id="textColorValue">#00ff41</span>
-                </div>
-            </div>
-            
-            <div class="admin-control">
-                <label>Color Neón</label>
-                <div class="color-picker-wrapper">
-                    <input type="color" id="adminNeonColor" value="#00ff41" onchange="updateAdminPreview()">
-                    <span class="color-value" id="neonColorValue">#00ff41</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="admin-section">
-            <div class="admin-section-title">🔤 Tipografía</div>
-            
-            <div class="admin-control">
-                <label>Tamaño de Fuente: <span class="admin-value" id="fontSizeValue">14px</span></label>
-                <input type="range" id="adminFontSize" min="8" max="32" value="14" oninput="updateAdminPreview()">
-            </div>
-            
-            <div class="admin-control">
-                <label>Familia de Fuente</label>
-                <select id="adminFontFamily" onchange="updateAdminPreview()">
-                    <optgroup label="Populares">
-                        <option value="'Arial', sans-serif">Arial</option>
-                        <option value="'Roboto', sans-serif">Roboto</option>
-                        <option value="'Montserrat', sans-serif" selected>Montserrat</option>
-                        <option value="'Open Sans', sans-serif">Open Sans</option>
-                        <option value="'Lato', sans-serif">Lato</option>
-                        <option value="'Poppins', sans-serif">Poppins</option>
-                        <option value="'Inter', sans-serif">Inter</option>
-                        <option value="'Nunito', sans-serif">Nunito</option>
-                    </optgroup>
-                    <optgroup label="Serif">
-                        <option value="'Playfair Display', serif">Playfair Display</option>
-                        <option value="'Merriweather', serif">Merriweather</option>
-                        <option value="'Lora', serif">Lora</option>
-                        <option value="'Libre Baskerville', serif">Libre Baskerville</option>
-                        <option value="'PT Serif', serif">PT Serif</option>
-                        <option value="'Bitter', serif">Bitter</option>
-                    </optgroup>
-                    <optgroup label="Monospace">
-                        <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
-                        <option value="'Fira Code', monospace">Fira Code</option>
-                        <option value="'Source Code Pro', monospace">Source Code Pro</option>
-                        <option value="'Ubuntu Mono', monospace">Ubuntu Mono</option>
-                        <option value="'Space Mono', monospace">Space Mono</option>
-                        <option value="'IBM Plex Mono', monospace">IBM Plex Mono</option>
-                    </optgroup>
-                    <optgroup label="Display">
-                        <option value="'Bebas Neue', display">Bebas Neue</option>
-                        <option value="'Oswald', sans-serif">Oswald</option>
-                        <option value="'Anton', sans-serif">Anton</option>
-                        <option value="'Teko', sans-serif">Teko</option>
-                        <option value="'Righteous', display">Righteous</option>
-                    </optgroup>
-                    <optgroup label="Manuscritas">
-                        <option value="'Dancing Script', cursive">Dancing Script</option>
-                        <option value="'Pacifico', cursive">Pacifico</option>
-                        <option value="'Great Vibes', cursive">Great Vibes</option>
-                        <option value="'Sacramento', cursive">Sacramento</option>
-                        <option value="'Kaushan Script', cursive">Kaushan Script</option>
-                        <option value="'Parisienne', cursive">Parisienne</option>
-                    </optgroup>
-                    <optgroup label="Chinas/Japonesas">
-                        <option value="'Ma Shan Zheng', cursive">Ma Shan Zheng</option>
-                        <option value="'Zcool XiaoWei', serif">Zcool XiaoWei</option>
-                    </optgroup>
-                </select>
-            </div>
-        </div>
-        
-        <button class="admin-btn apply" onclick="applyPermanentDesign()">
-            📋 COPIAR CÓDIGO FINAL
-        </button>
-        
-        <button class="admin-btn reset" onclick="resetAdminStyles()">
-            🔄 Restablecer
+    <!-- Indicador visual de Modo Constructor -->
+    <div class="constructor-indicator">
+        <span>MODO CONSTRUCTOR ACTIVADO</span>
+        <button onclick="deactivateConstructorMode();" style="margin-left: 15px; background: #ff0040; border: none; color: white; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-size: 0.8rem;">
+            SALIR
         </button>
     </div>
+    
+    <!-- Panel lateral de admin (toggle) -->
+    <div class="admin-toggle" onclick="toggleAdminPanel()" title="Panel de Diseño">
+        DISEÑO
+    </div>
+    
+
     
 
 </body>
