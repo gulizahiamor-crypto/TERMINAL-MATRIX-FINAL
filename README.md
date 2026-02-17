@@ -2,7 +2,7 @@
 title: Trading-Chat-IA
 emoji: 🚀
 colorFrom: green
-colorTo: black
+colorTo: gray
 sdk: static
 pinned: false
 ---
