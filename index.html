@@ -499,8 +499,12 @@
     </div>
 
     <script>
-        // ===== CONFIGURACIÓN API =====
-        const API_KEY_PUBLICA = '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';
+        // ===== CONFIGURACIÓN API - VARIABLE DE ENTORNO =====
+        // En Vercel, configura GROQ_API_KEY en Environment Variables
+        // Esta clave se reemplazará automáticamente en producción
+        const GROQ_API_KEY = typeof process !== 'undefined' && process.env && process.env.GROQ_API_KEY 
+            ? process.env.GROQ_API_KEY 
+            : window.ENV?.GROQ_API_KEY || 'TU_API_KEY_AQUI';
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY_PUBLICA}`;
         
         // Prompt del sistema para IA
@@ -643,7 +647,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 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'
+                        'Authorization': 'Bearer ' + GROQ_API_KEY
                     },
                     body: JSON.stringify({
                         model: 'llama-3.3-70b-versatile',

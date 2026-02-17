@@ -40,6 +40,14 @@ Sistema de trading inteligente con asistencia de IA para análisis de mercados f
 
 Este proyecto está configurado para desplegarse en Hugging Face Spaces con SDK estático.
 
+### Configuración para Vercel
+
+Para desplegar en Vercel, configura las siguientes Variables de Entorno:
+
+| Variable | Valor |
+|----------|-------|
+| GROQ_API_KEY | Tu clave API de Groq |
+
 ```bash
 # Deployment automático en HF Spaces
 ```
