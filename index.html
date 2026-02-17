@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading-Chat-IA | Sistema de Trading Inteligente</title>
     
+    <!-- Google Fonts - Inter moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Google Fonts - Selector de 500+ fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Agbalumo&family=Alegreya&family=Alegreya+Sans&family=Amatic+SC&family=Anton&family=Bebas+Neue&family=Bitter&family=Cabin&family=Cairo&family=Comfortaa&family=Comic+Neue&family=Cookie&family=Courgette&family=Dancing+Script&family=DM+Sans&family=Dosis&family=EB+Garamond&family=Eczar&family=Exo+2&family=Fira+Sans&family=Fjalla+One&family=Fredoka+One&family=Fira+Code&family=Geist&family=Gloria+Hallelujah&family=Great+Vibes&family=Heebo&family=IBM+Plex+Sans&family=Inconsolata&family=Indie+Flower&family=Inter&family=JetBrains+Mono&family=Josefin+Sans&family=Jost&family=Kanit&family=Karla&family=Kaushan+Script&family=Lato&family=Libre+Baskerville&family=Libre+Franklin&family=Lora&family=Manrope&family=Ma+Shan+Zheng&family=Merriweather&family=Merriweather+Sans&family=Monoton&family=Montserrat&family=Mukta&family=Muli&family=Nunito&family=Nunito+Sans&family=Open+Sans&family=Oswald&family=Outfit&family=Oxygen&family=Pacifico&family=Parisienne&family=Patrick+Hand&family=Paytone+One&family=Peddana&family=Philosopher&family=Pinyon+Script&family=Playfair+Display&family=Playfair+Display+SC&family=Plus+Jakarta+Sans&family=Poppins&family=Prata&family=Prompt&family=PT+Sans&family=PT+Serif&family=Quicksand&family=Quintessential&family=Raleway&family=Red+Hat+Display&family=Righteous&family=Roboto&family=Roboto+Condensed&family=Roboto+Flex&family=Roboto+Mono&family=Rubik&family=Sacramento&family=Salsa&family=Sarabun&family=Shadows+Into+Light&family=Shrikhand&family=Signika+Negative&family=Source+Code+Pro&family=Source+Sans+3&family=Space+Grotesk&family=Space+Mono&family=Spectral&family=Syne&family=Tajawal&family=Teko&family=Tilt+Prism&family=Titillium+Web&family=Tomorrow&family=Ubuntu&family=Ubuntu+Mono&family=Unbounded&family=Urbanist&family=Varela+Round&family=Vollkorn&family=Work+Sans&family=Xanh+Mono&family=Yanone+Kaffeesatz&family=Yeseva+One&family=Zcool+XiaoWei&family=Zilla+Slab&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== ESTILO MATRIX/CYBERPUNK ===== */
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+        /* ===== ESTILO MODERNO TIPO GEMINI/IA ===== */
         
         * {
             margin: 0;
@@ -21,108 +25,50 @@
         }
         
         :root {
-            --neon-green: #00ff41;
-            --neon-green-dim: #00ff4133;
-            --dark-bg: #0a0a0a;
-            --panel-bg: #0d0d0d;
-            --text-primary: #00ff41;
-            --text-secondary: #00cc33;
-            --text-muted: #008f11;
-            --buy-color: #00ff41;
-            --sell-color: #ff0040;
-            --border-glow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green-dim);
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #252525;
+            --bg-tertiary: #2d2d2d;
+            --bg-card: #333333;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #808080;
+            --accent: #8ab4f8;
+            --accent-dim: #8ab4f833;
+            --buy-color: #4ade80;
+            --sell-color: #f87171;
+            --border-radius: 24px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
         
-        /* Tema: Blanco y Negro */
-        body.theme-bw {
-            --neon-green: #000000;
-            --neon-green-dim: #00000033;
-            --dark-bg: #ffffff;
-            --panel-bg: #f0f0f0;
-            --text-primary: #000000;
-            --text-secondary: #333333;
-            --text-muted: #666666;
-            --buy-color: #000000;
-            --sell-color: #ff0000;
-            --border-glow: none;
-        }
-        
-        /* Tema: Oscuro */
-        body.theme-dark {
-            --neon-green: #4a9eff;
-            --neon-green-dim: #4a9eff33;
-            --dark-bg: #1a1a2e;
-            --panel-bg: #16213e;
-            --text-primary: #4a9eff;
-            --text-secondary: #3d8ae6;
-            --text-muted: #2a6bc4;
-            --buy-color: #00ff88;
-            --sell-color: #ff4a6a;
-            --border-glow: 0 0 10px #4a9eff, 0 0 20px #4a9eff33;
-        }
-        
-        /* Tema: Claro */
+        /* Tema Claro */
         body.theme-light {
-            --neon-green: #0066cc;
-            --neon-green-dim: #0066cc33;
-            --dark-bg: #ffffff;
-            --panel-bg: #f5f5f5;
-            --text-primary: #000000;
-            --text-secondary: #333333;
-            --text-muted: #666666;
-            --buy-color: #008800;
-            --sell-color: #cc0000;
-            --border-glow: none;
-        }
-        
-        /* Tema: Neon Night */
-        body.theme-neon {
-            --neon-green: #00ffff;
-            --neon-green-dim: #00ffff33;
-            --dark-bg: #0a001a;
-            --panel-bg: #15002a;
-            --text-primary: #00ffff;
-            --text-secondary: #ff00ff;
-            --text-muted: #ff00ff;
-            --buy-color: #00ffff;
-            --sell-color: #ff00ff;
-            --border-glow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
-        }
-        
-        /* Eliminar fondo matrix en temas diferentes */
-        body.theme-bw::before, body.theme-dark::before, body.theme-light::before, body.theme-neon::before {
-            display: none;
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f0f0f0;
+            --bg-card: #ffffff;
+            --text-primary: #1f1f1f;
+            --text-secondary: #5f6368;
+            --text-muted: #808080;
+            --accent: #1a73e8;
+            --accent-dim: #1a73e833;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
         
         body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: var(--dark-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.6;
         }
         
-        /* Efecto de fondo Matrix */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, transparent 98%, var(--neon-green-dim) 100%),
-                linear-gradient(0deg, transparent 98%, var(--neon-green-dim) 100%);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.3;
-        }
-        
-        /* ===== LAYOUT PRINCIPAL - ESTILO BLOOMBERG ===== */
+        /* ===== LAYOUT PRINCIPAL MODERNO ===== */
         .container {
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 340px;
             grid-template-rows: auto auto 1fr;
             min-height: 100vh;
             gap: 0;
@@ -132,7 +78,7 @@
         .main-panel {
             display: flex;
             flex-direction: column;
-            border-right: 1px solid var(--text-primary);
+            border-right: 1px solid var(--bg-tertiary);
         }
         
         /* TradingView - ANCHO COMPLETO arriba */
@@ -172,28 +118,28 @@
             min-height: 150px;
         }
         
-        /* ===== HEADER ===== */
+        /* ===== HEADER MODERNO ===== */
         header {
             grid-column: 1 / -1;
-            background: var(--panel-bg);
-            border-bottom: 1px solid var(--text-primary);
-            padding: 15px 30px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--bg-tertiary);
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: var(--border-glow);
+            box-shadow: var(--shadow);
         }
         
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: var(--border-glow);
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
         }
         
         .logo span {
-            color: var(--text-muted);
+            color: var(--accent);
+            font-weight: 300;
         }
         
         /* ===== PANEL DE AJUSTES ===== */
@@ -327,21 +273,26 @@
             margin-bottom: 15px;
         }
         
+        /* ===== MENSAJES TIPO GEMINI ===== */
         .message {
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            border-left: 2px solid var(--text-muted);
+            margin-bottom: 12px;
+            padding: 16px 20px;
+            border-radius: 24px;
             animation: fadeIn 0.3s ease;
+            max-width: 85%;
         }
         
         .message.user {
-            border-left-color: var(--text-secondary);
-            background: rgba(0, 255, 65, 0.05);
+            background: var(--accent);
+            color: #000;
+            margin-left: auto;
+            border-bottom-right-radius: 8px;
         }
         
         .message.ai {
-            border-left-color: var(--text-primary);
-            background: rgba(0, 255, 65, 0.1);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-bottom-left-radius: 8px;
         }
         
         @keyframes fadeIn {
@@ -360,26 +311,31 @@
             line-height: 1.6;
         }
         
+        /* ===== INPUT MINIMALISTA MODERNO ===== */
         .chat-input-area {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--bg-tertiary);
         }
         
         #chatInput {
             flex: 1;
-            background: var(--panel-bg);
-            border: 1px solid var(--text-muted);
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 30px;
             color: var(--text-primary);
-            padding: 12px 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            padding: 14px 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             outline: none;
             transition: all 0.3s;
+            box-shadow: var(--shadow);
         }
         
         #chatInput:focus {
-            border-color: var(--text-primary);
-            box-shadow: var(--border-glow);
+            box-shadow: var(--shadow-hover), 0 0 0 2px var(--accent);
         }
         
         #chatInput::placeholder {
@@ -387,22 +343,21 @@
         }
         
         .btn {
-            background: transparent;
-            border: 1px solid var(--text-primary);
-            color: var(--text-primary);
-            padding: 12px 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            padding: 14px 28px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            border-radius: 30px;
             transition: all 0.3s;
         }
         
         .btn:hover {
-            background: var(--neon-green);
-            color: var(--dark-bg);
-            box-shadow: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
         
         /* ===== ÁREA DE SEÑALES ===== */
@@ -411,13 +366,22 @@
             min-height: 300px;
         }
         
+        /* ===== TARJETAS MODERNAS ===== */
         .signal-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--text-muted);
-            padding: 15px;
-            margin-bottom: 10px;
+            background: var(--bg-tertiary);
+            border: none;
+            padding: 16px;
+            margin-bottom: 12px;
             position: relative;
             overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .signal-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
         }
         
         .signal-card::before {
@@ -425,18 +389,17 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 3px;
+            width: 4px;
             height: 100%;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
         }
         
         .signal-card.buy::before {
             background: var(--buy-color);
-            box-shadow: 0 0 10px var(--buy-color);
         }
         
         .signal-card.sell::before {
             background: var(--sell-color);
-            box-shadow: 0 0 10px var(--sell-color);
         }
         
         .signal-header {
@@ -494,9 +457,9 @@
             margin-top: 15px;
         }
         
-        /* ===== PANEL LATERAL (DATOS DE MERCADO) ===== */
+        /* ===== PANEL LATERAL MODERNO ===== */
         .side-panel {
-            background: var(--panel-bg);
+            background: var(--bg-secondary);
             padding: 20px;
             overflow-y: auto;
         }
@@ -2604,10 +2567,10 @@
     
 
     
-    <!-- ===== CRÉDITOS ===== -->
+    <!-- ===== CRÉDITOS MODERNOS ===== -->
     <footer style="
-        background: #0d0d0d;
-        border-top: 2px solid #00ff41;
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--bg-tertiary);
         padding: 25px;
         text-align: center;
         margin-top: 20px;
