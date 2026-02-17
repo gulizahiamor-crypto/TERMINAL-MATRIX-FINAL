@@ -230,11 +230,22 @@
             50% { opacity: 0.5; }
         }
         
-        /* ===== PANEL PRINCIPAL (CHAT + SEÑALES) ===== */
+        /* ===== PANEL PRINCIPAL (Gráfico + Chat) ===== */
         .main-panel {
             display: flex;
             flex-direction: column;
             border-right: 1px solid var(--text-primary);
+        }
+        
+        /* TradingView en área principal */
+        .tradingview-section {
+            flex: 0 0 auto;
+            padding: 20px;
+            border-bottom: 1px solid var(--text-primary);
+        }
+        
+        .tradingview-section .tradingview-widget-container {
+            height: 400px !important;
         }
         
         /* ===== ÁREA DE CHAT ===== */
@@ -1293,18 +1304,16 @@
         
         <!-- PANEL PRINCIPAL -->
         <div class="main-panel">
-            <!-- CHAT SECTION -->
+            <!-- TradingView Widget - ÁREA PRINCIPAL -->
+            <div class="tradingview-section">
+                <div class="section-title" id="chartTitle">Análisis de Mercado XAUUSD</div>
+                <div class="tradingview-widget-container" id="tradingViewContainer" style="height:400px;">
+                    <div id="tradingview_chart"></div>
+                </div>
+            </div>
+            
+            <!-- CHAT SECTION - Debajo del gráfico -->
             <div class="chat-section" id="chatSection">
-                <!-- Resize handles estilo Windows -->
-                <div class="resize-handle resize-handle-n"></div>
-                <div class="resize-handle resize-handle-s"></div>
-                <div class="resize-handle resize-handle-e"></div>
-                <div class="resize-handle resize-handle-w"></div>
-                <div class="resize-handle resize-handle-ne"></div>
-                <div class="resize-handle resize-handle-nw"></div>
-                <div class="resize-handle resize-handle-se"></div>
-                <div class="resize-handle resize-handle-sw"></div>
-                
                 <div class="section-title" id="chatTitle">Asistente de IA Universal</div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message ai">
@@ -1323,35 +1332,11 @@
                     <button class="btn" onclick="sendMessage()">Enviar</button>
                 </div>
             </div>
-            
-            <!-- SEÑALES SECTION -->
-            <div class="signals-section">
-                <div class="section-title" id="signalsTitle">Generador de Señales</div>
-                <div id="signalsContainer">
-                    <!-- Las señales se generarán aquí -->
-                </div>
-                <button class="btn generate-btn" onclick="generateSignal()">Generar Señal</button>
-            </div>
         </div>
         
-        <!-- PANEL LATERAL -->
+        <!-- PANEL LATERAL - Solo datos de mercado -->
         <div class="side-panel">
             <div class="section-title" id="marketTitle">Mercado XAUUSD</div>
-            
-            <!-- TradingView Widget -->
-            <div class="tradingview-widget-container" id="tradingViewContainer" style="height:280px;margin-bottom:10px;">
-                <!-- Resize handles estilo Windows -->
-                <div class="resize-handle resize-handle-n"></div>
-                <div class="resize-handle resize-handle-s"></div>
-                <div class="resize-handle resize-handle-e"></div>
-                <div class="resize-handle resize-handle-w"></div>
-                <div class="resize-handle resize-handle-ne"></div>
-                <div class="resize-handle resize-handle-nw"></div>
-                <div class="resize-handle resize-handle-se"></div>
-                <div class="resize-handle resize-handle-sw"></div>
-                
-                <div id="tradingview_chart"></div>
-            </div>
             
             <div class="market-data" id="marketData">
                 <!-- Datos del mercado se actualizan aquí -->
@@ -2557,7 +2542,7 @@
     <script type="text/javascript">
     new TradingView.widget({
         width: "100%",
-        height: 280,
+        height: 400,
         symbol: "XAUUSD",
         interval: "D",
         timezone: "America/Buenos_Aires",
@@ -2620,7 +2605,7 @@
     
 
 </body>
-</html> id="adminStylesPanel">
+</html>
         <h3>⚙️ Panel de Estilos</h3>
         
         <div class="admin-section">
