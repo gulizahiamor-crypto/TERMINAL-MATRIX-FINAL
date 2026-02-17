@@ -145,7 +145,103 @@
             font-weight: 300;
         }
         
-        /* ===== PANEL DE AJUSTES ===== */
+        /* ===== HEADER MINIMALISTA ===== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .settings-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--text-muted);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        
+        .settings-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        
+        /* Menú de Ajustes */
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--text-muted);
+            border-radius: 15px;
+            padding: 0;
+            min-width: 220px;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .settings-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        .settings-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .settings-menu-item {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .settings-menu-item label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .settings-menu-item select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 10px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .settings-menu-item select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        /* Panel de Ajustes */
         .settings-panel {
             grid-column: 1 / -1;
             background: var(--panel-bg);
@@ -1285,17 +1381,41 @@
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
+        <!-- HEADER MINIMALISTA -->
         <header>
             <div class="logo">Trading<span>-Chat</span>-IA</div>
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <span id="statusText">SISTEMA ACTIVO | MODO ONLINE</span>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span id="statusText">SISTEMA ACTIVO</span>
+                </div>
+                <button class="settings-btn" onclick="toggleSettingsMenu()" title="Ajustes">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
             </div>
         </header>
         
-        <!-- PANEL DE AJUSTES -->
-        <div class="settings-panel">
+        <!-- MENÚ DE AJUSTES (Dropdown) -->
+        <div class="settings-menu" id="settingsMenu">
+            <div class="settings-menu-header">
+                <span>Ajustes</span>
+                <button onclick="toggleSettingsMenu()" style="background:none;border:none;cursor:pointer;">&times;</button>
+            </div>
+            <div class="settings-menu-item">
+                <label>Idioma</label>
+                <select id="languageSelect" onchange="changeLanguage()">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+        </div>
             <div class="settings-group">
                 <span class="settings-label">Tema:</span>
                 <select class="settings-select" id="themeSelect" onchange="changeTheme()">
@@ -1479,6 +1599,21 @@
                 }
             }
         }
+        
+        // Toggle Menú de Ajustes
+        function toggleSettingsMenu() {
+            const menu = document.getElementById('settingsMenu');
+            menu.classList.toggle('show');
+        }
+        
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('settingsMenu');
+            const btn = document.querySelector('.settings-btn');
+            if (menu && !menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
         
         function changeLanguage() {
             const lang = document.getElementById('languageSelect').value;
