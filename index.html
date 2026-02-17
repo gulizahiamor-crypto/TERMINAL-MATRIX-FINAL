@@ -850,6 +850,296 @@
             font-weight: 700;
             text-shadow: 0 0 10px #00ff41;
         }
+        
+        /* ===== PANEL DE ESTILOS DEL ADMIN ===== */
+        .admin-styles-panel {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0d0d0d 100%);
+            border: 2px solid #00ff41;
+            border-radius: 0 15px 15px 0;
+            padding: 20px;
+            z-index: 10001;
+            box-shadow: 5px 0 30px #00ff4144;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .admin-styles-panel.show {
+            display: block;
+            animation: slideInLeft 0.4s ease;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateY(-50%) translateX(-100%); opacity: 0; }
+            to { transform: translateY(-50%) translateX(0); opacity: 1; }
+        }
+        
+        .admin-styles-panel h3 {
+            color: #00ff41;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 1px solid #00ff4144;
+            padding-bottom: 10px;
+        }
+        
+        .admin-section {
+            margin-bottom: 20px;
+        }
+        
+        .admin-section-title {
+            color: #00cc33;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .admin-section-title::before {
+            content: '◆';
+            color: #00ff41;
+        }
+        
+        .admin-control {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .admin-control label {
+            color: #00ff4188;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+        
+        .admin-control input[type="color"] {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #00ff4144;
+            border-radius: 5px;
+            background: #0a0a0a;
+            cursor: pointer;
+        }
+        
+        .admin-control input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #0a0a0a;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .admin-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #00ff41;
+            cursor: pointer;
+            box-shadow: 0 0 10px #00ff41;
+        }
+        
+        .admin-control select {
+            width: 100%;
+            padding: 10px;
+            background: #0a0a0a;
+            border: 1px solid #00ff4144;
+            border-radius: 5px;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .admin-control select:focus {
+            outline: none;
+            border-color: #00ff41;
+        }
+        
+        .admin-value {
+            color: #00ff41;
+            font-size: 0.75rem;
+            text-align: right;
+        }
+        
+        .admin-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .admin-btn.apply {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            box-shadow: 0 0 20px #00ff4144;
+        }
+        
+        .admin-btn.apply:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px #00ff41;
+        }
+        
+        .admin-btn.reset {
+            background: transparent;
+            border: 1px solid #ff0040;
+            color: #ff0040;
+        }
+        
+        .admin-btn.reset:hover {
+            background: #ff0040;
+            color: #fff;
+        }
+        
+        /* Resize handles estilo Windows */
+        .resize-handle {
+            display: none;
+            position: absolute;
+            z-index: 100;
+        }
+        
+        body.constructor-mode .resize-handle {
+            display: block;
+        }
+        
+        .resize-handle-n {
+            top: -5px;
+            left: 10px;
+            right: 10px;
+            height: 10px;
+            cursor: n-resize;
+            background: linear-gradient(180deg, #00ff41 0%, transparent 100%);
+            opacity: 0.7;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .resize-handle-s {
+            bottom: -5px;
+            left: 10px;
+            right: 10px;
+            height: 10px;
+            cursor: s-resize;
+            background: linear-gradient(0deg, #00ff41 0%, transparent 100%);
+            opacity: 0.7;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .resize-handle-e {
+            right: -5px;
+            top: 10px;
+            bottom: 10px;
+            width: 10px;
+            cursor: e-resize;
+            background: linear-gradient(90deg, #00ff41 0%, transparent 100%);
+            opacity: 0.7;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .resize-handle-w {
+            left: -5px;
+            top: 10px;
+            bottom: 10px;
+            width: 10px;
+            cursor: w-resize;
+            background: linear-gradient(270deg, #00ff41 0%, transparent 100%);
+            opacity: 0.7;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .resize-handle-ne {
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            cursor: ne-resize;
+            background: #00ff41;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        
+        .resize-handle-nw {
+            top: -8px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            cursor: nw-resize;
+            background: #00ff41;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        
+        .resize-handle-se {
+            bottom: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            cursor: se-resize;
+            background: #00ff41;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: pulse-handle 1s infinite;
+        }
+        
+        .resize-handle-sw {
+            bottom: -8px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            cursor: sw-resize;
+            background: #00ff41;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        
+        .resize-handle:hover {
+            opacity: 1 !important;
+            box-shadow: 0 0 15px #00ff41;
+        }
+        
+        /* Toggle del panel admin */
+        .admin-toggle {
+            display: none;
+            position: fixed;
+            left: 290px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1a1a2e;
+            border: 2px solid #00ff41;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+            padding: 15px 8px;
+            cursor: pointer;
+            z-index: 10002;
+            color: #00ff41;
+            font-size: 0.8rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        
+        body.constructor-mode .admin-toggle {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -948,7 +1238,17 @@
         <!-- PANEL PRINCIPAL -->
         <div class="main-panel">
             <!-- CHAT SECTION -->
-            <div class="chat-section">
+            <div class="chat-section" id="chatSection">
+                <!-- Resize handles estilo Windows -->
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-nw"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                
                 <div class="section-title" id="chatTitle">Asistente de IA Universal</div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message ai">
@@ -983,7 +1283,17 @@
             <div class="section-title" id="marketTitle">Mercado XAUUSD</div>
             
             <!-- TradingView Widget -->
-            <div class="tradingview-widget-container" style="height:280px;margin-bottom:10px;">
+            <div class="tradingview-widget-container" id="tradingViewContainer" style="height:280px;margin-bottom:10px;">
+                <!-- Resize handles estilo Windows -->
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-nw"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                
                 <div id="tradingview_chart"></div>
             </div>
             
@@ -1268,16 +1578,22 @@
             document.body.classList.add('design-mode-active');
             
             // Mostrar mensaje de activación
-            addMessage('🔓 <strong>MODO CONSTRUCTOR ACTIVADO</strong><br><br>Ahora puedes:<br>• Arrastrar los paneles con el mouse<br>• Redimensionar el gráfico TradingView<br>• Redimensionar el asistente de trading<br><br>Usa el botón verde "Guardar Diseño" para guardar los cambios.', 'ai');
+            addMessage('🔓 <strong>MODO CONSTRUCTOR ACTIVADO</strong><br><br>Ahora puedes:<br>• Arrastrar los paneles con el mouse<br>• Redimensionar el gráfico TradingView (bordes y esquinas)<br>• Redimensionar el asistente de trading<br>• Cambiar colores y tipografía en el panel lateral<br><br>Usa el botón verde "Guardar Diseño" o "Aplicar Diseño Definitivo" para guardar.', 'ai');
             
             // Habilitar interact.js para movimiento
             enableConstructorInteractions();
+            
+            // Mostrar panel de administración
+            setTimeout(showAdminPanel, 500);
         }
         
         function deactivateConstructorMode() {
             constructorMode = false;
             document.body.classList.remove('constructor-mode');
             document.body.classList.remove('design-mode-active');
+            
+            // Ocultar panel de administración
+            hideAdminPanel();
             
             // Deshabilitar interact.js
             disableConstructorInteractions();
@@ -1660,6 +1976,152 @@
             }
         }
         
+        // ===== PANEL DE ESTILOS DEL ADMIN =====
+        function showAdminPanel() {
+            document.getElementById('adminStylesPanel').classList.add('show');
+        }
+        
+        function hideAdminPanel() {
+            document.getElementById('adminStylesPanel').classList.remove('show');
+        }
+        
+        function updateAdminPreview() {
+            const bgColor = document.getElementById('adminBgColor').value;
+            const borderColor = document.getElementById('adminBorderColor').value;
+            const textColor = document.getElementById('adminTextColor').value;
+            const fontSize = document.getElementById('adminFontSize').value;
+            const fontFamily = document.getElementById('adminFontFamily').value;
+            
+            // Actualizar valor del tamaño de fuente
+            document.getElementById('fontSizeValue').textContent = fontSize + 'px';
+            
+            // Aplicar cambios en tiempo real al container
+            const container = document.querySelector('.container');
+            if (container) {
+                container.style.setProperty('--admin-bg', bgColor);
+                container.style.setProperty('--admin-border', borderColor);
+                container.style.setProperty('--admin-text', textColor);
+                container.style.setProperty('--admin-font-size', fontSize + 'px');
+                container.style.setProperty('--admin-font-family', fontFamily);
+            }
+        }
+        
+        // Generar CSS definitivo para guardar
+        function applyPermanentDesign() {
+            const bgColor = document.getElementById('adminBgColor').value;
+            const borderColor = document.getElementById('adminBorderColor').value;
+            const textColor = document.getElementById('adminTextColor').value;
+            const fontSize = document.getElementById('adminFontSize').value;
+            const fontFamily = document.getElementById('adminFontFamily').value;
+            
+            // Obtener posiciones actuales
+            const designState = getDesignState();
+            
+            // Generar CSS completo
+            let cssCode = `/* ============================================\n   DISEÑO DEFINITIVO - Trading Chat IA\n`;
+            cssCode += `   Aplicado por: Gustavo Javier Ferreira de Misiones\n`;
+            cssCode += `   ============================================\n\n`;
+            
+            cssCode += `/* ----- VARIABLES DE COLOR ----- */\n`;
+            cssCode += `:root {\n`;
+            cssCode += `  --admin-bg: ${bgColor};\n`;
+            cssCode += `  --admin-border: ${borderColor};\n`;
+            cssCode += `  --admin-text: ${textColor};\n`;
+            cssCode += `  --admin-font-size: ${fontSize}px;\n`;
+            cssCode += `  --admin-font-family: ${fontFamily};\n`;
+            cssCode += `}\n\n`;
+            
+            cssCode += `/* ----- ESTILOS APLICADOS ----- */\n`;
+            cssCode += `body {\n  background-color: ${bgColor};\n  color: ${textColor};\n  font-family: ${fontFamily};\n  font-size: ${fontSize}px;\n}\n\n`;
+            
+            if (designState.chatSection) {
+                cssCode += `.chat-section {\n`;
+                if (designState.chatSection.width) cssCode += `  width: ${designState.chatSection.width};\n`;
+                if (designState.chatSection.height) cssCode += `  height: ${designState.chatSection.height};\n`;
+                cssCode += `}\n\n`;
+            }
+            
+            if (designState.signalsSection) {
+                cssCode += `.signals-section {\n`;
+                if (designState.signalsSection.width) cssCode += `  width: ${designState.signalsSection.width};\n`;
+                if (designState.signalsSection.height) cssCode += `  height: ${designState.signalsSection.height};\n`;
+                cssCode += `}\n\n`;
+            }
+            
+            if (designState.tradingView) {
+                cssCode += `.tradingview-widget-container {\n`;
+                if (designState.tradingView.width) cssCode += `  width: ${designState.tradingView.width} !important;\n`;
+                if (designState.tradingView.height) cssCode += `  height: ${designState.tradingView.height} !important;\n`;
+                cssCode += `}\n\n`;
+            }
+            
+            // Bordes
+            cssCode += `/* ----- BORDES PERSONALIZADOS ----- */\n`;
+            cssCode += `.container, header, .settings-panel, .chat-messages, .message, .signal-card, .market-item {\n  border-color: ${borderColor};\n}\n\n`;
+            
+            cssCode += `/* ----- TEXTOS PERSONALIZADOS ----- */\n`;
+            cssCode += `.message-content, .signal-detail-value, .market-price, .logo {\n  color: ${textColor};\n}\n\n`;
+            
+            // Agregar JSON
+            cssCode += `/* ============================================\n   JSON DATA (para restauración)\n`;
+            cssCode += `   ============================================\n\n`;
+            cssCode += JSON.stringify({
+                colors: { bg: bgColor, border: borderColor, text: textColor },
+                typography: { fontSize: fontSize, fontFamily: fontFamily },
+                layout: designState
+            }, null, 2);
+            
+            // Mostrar en modal
+            document.getElementById('coordinatesOutput').textContent = cssCode;
+            document.getElementById('coordinatesModal').classList.add('show');
+            
+            // Guardar en localStorage
+            localStorage.setItem('trading-chat-permanent-design', JSON.stringify({
+                colors: { bg: bgColor, border: borderColor, text: textColor },
+                typography: { fontSize: fontSize, fontFamily: fontFamily },
+                layout: designState
+            }));
+            
+            addMessage('✅ <strong>DISEÑO DEFINITIVO APLICADO</strong><br><br>El código CSS está disponible en el modal.<br>Este diseño queda guardado para siempre.', 'ai');
+        }
+        
+        function resetAdminStyles() {
+            document.getElementById('adminBgColor').value = '#0a0a0a';
+            document.getElementById('adminBorderColor').value = '#00ff41';
+            document.getElementById('adminTextColor').value = '#00ff41';
+            document.getElementById('adminFontSize').value = '14';
+            document.getElementById('adminFontFamily').value = "'JetBrains Mono', monospace";
+            
+            document.getElementById('fontSizeValue').textContent = '14px';
+            updateAdminPreview();
+            
+            addMessage('ℹ️ Estilos restablecidos a los valores por defecto.', 'ai');
+        }
+        
+        // Cargar diseño permanente al inicio
+        function loadPermanentDesign() {
+            const saved = localStorage.getItem('trading-chat-permanent-design');
+            if (saved) {
+                try {
+                    const design = JSON.parse(saved);
+                    
+                    if (design.colors) {
+                        document.body.style.backgroundColor = design.colors.bg;
+                        document.body.style.color = design.colors.text;
+                    }
+                    
+                    if (design.layout) {
+                        applyDesignState(design.layout);
+                    }
+                } catch (e) {
+                    console.error('Error al cargar diseño permanente:', e);
+                }
+            }
+        }
+        
+        // Iniciar carga del diseño
+        loadPermanentDesign();
+        
         // ===== INTERACT.JS - Solo activar en modo constructor =====
         let interactMainPanel, interactSidePanel, interactChatSection, interactTradingView;
         
@@ -1965,6 +2427,56 @@
     <!-- Indicador de Modo Constructor -->
     <div class="constructor-indicator" id="constructorIndicator">
         🔧 MODO CONSTRUCTOR ACTIVADO | Arrastra y redimensiona los elementos
+    </div>
+    
+    <!-- Panel de Estilos del Admin -->
+    <div class="admin-styles-panel" id="adminStylesPanel">
+        <h3>⚙️ Panel de Estilos</h3>
+        
+        <div class="admin-section">
+            <div class="admin-section-title">Colores</div>
+            
+            <div class="admin-control">
+                <label>Color de Fondo</label>
+                <input type="color" id="adminBgColor" value="#0a0a0a" onchange="updateAdminPreview()">
+            </div>
+            
+            <div class="admin-control">
+                <label>Color de Bordes</label>
+                <input type="color" id="adminBorderColor" value="#00ff41" onchange="updateAdminPreview()">
+            </div>
+            
+            <div class="admin-control">
+                <label>Color de Texto</label>
+                <input type="color" id="adminTextColor" value="#00ff41" onchange="updateAdminPreview()">
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <div class="admin-section-title">Tipografía</div>
+            
+            <div class="admin-control">
+                <label>Tamaño de Fuente: <span class="admin-value" id="fontSizeValue">14px</span></label>
+                <input type="range" id="adminFontSize" min="10" max="24" value="14" oninput="updateAdminPreview()">
+            </div>
+            
+            <div class="admin-control">
+                <label>Estilo de Letra</label>
+                <select id="adminFontFamily" onchange="updateAdminPreview()">
+                    <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="admin-btn apply" onclick="applyPermanentDesign()">
+            ✅ Aplicar Diseño Definitivo
+        </button>
+        
+        <button class="admin-btn reset" onclick="resetAdminStyles()">
+            🔄 Restablecer
+        </button>
     </div>
     
     <!-- Indicador de Modo Diseño -->
