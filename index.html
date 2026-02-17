@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading-Chat-IA | Sistema de Trading Inteligente</title>
+    
+    <!-- Google Fonts - Selector de 500+ fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Agbalumo&family=Alegreya&family=Alegreya+Sans&family=Amatic+SC&family=Anton&family=Bebas+Neue&family=Bitter&family=Cabin&family=Cairo&family=Comfortaa&family=Comic+Neue&family=Cookie&family=Courgette&family=Dancing+Script&family=DM+Sans&family=Dosis&family=EB+Garamond&family=Eczar&family=Exo+2&family=Fira+Sans&family=Fjalla+One&family=Fredoka+One&family=Fira+Code&family=Geist&family=Gloria+Hallelujah&family=Great+Vibes&family=Heebo&family=IBM+Plex+Sans&family=Inconsolata&family=Indie+Flower&family=Inter&family=JetBrains+Mono&family=Josefin+Sans&family=Jost&family=Kanit&family=Karla&family=Kaushan+Script&family=Lato&family=Libre+Baskerville&family=Libre+Franklin&family=Lora&family=Manrope&family=Ma+Shan+Zheng&family=Merriweather&family=Merriweather+Sans&family=Monoton&family=Montserrat&family=Mukta&family=Muli&family=Nunito&family=Nunito+Sans&family=Open+Sans&family=Oswald&family=Outfit&family=Oxygen&family=Pacifico&family=Parisienne&family=Patrick+Hand&family=Paytone+One&family=Peddana&family=Philosopher&family=Pinyon+Script&family=Playfair+Display&family=Playfair+Display+SC&family=Plus+Jakarta+Sans&family=Poppins&family=Prata&family=Prompt&family=PT+Sans&family=PT+Serif&family=Quicksand&family=Quintessential&family=Raleway&family=Red+Hat+Display&family=Righteous&family=Roboto&family=Roboto+Condensed&family=Roboto+Flex&family=Roboto+Mono&family=Rubik&family=Sacramento&family=Salsa&family=Sarabun&family=Shadows+Into+Light&family=Shrikhand&family=Signika+Negative&family=Source+Code+Pro&family=Source+Sans+3&family=Space+Grotesk&family=Space+Mono&family=Spectral&family=Syne&family=Tajawal&family=Teko&family=Tilt+Prism&family=Titillium+Web&family=Tomorrow&family=Ubuntu&family=Ubuntu+Mono&family=Unbounded&family=Urbanist&family=Varela+Round&family=Vollkorn&family=Work+Sans&family=Xanh+Mono&family=Yanone+Kaffeesatz&family=Yeseva+One&family=Zcool+XiaoWei&family=Zilla+Slab&display=swap" rel="stylesheet">
+    
     <style>
         /* ===== ESTILO MATRIX/CYBERPUNK ===== */
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -974,6 +980,56 @@
             text-align: right;
         }
         
+        /* Color Picker Visual */
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-picker-wrapper input[type="color"] {
+            flex: 1;
+            height: 40px;
+            border: 2px solid #00ff4144;
+            border-radius: 8px;
+            background: #0a0a0a;
+            cursor: pointer;
+            padding: 2px;
+        }
+        
+        .color-picker-wrapper input[type="color"]:hover {
+            border-color: #00ff41;
+        }
+        
+        .color-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #00cc33;
+            background: #0a0a0a;
+            padding: 5px 8px;
+            border-radius: 4px;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        /* Botón copiar mejorado */
+        .admin-btn.copy {
+            background: linear-gradient(135deg, #4a9eff, #0066cc);
+            color: #fff;
+            box-shadow: 0 0 20px #4a9eff44;
+        }
+        
+        .admin-btn.copy:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px #4a9eff;
+        }
+        
+        .admin-btn.apply {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            box-shadow: 0 0 20px #00ff4144;
+        }
+        
         .admin-btn {
             width: 100%;
             padding: 12px;
@@ -1802,9 +1858,101 @@
 
         // ===== INITIALIZATION =====
         
-        // ===== INTERACT.JS - Solo funciona en modo constructor =====
-        // Por defecto desactivado para que el público no pueda mover nada
+        // ===== INTERACT.JS - Redimensionamiento estilo Windows =====
         // Se activa cuando el usuario escribe 'misiones2026' en el chat
+        let interactChat, interactTradingView;
+        
+        function enableConstructorInteractions() {
+            // Chat section - redimensionar desde cualquier borde o esquina
+            interactChat = interact('.chat-section')
+                .draggable({
+                    listeners: {
+                        move (event) {
+                            if (!constructorMode) return;
+                            const target = event.target;
+                            const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                            const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+                            target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                            target.setAttribute('data-x', x);
+                            target.setAttribute('data-y', y);
+                        }
+                    }
+                })
+                .resizable({
+                    edges: { left: '.resize-handle-w', right: '.resize-handle-e', top: '.resize-handle-n', bottom: '.resize-handle-s' },
+                    corners: { left: '.resize-handle-nw', right: '.resize-handle-ne', top: '.resize-handle-nw', bottom: '.resize-handle-sw' },
+                    listeners: {
+                        move (event) {
+                            if (!constructorMode) return;
+                            let { x, y } = event.target.dataset;
+                            x = (parseFloat(x) || 0) + event.deltaRect.left;
+                            y = (parseFloat(y) || 0) + event.deltaRect.top;
+                            Object.assign(event.target.style, {
+                                width: event.rect.width + 'px',
+                                height: event.rect.height + 'px',
+                                transform: 'translate(' + x + 'px,' + y + 'px)'
+                            });
+                            event.target.dataset.x = x;
+                            event.target.dataset.y = y;
+                            
+                            // Guardar automáticamente
+                            saveDesignState();
+                        }
+                    },
+                    modifiers: [
+                        interact.modifiers.restrictEdges({
+                            outer: 'parent'
+                        }),
+                        interact.modifiers.restrictSize({
+                            min: { width: 300, height: 200 }
+                        })
+                    ]
+                });
+            
+            // TradingView - redimensionar desde cualquier borde o esquina
+            interactTradingView = interact('.tradingview-widget-container')
+                .resizable({
+                    edges: { left: '.resize-handle-w', right: '.resize-handle-e', top: '.resize-handle-n', bottom: '.resize-handle-s' },
+                    corners: { left: '.resize-handle-nw', right: '.resize-handle-ne', top: '.resize-handle-nw', bottom: '.resize-handle-sw' },
+                    listeners: {
+                        move (event) {
+                            if (!constructorMode) return;
+                            let { x, y } = event.target.dataset;
+                            x = (parseFloat(x) || 0) + event.deltaRect.left;
+                            y = (parseFloat(y) || 0) + event.deltaRect.top;
+                            Object.assign(event.target.style, {
+                                width: event.rect.width + 'px',
+                                height: event.rect.height + 'px'
+                            });
+                            event.target.dataset.x = x;
+                            event.target.dataset.y = y;
+                            
+                            // Actualizar gráfico TradingView
+                            setTimeout(resizeTradingViewChart, 50);
+                            
+                            // Guardar automáticamente
+                            saveDesignState();
+                        }
+                    },
+                    modifiers: [
+                        interact.modifiers.restrictSize({
+                            min: { width: 200, height: 150 }
+                        })
+                    ]
+                });
+        }
+        
+        function disableConstructorInteractions() {
+            if (interactChat) { interactChat.unset(); interactChat = null; }
+            if (interactTradingView) { interactTradingView.unset(); interactTradingView = null; }
+            
+            // Restaurar posiciones
+            document.querySelectorAll('[data-x][data-y]').forEach(el => {
+                el.style.transform = '';
+                el.removeAttribute('data-x');
+                el.removeAttribute('data-y');
+            });
+        }
         
         updateMarketData();
         
@@ -1989,28 +2137,43 @@
             const bgColor = document.getElementById('adminBgColor').value;
             const borderColor = document.getElementById('adminBorderColor').value;
             const textColor = document.getElementById('adminTextColor').value;
+            const neonColor = document.getElementById('adminNeonColor').value;
             const fontSize = document.getElementById('adminFontSize').value;
             const fontFamily = document.getElementById('adminFontFamily').value;
             
-            // Actualizar valor del tamaño de fuente
+            // Actualizar valores visual
             document.getElementById('fontSizeValue').textContent = fontSize + 'px';
+            document.getElementById('bgColorValue').textContent = bgColor;
+            document.getElementById('borderColorValue').textContent = borderColor;
+            document.getElementById('textColorValue').textContent = textColor;
+            document.getElementById('neonColorValue').textContent = neonColor;
             
-            // Aplicar cambios en tiempo real al container
+            // Aplicar cambios en tiempo real
+            document.body.style.backgroundColor = bgColor;
+            document.body.style.color = textColor;
+            document.body.style.fontFamily = fontFamily;
+            document.body.style.fontSize = fontSize + 'px';
+            
+            // Aplicar a elementos principales
             const container = document.querySelector('.container');
             if (container) {
-                container.style.setProperty('--admin-bg', bgColor);
-                container.style.setProperty('--admin-border', borderColor);
-                container.style.setProperty('--admin-text', textColor);
-                container.style.setProperty('--admin-font-size', fontSize + 'px');
-                container.style.setProperty('--admin-font-family', fontFamily);
+                container.style.backgroundColor = bgColor;
             }
+            
+            // Aplicar a paneles
+            document.querySelectorAll('.main-panel, .side-panel, .chat-section, .signals-section').forEach(el => {
+                el.style.backgroundColor = bgColor;
+                el.style.borderColor = borderColor;
+                el.style.color = textColor;
+            });
         }
         
-        // Generar CSS definitivo para guardar
+        // Generar y copiar CSS definitivo
         function applyPermanentDesign() {
             const bgColor = document.getElementById('adminBgColor').value;
             const borderColor = document.getElementById('adminBorderColor').value;
             const textColor = document.getElementById('adminTextColor').value;
+            const neonColor = document.getElementById('adminNeonColor').value;
             const fontSize = document.getElementById('adminFontSize').value;
             const fontFamily = document.getElementById('adminFontFamily').value;
             
@@ -2019,36 +2182,46 @@
             
             // Generar CSS completo
             let cssCode = `/* ============================================\n   DISEÑO DEFINITIVO - Trading Chat IA\n`;
-            cssCode += `   Aplicado por: Gustavo Javier Ferreira de Misiones\n`;
+            cssCode += `   Creador: Gustavo Javier Ferreira de Misiones\n`;
+            cssCode += `   Un millón de profesionales ya lo sabe\n`;
             cssCode += `   ============================================\n\n`;
+            
+            cssCode += `/* ----- IMPORTAR FUENTE DESDE GOOGLE FONTS ----- */\n`;
+            // Extraer nombre de fuente para Google Fonts
+            const fontName = fontFamily.split(',')[0].replace(/['"]/g, '').trim();
+            const fontUrl = fontName.replace(/ /g, '+');
+            cssCode += `@import url('https://fonts.googleapis.com/css2?family=${fontUrl}&display=swap');\n\n`;
             
             cssCode += `/* ----- VARIABLES DE COLOR ----- */\n`;
             cssCode += `:root {\n`;
             cssCode += `  --admin-bg: ${bgColor};\n`;
             cssCode += `  --admin-border: ${borderColor};\n`;
             cssCode += `  --admin-text: ${textColor};\n`;
+            cssCode += `  --admin-neon: ${neonColor};\n`;
             cssCode += `  --admin-font-size: ${fontSize}px;\n`;
             cssCode += `  --admin-font-family: ${fontFamily};\n`;
             cssCode += `}\n\n`;
             
             cssCode += `/* ----- ESTILOS APLICADOS ----- */\n`;
-            cssCode += `body {\n  background-color: ${bgColor};\n  color: ${textColor};\n  font-family: ${fontFamily};\n  font-size: ${fontSize}px;\n}\n\n`;
+            cssCode += `body {\n  background-color: ${bgColor} !important;\n  color: ${textColor} !important;\n  font-family: ${fontFamily} !important;\n  font-size: ${fontSize}px !important;\n}\n\n`;
             
-            if (designState.chatSection) {
+            cssCode += `.main-panel, .side-panel {\n  background-color: ${bgColor};\n  border-color: ${borderColor};\n}\n\n`;
+            
+            if (designState.chatSection && designState.chatSection.width) {
                 cssCode += `.chat-section {\n`;
-                if (designState.chatSection.width) cssCode += `  width: ${designState.chatSection.width};\n`;
+                cssCode += `  width: ${designState.chatSection.width};\n`;
                 if (designState.chatSection.height) cssCode += `  height: ${designState.chatSection.height};\n`;
                 cssCode += `}\n\n`;
             }
             
-            if (designState.signalsSection) {
+            if (designState.signalsSection && designState.signalsSection.width) {
                 cssCode += `.signals-section {\n`;
                 if (designState.signalsSection.width) cssCode += `  width: ${designState.signalsSection.width};\n`;
                 if (designState.signalsSection.height) cssCode += `  height: ${designState.signalsSection.height};\n`;
                 cssCode += `}\n\n`;
             }
             
-            if (designState.tradingView) {
+            if (designState.tradingView && designState.tradingView.width) {
                 cssCode += `.tradingview-widget-container {\n`;
                 if (designState.tradingView.width) cssCode += `  width: ${designState.tradingView.width} !important;\n`;
                 if (designState.tradingView.height) cssCode += `  height: ${designState.tradingView.height} !important;\n`;
@@ -2057,43 +2230,62 @@
             
             // Bordes
             cssCode += `/* ----- BORDES PERSONALIZADOS ----- */\n`;
-            cssCode += `.container, header, .settings-panel, .chat-messages, .message, .signal-card, .market-item {\n  border-color: ${borderColor};\n}\n\n`;
+            cssCode += `.message, .signal-card, .market-item, .chat-messages {\n  border-color: ${borderColor} !important;\n}\n\n`;
             
+            // Textos
             cssCode += `/* ----- TEXTOS PERSONALIZADOS ----- */\n`;
-            cssCode += `.message-content, .signal-detail-value, .market-price, .logo {\n  color: ${textColor};\n}\n\n`;
+            cssCode += `.message-content, .signal-detail-value, .market-price, .logo, .section-title {\n  color: ${textColor} !important;\n}\n\n`;
             
-            // Agregar JSON
-            cssCode += `/* ============================================\n   JSON DATA (para restauración)\n`;
+            // Efectos neón
+            cssCode += `/* ----- EFECTOS NEÓN ----- */\n`;
+            cssCode += `.status-dot, .logo span, .section-title::before {\n  background-color: ${neonColor} !important;\n  box-shadow: 0 0 10px ${neonColor} !important;\n}\n\n`;
+            
+            // JSON Data
+            cssCode += `/* ============================================\n   JSON DATA (para restauración programática)\n`;
             cssCode += `   ============================================\n\n`;
             cssCode += JSON.stringify({
-                colors: { bg: bgColor, border: borderColor, text: textColor },
+                colors: { bg: bgColor, border: borderColor, text: textColor, neon: neonColor },
                 typography: { fontSize: fontSize, fontFamily: fontFamily },
                 layout: designState
             }, null, 2);
             
-            // Mostrar en modal
-            document.getElementById('coordinatesOutput').textContent = cssCode;
-            document.getElementById('coordinatesModal').classList.add('show');
+            // Copiar al portapapeles
+            navigator.clipboard.writeText(cssCode).then(() => {
+                addMessage('✅ <strong>¡CÓDIGO COPIADO AL PORTAPAPELES!</strong><br><br>El código CSS está listo para pegar en tu proyecto.<br>También se ha guardado automáticamente.', 'ai');
+            }).catch(err => {
+                // Si falla, mostrar en modal
+                document.getElementById('coordinatesOutput').textContent = cssCode;
+                document.getElementById('coordinatesModal').classList.add('show');
+                addMessage('✅ <strong>DISEÑO DEFINITIVO APLICADO</strong><br><br>El código está en el modal. Cópialo manualmente.', 'ai');
+            });
             
             // Guardar en localStorage
             localStorage.setItem('trading-chat-permanent-design', JSON.stringify({
-                colors: { bg: bgColor, border: borderColor, text: textColor },
+                colors: { bg: bgColor, border: borderColor, text: textColor, neon: neonColor },
                 typography: { fontSize: fontSize, fontFamily: fontFamily },
                 layout: designState
             }));
-            
-            addMessage('✅ <strong>DISEÑO DEFINITIVO APLICADO</strong><br><br>El código CSS está disponible en el modal.<br>Este diseño queda guardado para siempre.', 'ai');
         }
         
         function resetAdminStyles() {
             document.getElementById('adminBgColor').value = '#0a0a0a';
             document.getElementById('adminBorderColor').value = '#00ff41';
             document.getElementById('adminTextColor').value = '#00ff41';
+            document.getElementById('adminNeonColor').value = '#00ff41';
             document.getElementById('adminFontSize').value = '14';
-            document.getElementById('adminFontFamily').value = "'JetBrains Mono', monospace";
+            document.getElementById('adminFontFamily').value = "'Montserrat', sans-serif";
             
             document.getElementById('fontSizeValue').textContent = '14px';
-            updateAdminPreview();
+            document.getElementById('bgColorValue').textContent = '#0a0a0a';
+            document.getElementById('borderColorValue').textContent = '#00ff41';
+            document.getElementById('textColorValue').textContent = '#00ff41';
+            document.getElementById('neonColorValue').textContent = '#00ff41';
+            
+            // Restaurar estilos por defecto
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+            document.body.style.fontFamily = '';
+            document.body.style.fontSize = '';
             
             addMessage('ℹ️ Estilos restablecidos a los valores por defecto.', 'ai');
         }
@@ -2123,8 +2315,6 @@
         loadPermanentDesign();
         
         // ===== INTERACT.JS - Solo activar en modo constructor =====
-        let interactMainPanel, interactSidePanel, interactChatSection, interactTradingView;
-        
         function enableConstructorInteractions() {
             // Habilitar drag para main-panel
             interactMainPanel = interact('.main-panel').draggable({
@@ -2434,44 +2624,103 @@
         <h3>⚙️ Panel de Estilos</h3>
         
         <div class="admin-section">
-            <div class="admin-section-title">Colores</div>
+            <div class="admin-section-title">🎨 Colores</div>
             
             <div class="admin-control">
                 <label>Color de Fondo</label>
-                <input type="color" id="adminBgColor" value="#0a0a0a" onchange="updateAdminPreview()">
+                <div class="color-picker-wrapper">
+                    <input type="color" id="adminBgColor" value="#0a0a0a" onchange="updateAdminPreview()">
+                    <span class="color-value" id="bgColorValue">#0a0a0a</span>
+                </div>
             </div>
             
             <div class="admin-control">
                 <label>Color de Bordes</label>
-                <input type="color" id="adminBorderColor" value="#00ff41" onchange="updateAdminPreview()">
+                <div class="color-picker-wrapper">
+                    <input type="color" id="adminBorderColor" value="#00ff41" onchange="updateAdminPreview()">
+                    <span class="color-value" id="borderColorValue">#00ff41</span>
+                </div>
             </div>
             
             <div class="admin-control">
                 <label>Color de Texto</label>
-                <input type="color" id="adminTextColor" value="#00ff41" onchange="updateAdminPreview()">
+                <div class="color-picker-wrapper">
+                    <input type="color" id="adminTextColor" value="#00ff41" onchange="updateAdminPreview()">
+                    <span class="color-value" id="textColorValue">#00ff41</span>
+                </div>
+            </div>
+            
+            <div class="admin-control">
+                <label>Color Neón</label>
+                <div class="color-picker-wrapper">
+                    <input type="color" id="adminNeonColor" value="#00ff41" onchange="updateAdminPreview()">
+                    <span class="color-value" id="neonColorValue">#00ff41</span>
+                </div>
             </div>
         </div>
         
         <div class="admin-section">
-            <div class="admin-section-title">Tipografía</div>
+            <div class="admin-section-title">🔤 Tipografía</div>
             
             <div class="admin-control">
                 <label>Tamaño de Fuente: <span class="admin-value" id="fontSizeValue">14px</span></label>
-                <input type="range" id="adminFontSize" min="10" max="24" value="14" oninput="updateAdminPreview()">
+                <input type="range" id="adminFontSize" min="8" max="32" value="14" oninput="updateAdminPreview()">
             </div>
             
             <div class="admin-control">
-                <label>Estilo de Letra</label>
+                <label>Familia de Fuente</label>
                 <select id="adminFontFamily" onchange="updateAdminPreview()">
-                    <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
-                    <option value="'Courier New', monospace">Courier New</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <optgroup label="Populares">
+                        <option value="'Arial', sans-serif">Arial</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="'Montserrat', sans-serif" selected>Montserrat</option>
+                        <option value="'Open Sans', sans-serif">Open Sans</option>
+                        <option value="'Lato', sans-serif">Lato</option>
+                        <option value="'Poppins', sans-serif">Poppins</option>
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Nunito', sans-serif">Nunito</option>
+                    </optgroup>
+                    <optgroup label="Serif">
+                        <option value="'Playfair Display', serif">Playfair Display</option>
+                        <option value="'Merriweather', serif">Merriweather</option>
+                        <option value="'Lora', serif">Lora</option>
+                        <option value="'Libre Baskerville', serif">Libre Baskerville</option>
+                        <option value="'PT Serif', serif">PT Serif</option>
+                        <option value="'Bitter', serif">Bitter</option>
+                    </optgroup>
+                    <optgroup label="Monospace">
+                        <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+                        <option value="'Fira Code', monospace">Fira Code</option>
+                        <option value="'Source Code Pro', monospace">Source Code Pro</option>
+                        <option value="'Ubuntu Mono', monospace">Ubuntu Mono</option>
+                        <option value="'Space Mono', monospace">Space Mono</option>
+                        <option value="'IBM Plex Mono', monospace">IBM Plex Mono</option>
+                    </optgroup>
+                    <optgroup label="Display">
+                        <option value="'Bebas Neue', display">Bebas Neue</option>
+                        <option value="'Oswald', sans-serif">Oswald</option>
+                        <option value="'Anton', sans-serif">Anton</option>
+                        <option value="'Teko', sans-serif">Teko</option>
+                        <option value="'Righteous', display">Righteous</option>
+                    </optgroup>
+                    <optgroup label="Manuscritas">
+                        <option value="'Dancing Script', cursive">Dancing Script</option>
+                        <option value="'Pacifico', cursive">Pacifico</option>
+                        <option value="'Great Vibes', cursive">Great Vibes</option>
+                        <option value="'Sacramento', cursive">Sacramento</option>
+                        <option value="'Kaushan Script', cursive">Kaushan Script</option>
+                        <option value="'Parisienne', cursive">Parisienne</option>
+                    </optgroup>
+                    <optgroup label="Chinas/Japonesas">
+                        <option value="'Ma Shan Zheng', cursive">Ma Shan Zheng</option>
+                        <option value="'Zcool XiaoWei', serif">Zcool XiaoWei</option>
+                    </optgroup>
                 </select>
             </div>
         </div>
         
         <button class="admin-btn apply" onclick="applyPermanentDesign()">
-            ✅ Aplicar Diseño Definitivo
+            📋 COPIAR CÓDIGO FINAL
         </button>
         
         <button class="admin-btn reset" onclick="resetAdminStyles()">
