@@ -501,7 +501,7 @@
     <script>
         // ===== CONFIGURACIÓN API =====
         // API Key hardcodeada para producción
-        const GROQ_API_KEY = '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';
+        const apiKey = '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';
         const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
         
         // Prompt del sistema para IA - Chat Trading IA
@@ -644,7 +644,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + GROQ_API_KEY
+                        'Authorization': 'Bearer ' + apiKey
                     },
                     method: 'POST',
                     headers: {
