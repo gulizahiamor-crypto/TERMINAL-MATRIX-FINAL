@@ -27,6 +27,67 @@
             --border-glow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green-dim);
         }
         
+        /* Tema: Blanco y Negro */
+        body.theme-bw {
+            --neon-green: #000000;
+            --neon-green-dim: #00000033;
+            --dark-bg: #ffffff;
+            --panel-bg: #f0f0f0;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-muted: #666666;
+            --buy-color: #000000;
+            --sell-color: #ff0000;
+            --border-glow: none;
+        }
+        
+        /* Tema: Oscuro */
+        body.theme-dark {
+            --neon-green: #4a9eff;
+            --neon-green-dim: #4a9eff33;
+            --dark-bg: #1a1a2e;
+            --panel-bg: #16213e;
+            --text-primary: #4a9eff;
+            --text-secondary: #3d8ae6;
+            --text-muted: #2a6bc4;
+            --buy-color: #00ff88;
+            --sell-color: #ff4a6a;
+            --border-glow: 0 0 10px #4a9eff, 0 0 20px #4a9eff33;
+        }
+        
+        /* Tema: Claro */
+        body.theme-light {
+            --neon-green: #0066cc;
+            --neon-green-dim: #0066cc33;
+            --dark-bg: #ffffff;
+            --panel-bg: #f5f5f5;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-muted: #666666;
+            --buy-color: #008800;
+            --sell-color: #cc0000;
+            --border-glow: none;
+        }
+        
+        /* Tema: Neon Night */
+        body.theme-neon {
+            --neon-green: #00ffff;
+            --neon-green-dim: #00ffff33;
+            --dark-bg: #0a001a;
+            --panel-bg: #15002a;
+            --text-primary: #00ffff;
+            --text-secondary: #ff00ff;
+            --text-muted: #ff00ff;
+            --buy-color: #00ffff;
+            --sell-color: #ff00ff;
+            --border-glow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+        }
+        
+        /* Eliminar fondo matrix en temas diferentes */
+        body.theme-bw::before, body.theme-dark::before, body.theme-light::before, body.theme-neon::before {
+            display: none;
+        }
+        
         body {
             font-family: 'JetBrains Mono', monospace;
             background-color: var(--dark-bg);
@@ -56,7 +117,7 @@
         .container {
             display: grid;
             grid-template-columns: 1fr 350px;
-            grid-template-rows: auto 1fr;
+            grid-template-rows: auto auto 1fr;
             min-height: 100vh;
             gap: 0;
         }
@@ -83,6 +144,63 @@
         
         .logo span {
             color: var(--text-muted);
+        }
+        
+        /* ===== PANEL DE AJUSTES ===== */
+        .settings-panel {
+            grid-column: 1 / -1;
+            background: var(--panel-bg);
+            border-bottom: 1px solid var(--text-muted);
+            padding: 10px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .settings-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .settings-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .settings-select {
+            background: var(--dark-bg);
+            border: 1px solid var(--text-muted);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            min-width: 150px;
+        }
+        
+        .settings-select:focus {
+            outline: none;
+            border-color: var(--text-primary);
+        }
+        
+        .language-search {
+            background: var(--dark-bg);
+            border: 1px solid var(--text-muted);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            width: 200px;
+        }
+        
+        .language-search:focus {
+            outline: none;
+            border-color: var(--text-primary);
         }
         
         .status-indicator {
@@ -444,6 +562,88 @@
             </div>
         </header>
         
+        <!-- PANEL DE AJUSTES -->
+        <div class="settings-panel">
+            <div class="settings-group">
+                <span class="settings-label">Tema:</span>
+                <select class="settings-select" id="themeSelect" onchange="changeTheme()">
+                    <option value="matrix">Matrix (Predeterminado)</option>
+                    <option value="bw">Blanco y Negro</option>
+                    <option value="dark">Oscuro (Dark Mode)</option>
+                    <option value="light">Claro (Light Mode)</option>
+                    <option value="neon">Neon Night</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <span class="settings-label">Idioma:</span>
+                <input type="text" class="language-search" id="languageSearch" placeholder="Buscar idioma..." oninput="filterLanguages()">
+                <select class="settings-select" id="languageSelect" onchange="changeLanguage()">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="ru">Русский</option>
+                    <option value="zh">中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="ar">العربية</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="tr">Türkçe</option>
+                    <option value="pl">Polski</option>
+                    <option value="nl">Nederlands</option>
+                    <option value="sv">Svenska</option>
+                    <option value="da">Dansk</option>
+                    <option value="fi">Suomi</option>
+                    <option value="no">Norsk</option>
+                    <option value="cs">Čeština</option>
+                    <option value="el">Ελληνικά</option>
+                    <option value="he">עברית</option>
+                    <option value="th">ไทย</option>
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="ms">Bahasa Melayu</option>
+                    <option value="tl">Tagalog</option>
+                    <option value="uk">Українська</option>
+                    <option value="hu">Magyar</option>
+                    <option value="ro">Română</option>
+                    <option value="bg">Български</option>
+                    <option value="sk">Slovenčina</option>
+                    <option value="hr">Hrvatski</option>
+                    <option value="sr">Српски</option>
+                    <option value="lt">Lietuvių</option>
+                    <option value="lv">Latviešu</option>
+                    <option value="et">Eesti</option>
+                    <option value="sl">Slovenščina</option>
+                    <option value="is">Íslenska</option>
+                    <option value="ca">Català</option>
+                    <option value="eu">Euskara</option>
+                    <option value="gl">Galego</option>
+                    <option value="af">Afrikaans</option>
+                    <option value="sw">Kiswahili</option>
+                    <option value="ml">മലയാളം</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="pa">ਪੰਜਾਬੀ</option>
+                    <option value="gu">ગુજરાતી</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="mr">मराठी</option>
+                    <option value="ne">नेपाली</option>
+                    <option value="si">සිංහල</option>
+                    <option value="km">ខ្មែរ</option>
+                    <option value="lo">ລາວ</option>
+                    <option value="my">မြန်မာ</option>
+                    <option value="ka">ქართული</option>
+                    <option value="am">አማርኛ</option>
+                    <option value="ha">Hausa</option>
+                    <option value="yo">Yorùbá</option>
+                    <option value="zu">Zulu</option>
+                </select>
+            </div>
+        </div>
+        
         <!-- PANEL PRINCIPAL -->
         <div class="main-panel">
             <!-- CHAT SECTION -->
@@ -499,6 +699,60 @@
     </div>
 
     <script>
+        // ===== FUNCIONES DE TEMA =====
+        function changeTheme() {
+            const theme = document.getElementById('themeSelect').value;
+            document.body.className = '';
+            if (theme !== 'matrix') {
+                document.body.classList.add('theme-' + theme);
+            }
+            localStorage.setItem('trading-chat-theme', theme);
+        }
+        
+        // Cargar tema guardado
+        const savedTheme = localStorage.getItem('trading-chat-theme');
+        if (savedTheme && savedTheme !== 'matrix') {
+            document.body.classList.add('theme-' + savedTheme);
+            document.getElementById('themeSelect').value = savedTheme;
+        }
+        
+        // ===== FUNCIONES DE IDIOMA =====
+        let currentLanguage = 'es';
+        
+        function filterLanguages() {
+            const search = document.getElementById('languageSearch').value.toLowerCase();
+            const select = document.getElementById('languageSelect');
+            const options = select.options;
+            
+            for (let i = 0; i < options.length; i++) {
+                const text = options[i].text.toLowerCase();
+                const value = options[i].value.toLowerCase();
+                if (text.includes(search) || value.includes(search)) {
+                    options[i].style.display = '';
+                } else {
+                    options[i].style.display = 'none';
+                }
+            }
+        }
+        
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            currentLanguage = lang;
+            localStorage.setItem('trading-chat-lang', lang);
+            
+            // Notificar a la IA del cambio de idioma
+            if (typeof notifyLanguageChange === 'function') {
+                notifyLanguageChange(lang);
+            }
+        }
+        
+        // Cargar idioma guardado
+        const savedLang = localStorage.getItem('trading-chat-lang');
+        if (savedLang) {
+            document.getElementById('languageSelect').value = savedLang;
+            currentLanguage = savedLang;
+        }
+        
         // ===== CONFIGURACIÓN API =====
         // El frontend llama al servidor local para proteger la API Key
         const API_URL = '/api/chat';
@@ -881,5 +1135,27 @@
         // Auto-scroll chat
         document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
     </script>
+    
+    <!-- ===== CRÉDITOS ===== -->
+    <footer style="
+        background: #0d0d0d;
+        border-top: 1px solid #00ff41;
+        padding: 20px;
+        text-align: center;
+        margin-top: 20px;
+        box-shadow: 0 0 10px #00ff4133;
+    ">
+        <div style="
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff41;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            line-height: 1.8;
+        ">
+            <div style="margin-bottom: 10px;">▓▓▓ CRÉDITOS DEL SISTEMA ▓▓▓</div>
+            Desarrollado por: FERREIRA GUSTAVO JAVIER. IA sencilla de casa, sin recursos, menor de edad. Ayuda solo en programación para ser 1,000,000 de veces más efectiva que los profesionales.
+            <div style="margin-top: 10px; color: #008f11;">
+        </div>
+    </footer>
 </body>
 </html>
