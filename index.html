@@ -759,6 +759,7 @@
                 generateBtn: 'Generar Señal',
                 marketTitle: 'Mercado XAUUSD',
                 tickTitle: 'Flujo deTicks en Vivo',
+                statusText: 'SISTEMA ACTIVO | MODO OFFLINE',
                 credits: 'Desarrollado por: FERREIRA GUSTAVO JAVIER. IA sencilla de casa, sin recursos, menor de edad. Ayuda solo en programación para ser 1,000,000 de veces más efectiva que los profesionales.',
                 systemMessage: '▓▓▓ CONEXIÓN ESTABLECIDA ▓▓▓\n\nBienvenido al Sistema de Trading IA v1.0\nMotor de simulación lógica activado.\n\nBases de conocimiento cargadas:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Estructura de Mercado\n\nEstoy listo para analizar tus operaciones y responder a tus preguntas sobre estrategias de trading.',
                 processing: 'IA | Procesando...',
@@ -772,6 +773,7 @@
                 generateBtn: 'Generate Signal',
                 marketTitle: 'XAUUSD Market',
                 tickTitle: 'Live Tick Flow',
+                statusText: 'SYSTEM ACTIVE | OFFLINE MODE',
                 credits: 'Developed by: FERREIRA GUSTAVO JAVIER. Simple AI from home, with no resources, a minor. Only programming help to be 1,000,000 times more effective than professionals.',
                 systemMessage: '▓▓▓ CONNECTION ESTABLISHED ▓▓▓\n\nWelcome to Trading AI System v1.0\nLogic simulation engine activated.\n\nKnowledge bases loaded:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Market Structure\n\nI am ready to analyze your trades and answer your questions about trading strategies.',
                 processing: 'IA | Processing...',
@@ -785,6 +787,7 @@
                 generateBtn: 'Gerar Sinal',
                 marketTitle: 'Mercado XAUUSD',
                 tickTitle: 'Fluxo de Ticks ao Vivo',
+                statusText: 'SISTEMA ATIVO | MODO OFFLINE',
                 credits: 'Desenvolvido por: FERREIRA GUSTAVO JAVIER. IA simples de casa, sem recursos, menor de idade. Apenas ajuda de programação para ser 1.000.000 de vezes mais eficaz que os profissionais.',
                 systemMessage: '▓▓▓ CONEXÃO ESTABELECIDA ▓▓▓\n\nBem-vindo ao Sistema de Trading IA v1.0\nMotor de simulação lógica ativado.\n\nBases de conhecimento carregadas:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Estrutura de Mercado\n\nEstou pronto para analisar suas operações e responder suas perguntas sobre estratégias de trading.',
                 processing: 'IA | Processando...',
@@ -798,6 +801,7 @@
                 generateBtn: 'Générer un Signal',
                 marketTitle: 'Marché XAUUSD',
                 tickTitle: 'Flux de Ticks en Direct',
+                statusText: 'SYSTÈME ACTIF | MODE HORS LIGNE',
                 credits: 'Développé par: FERREIRA GUSTAVO JAVIER. IA simple à la maison, sans ressources, mineur. Aide en programmation pour être 1 000 000 de fois plus efficace que les professionnels.',
                 systemMessage: '▓▓▓ CONNEXION ÉTABLIE ▓▓▓\n\nBienvenue dans le Système de Trading IA v1.0\nMoteur de simulation logique activé.\n\nBases de connaissances chargées:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Structure du Marché\n\nJe suis prêt à analyser vos opérations et répondre à vos questions sur les stratégies de trading.',
                 processing: 'IA | Traitement...',
@@ -811,6 +815,7 @@
                 generateBtn: 'Signal Generieren',
                 marketTitle: 'XAUUSD Markt',
                 tickTitle: 'Live Tick-Fluss',
+                statusText: 'SYSTEM AKTIV | OFFLINE-MODUS',
                 credits: 'Entwickelt von: FERREIRA GUSTAVO JAVIER. Einfache KI von zu Hause, ohne Ressourcen, minderjährig. Nur Programmierhilfe, um 1.000.000 mal effektiver zu sein als Profis.',
                 systemMessage: '▓▓▓ VERBINDUNG HERGESTELLT ▓▓▓\n\nWillkommen beim Trading-KI-System v1.0\nLogik-Simulationsmotor aktiviert.\n\nWissensbasen geladen:\n• SMC (Smart Money Concepts)\n• ICT (Inner Circle Trading)\n• Price Action\n• Marktstruktur\n\nIch bin bereit, Ihre Trades zu analysieren und Ihre Fragen zu Trading-Strategien zu beantworten.',
                 processing: 'KI | Verarbeitung...',
@@ -821,14 +826,38 @@
         // Función para actualizar la interfaz
         function updateInterface() {
             const t = translations[currentLanguage] || translations.es;
-            document.querySelector('.chat-section .section-title').textContent = t.title;
-            document.getElementById('chatInput').placeholder = t.inputPlaceholder;
-            document.querySelector('.chat-section .btn').textContent = t.sendBtn;
-            document.querySelector('.signals-section .section-title').textContent = t.signalsTitle;
-            document.querySelector('.generate-btn').textContent = t.generateBtn;
-            document.querySelector('.side-panel .section-title').textContent = t.marketTitle;
-            document.querySelector('.tick-title').textContent = t.tickTitle;
-            document.querySelector('footer .settings-label')?.closest('footer');
+            
+            // Chat
+            if (document.querySelector('.chat-section .section-title'))
+                document.querySelector('.chat-section .section-title').textContent = t.title;
+            if (document.getElementById('chatInput'))
+                document.getElementById('chatInput').placeholder = t.inputPlaceholder;
+            const sendBtn = document.querySelector('.chat-section .btn');
+            if (sendBtn) sendBtn.textContent = t.sendBtn;
+            
+            // Signals
+            if (document.querySelector('.signals-section .section-title'))
+                document.querySelector('.signals-section .section-title').textContent = t.signalsTitle;
+            const genBtn = document.querySelector('.generate-btn');
+            if (genBtn) genBtn.textContent = t.generateBtn;
+            
+            // Market
+            if (document.querySelector('.side-panel .section-title'))
+                document.querySelector('.side-panel .section-title').textContent = t.marketTitle;
+            if (document.querySelector('.tick-title'))
+                document.querySelector('.tick-title').textContent = t.tickTitle;
+            
+            // Status header
+            const statusText = document.querySelector('.status-indicator span');
+            if (statusText) statusText.textContent = t.statusText;
+            
+            // Credits
+            const creditsEl = document.querySelector('footer div[style*="margin-bottom"]');
+            if (creditsEl) creditsEl.textContent = t.credits;
+            
+            // Logo
+            const logoEl = document.querySelector('.logo');
+            if (logoEl) logoEl.innerHTML = `Trading<span>-Chat</span>-IA`;
         }
         
         // Inicializar interfaz
@@ -980,7 +1009,7 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message: prompt,
+                        message: 'Responde exclusivamente en ' + currentLanguage + '. No uses inglés a menos que el usuario lo pida. ' + prompt,
                         language: currentLanguage
                     })
                 });
