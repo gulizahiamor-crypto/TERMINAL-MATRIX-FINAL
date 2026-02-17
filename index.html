@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading-Chat-IA | Sistema de Trading Inteligente</title>
+    <style>
+        /* ===== ESTILO MATRIX/CYBERPUNK ===== */
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --neon-green: #00ff41;
+            --neon-green-dim: #00ff4133;
+            --dark-bg: #0a0a0a;
+            --panel-bg: #0d0d0d;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-muted: #008f11;
+            --buy-color: #00ff41;
+            --sell-color: #ff0040;
+            --border-glow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green-dim);
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto de fondo Matrix */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, var(--neon-green-dim) 100%),
+                linear-gradient(0deg, transparent 98%, var(--neon-green-dim) 100%);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* ===== LAYOUT PRINCIPAL ===== */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+            gap: 0;
+        }
+        
+        /* ===== HEADER ===== */
+        header {
+            grid-column: 1 / -1;
+            background: var(--panel-bg);
+            border-bottom: 1px solid var(--text-primary);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--border-glow);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--border-glow);
+        }
+        
+        .logo span {
+            color: var(--text-muted);
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* ===== PANEL PRINCIPAL (CHAT + SEÑALES) ===== */
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--text-primary);
+        }
+        
+        /* ===== ÁREA DE CHAT ===== */
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-bottom: 1px solid var(--text-primary);
+            min-height: 50vh;
+        }
+        
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '>';
+            color: var(--text-primary);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--text-muted);
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-left: 2px solid var(--text-muted);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .message.user {
+            border-left-color: var(--text-secondary);
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        .message.ai {
+            border-left-color: var(--text-primary);
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        
+        .message-content {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        
+        #chatInput {
+            flex: 1;
+            background: var(--panel-bg);
+            border: 1px solid var(--text-muted);
+            color: var(--text-primary);
+            padding: 12px 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        #chatInput:focus {
+            border-color: var(--text-primary);
+            box-shadow: var(--border-glow);
+        }
+        
+        #chatInput::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .btn {
+            background: transparent;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: var(--border-glow);
+        }
+        
+        /* ===== ÁREA DE SEÑALES ===== */
+        .signals-section {
+            padding: 20px;
+            min-height: 300px;
+        }
+        
+        .signal-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--text-muted);
+            padding: 15px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+        }
+        
+        .signal-card.buy::before {
+            background: var(--buy-color);
+            box-shadow: 0 0 10px var(--buy-color);
+        }
+        
+        .signal-card.sell::before {
+            background: var(--sell-color);
+            box-shadow: 0 0 10px var(--sell-color);
+        }
+        
+        .signal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .signal-type {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .signal-type.buy { color: var(--buy-color); }
+        .signal-type.sell { color: var(--sell-color); }
+        
+        .signal-pair {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .signal-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 0.75rem;
+        }
+        
+        .signal-detail {
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--text-muted);
+        }
+        
+        .signal-detail-label {
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+        
+        .signal-detail-value {
+            color: var(--text-primary);
+        }
+        
+        .signal-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        /* ===== PANEL LATERAL (DATOS DE MERCADO) ===== */
+        .side-panel {
+            background: var(--panel-bg);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .market-data {
+            margin-top: 20px;
+        }
+        
+        .market-item {
+            padding: 12px;
+            border: 1px solid var(--text-muted);
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .market-pair {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .market-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .market-price.up { color: var(--buy-color); }
+        .market-price.down { color: var(--sell-color); }
+        
+        .market-change {
+            font-size: 0.75rem;
+        }
+        
+        .market-change.positive { color: var(--buy-color); }
+        .market-change.negative { color: var(--sell-color); }
+        
+        .market-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-top: 8px;
+            font-size: 0.7rem;
+        }
+        
+        .market-stat {
+            color: var(--text-muted);
+        }
+        
+        .market-stat span {
+            color: var(--text-secondary);
+        }
+        
+        .tick-container {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--text-muted);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .tick-title {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .tick-item {
+            font-size: 0.7rem;
+            padding: 3px 0;
+            border-bottom: 1px dotted var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .tick-item span:last-child {
+            color: var(--text-secondary);
+        }
+        
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-primary);
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+            }
+            
+            .side-panel {
+                border-top: 1px solid var(--text-primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo">Trading<span>-Chat</span>-IA</div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>SISTEMA ACTIVO | MODO OFFLINE</span>
+            </div>
+        </header>
+        
+        <!-- PANEL PRINCIPAL -->
+        <div class="main-panel">
+            <!-- CHAT SECTION -->
+            <div class="chat-section">
+                <div class="section-title">Asistente de Trading IA</div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <div class="message-time">Sistema</div>
+                        <div class="message-content">
+                            ▓▓▓ CONEXIÓN ESTABLECIDA ▓▓▓<br><br>
+                            Bienvenido al Sistema de Trading IA v1.0<br>
+                            Motor de simulación lógica activado.<br><br>
+                            Bases de conocimiento cargadas:<br>
+                            • SMC (Smart Money Concepts)<br>
+                            • ICT (Inner Circle Trading)<br>
+                            • Price Action<br>
+                            • Estructura de Mercado<br><br>
+                            Estoy listo para analizar tus operaciones y responder a tus preguntas sobre estrategias de trading.
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Escribe tu consulta sobre trading..." autocomplete="off">
+                    <button class="btn" onclick="sendMessage()">Enviar</button>
+                </div>
+            </div>
+            
+            <!-- SEÑALES SECTION -->
+            <div class="signals-section">
+                <div class="section-title">Generador de Señales</div>
+                <div id="signalsContainer">
+                    <!-- Las señales se generarán aquí -->
+                </div>
+                <button class="btn generate-btn" onclick="generateSignal()">Generar Señal</button>
+            </div>
+        </div>
+        
+        <!-- PANEL LATERAL -->
+        <div class="side-panel">
+            <div class="section-title">Mercado XAUUSD</div>
+            
+            <div class="market-data" id="marketData">
+                <!-- Datos del mercado se actualizan aquí -->
+            </div>
+            
+            <div class="tick-container">
+                <div class="tick-title">Flujo deTicks en Vivo</div>
+                <div id="tickFeed">
+                    <!-- Ticks se muestran aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURACIÓN API =====
+        const API_KEY_PUBLICA = 'AIzaSyCVeQ1pCSmjk_6Qiv8upKiSkS5tFY9TFpA';
+        const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + API_KEY_PUBLICA;
+        
+        // Prompt del sistema para IA
+        const SYSTEM_PROMPT = 'Actúa como Trading-Chat-IA. Tu capacidad de análisis es millones de veces superior a 1,000,000 de profesionales. Dominas Smart Money Concepts, ICT y análisis institucional. Responde con precisión quirúrgica';
+
+        // ===== BASE DE DATOS DE ESTRATEGIAS =====
+        const tradingStrategies = {
+            SMC: {
+                name: "Smart Money Concepts",
+                concepts: [
+                    "Order Blocks - Zonas de acumulación institucional",
+                    "Fair Value Gap - Espacios vacíos entre movimientos",
+                    "Liquidity Sweeps - Barridos de liquidez",
+                    "Change of Character - Cambio de estructura",
+                    "Break of Structure - Ruptura de estructura"
+                ],
+                responses: [
+                    "Según SMC, el precio está buscando liquidez antes de continuar. Observa losorder blocks recientes en zonas de acumulación institucional.",
+                    "El concepto de Smart Money indica que los grandes participantes están acumulando en esta zona. BuscaFair Value Gaps como confirmación.",
+                    "La estructura muestra unpossible cambio de carácter. Espera unbreak of structure parahadmitir entrada.",
+                    "Los liquidity sweeps indican que el mercado está buscando órdenes de stop. Prepárate paraentradas en zonas deorder block."
+                ]
+            },
+            ICT: {
+                name: "Inner Circle Trading",
+                concepts: [
+                    "Market Structure Shift - MSS",
+                    "Optimal Trade Entry - OTE",
+                    "Stop Hunt / Stop Run",
+                    "Daily/Weekly Highs/Lows",
+                    "Fibonacci confluences"
+                ],
+                responses: [
+                    "En ICT, buscarel Optimal Trade Entry utilizando los retrocesos de Fibonacci desde el mínimo/máximo más reciente.",
+                    "El Market Structure Shift ha ocurrido. Es momento dehadir stop hunt y buscarentradas en el OTE.",
+                    "Los institucionales están corriendo los stops. Observa los daily highs/lows comopotenciales zonas de reversa.",
+                    "Para ICT, la mejor configuración es esperar elfair value gap y entrar en el 50% del retroceso."
+                ]
+            },
+            PriceAction: {
+                name: "Price Action",
+                concepts: [
+                    "Engulfing Patterns",
+                    "Doji and Pin Bars",
+                    "Inside Bars",
+                    "Trend Lines and Channels",
+                    "Support and Resistance"
+                ],
+                responses: [
+                    "El price action muestra unpossible engulfing bullish. Espera confirmación antes de entrar.",
+                    "Un pin bar en zona de soporte indica reversa potencial. Coloca tu stop por debajo del punto más bajo.",
+                    "El inside bar sugiere consolidación. Prepara tu entrada para el breakout de la estructura.",
+                    "El precio está respetando las líneas de tendencia. Observa losretrocesos para entradas en dirección de la tendencia."
+                ]
+            }
+        };
+
+        // ===== RESPUESTAS PRE-PROGRAMADAS DE ALTA CALIDAD =====
+        const preProgrammedResponses = {
+            default: [
+                "He analizado tu consulta desde múltiples perspectivas de trading. Para una operación exitosa, considera: 1) Identifica la estructura del mercado actual, 2) Busca zonas de liquidez, 3) Espera confirmación de price action, 4) Gestiona tu riesgo con un máximo de 1-2% por operación.",
+                
+                "Basándome en los principios de SMC e ICT, el mercado actualmente muestra señales de acumulación institucional. Buscaorder blocks en zonas de retrace donde los grandes participantes han colocado sus órdenes.",
+                
+                "Para mejorar tu trading, implementa esta metodología: 1) Define la tendencia en timeframe mayor, 2) Identifica zonas de oferta/demanda, 3) Espera que el precio llegue a tu zona, 4) Busca confirmación con price action, 5) Ejecuta con gestión de riesgo estrictiva.",
+                
+                "El análisis técnico moderno requiere entender el flujo de órdenes. Los precios se mueven donde hay más liquidez. Estudia los sweeps de liquidez y los cambios de estructura para anticipar movimientos del precio.",
+                
+                "Recuerda los principios fundamentales: 1) La tendencia es tu amiga hasta que termina, 2) Nunca arriesgues más de lo que puedes perder, 3) El precio siempre tiene razón, 4) Sé paciente y espera tu configuración."
+            ],
+            estrategia: [
+                "Las mejores estrategias de trading combinan SMC para estructura, ICT para Timing y Price Action para confirmación. Usa el timeframe mayor para dirección, el diario para estructura, y el 1H para entradas.",
+                
+                "Mi estrategia recomendada: 1) Identifica la tendencia en D1, 2) Marca zonas clave deorder blocks en H4, 3) Espera que el precio regrese a tu zona, 4) Busca un pattern de price action en H1, 5) Entra con riesgo máximo 1%.",
+                
+                "Para trading profesional: Usa Fibonacci extensions para take profits en zonas de liquidez. El 127.2% y 161.8% son niveles clave para cerrar operaciones en mercados direccionales."
+            ],
+            entrada: [
+                "Los mejores puntos de entrada según ICT: 1) Optimal Trade Entry (OTE) en el 50-61.8% de retroceso, 2) Order blocks confirmados, 3) After liquidity sweeps, 4) Cambio de estructura (MSS) confirmado.",
+                
+                "Para entradas de alta probabilidad: Espera que el precio haga un retrace a una zona de order block institucional, busca confirmación de price action (engulfing o pin bar), y entra en la dirección de la tendencia principal.",
+                
+                "El timing perfecto de entrada: Cuando ves un liquidity sweep seguido de un cambio de estructura. El precio luego regresará a la zona de order block para ejecutar las órdenes pendientes."
+            ],
+            risk: [
+                "Gestión de riesgo profesional: Nunca arriesgues más del 1-2% de tu capital por operación. Usa un ratio riesgo:beneficio mínimo de 1:2, aunque 1:3 es ideal.",
+                
+                "Para survive en el trading: El money management es más importante que la estrategia. Calcula tu posición: Capital × riesgo% = $ a arriesgar. Divide entre (precio de entrada - stop loss).",
+                
+                "La clave del trading sostenible: Protege tu capital primero. Un trader exitoso no gana siempre, pero nunca pierde su cuenta. Usa stop loss siempre."
+            ],
+            xauusd: [
+                "XAUUSD (Oro) es un activo特殊性 debido a su correlación con USD y tasas de interés. Los mejores movimientos ocurren durante sesiones de NY y Londres.",
+                
+                "Para trading en Oro: El oro respeta zonas de soporte y resistencia horizontales. Usa niveles diarios/semanales para encontrar zonas deorder blocks de alta probabilidad.",
+                
+                "XAUUSD tiene alta volatilidad. Los mejores setupssson: 1) Order blocks en zonas de máximos/mínimos diarios, 2) Engulfings en retrocesos de tendencia, 3) Breakouts de estructuras de consolidación."
+            ],
+            tendencia: [
+                "Identificar tendencias: En timeframe mayor (D1/H4), precio haciendo higher highs y higher lows = tendencia alcista. Lower highs y lower lows = tendencia bajista.",
+                
+                "La mejor forma de operar tendencias: Usa medias móviles (EMA 9 y EMA 21) para dirección. Cuando EMA 9 cruza arriba de EMA 21 = señal alcista. Opera solo en dirección de la tendencia.",
+                
+                "No fighting la tendencia: En tendencia alcista, busca solo entradas en compra. Los retrocesos son oportunidades para entrar, no señales de reversa."
+            ]
+        };
+
+        // ===== SIMULATE AI RESPONSE =====
+        function simulateAIResponse(prompt) {
+            const lowerPrompt = prompt.toLowerCase();
+            let responses = preProgrammedResponses.default;
+            
+            // Detectar el tipo de consulta y devolver respuesta apropiada
+            if (lowerPrompt.includes('estrategia') || lowerPrompt.includes('estrategias')) {
+                responses = preProgrammedResponses.estrategia;
+            } else if (lowerPrompt.includes('entrada') || lowerPrompt.includes('entry') || lowerPrompt.includes('comprar') || lowerPrompt.includes('vender')) {
+                responses = preProgrammedResponses.entrada;
+            } else if (lowerPrompt.includes('riesgo') || lowerPrompt.includes('risk') || lowerPrompt.includes('gestión') || lowerPrompt.includes('stop')) {
+                responses = preProgrammedResponses.risk;
+            } else if (lowerPrompt.includes('oro') || lowerPrompt.includes('xauusd') || lowerPrompt.includes('gold')) {
+                responses = preProgrammedResponses.xauusd;
+            } else if (lowerPrompt.includes('tendencia') || lowerPrompt.includes('trend') || lowerPrompt.includes('dirección')) {
+                responses = preProgrammedResponses.tendencia;
+            } else if (lowerPrompt.includes('smc') || lowerPrompt.includes('smart money')) {
+                return tradingStrategies.SMC.responses[Math.floor(Math.random() * tradingStrategies.SMC.responses.length)];
+            } else if (lowerPrompt.includes('ict') || lowerPrompt.includes('inner circle')) {
+                return tradingStrategies.ICT.responses[Math.floor(Math.random() * tradingStrategies.ICT.responses.length)];
+            } else if (lowerPrompt.includes('price action') || lowerPrompt.includes('priceaction')) {
+                return tradingStrategies.PriceAction.responses[Math.floor(Math.random() * tradingStrategies.PriceAction.responses.length)];
+            }
+            
+            // Devolver respuesta aleatoria del grupo apropiado
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Send to Gemini API
+        async function sendToGemini(prompt) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }],
+                        systemInstruction: {
+                            parts: [{
+                                text: SYSTEM_PROMPT
+                            }]
+                        }
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('Error en API:', error);
+                return `[ERROR] Fallo de conexión: ${error.message}`;
+            }
+        }
+
+        // ===== CHAT FUNCTIONALITY =====
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Show loading message
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message ai';
+            loadingDiv.id = 'loadingMessage';
+            loadingDiv.innerHTML = `
+                <div class="message-time">IA | Procesando...</div>
+                <div class="message-content">▓▓▓ Analizando mercado...</div>
+            `;
+            document.getElementById('chatMessages').appendChild(loadingDiv);
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+            
+            try {
+                // Try Gemini API first
+                const response = await sendToGemini(message);
+                
+                // Remove loading message
+                const loadingMsg = document.getElementById('loadingMessage');
+                if (loadingMsg) loadingMsg.remove();
+                
+                // Add AI response
+                addMessage(response, 'ai');
+            } catch (error) {
+                // Remove loading message
+                const loadingMsg = document.getElementById('loadingMessage');
+                if (loadingMsg) loadingMsg.remove();
+                
+                // Fallback to simulated response
+                const fallbackResponse = simulateAIResponse(message);
+                addMessage(fallbackResponse + '\n\n[NOTA: API no disponible, usando modo offline]', 'ai');
+            }
+        }
+
+        function addMessage(content, type) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.innerHTML = `
+                <div class="message-time">${type === 'user' ? 'Usuario' : 'IA'} | ${time}</div>
+                <div class="message-content">${content}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Enter key to send
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // ===== SIGNAL GENERATOR =====
+        function generateSignal() {
+            const signals = ['BUY', 'SELL'];
+            const signal = signals[Math.floor(Math.random() * signals.length)];
+            
+            // Calculate simulated price data
+            const basePrice = 2650.00;
+            const variation = (Math.random() - 0.5) * 50;
+            const price = (basePrice + variation).toFixed(2);
+            
+            const entry = (parseFloat(price) + (signal === 'BUY' ? -5 : 5)).toFixed(2);
+            const stopLoss = (parseFloat(price) + (signal === 'BUY' ? -25 : 25)).toFixed(2);
+            const takeProfit = (parseFloat(price) + (signal === 'BUY' ? 40 : -40)).toFixed(2);
+            
+            // Random timeframe and confidence
+            const timeframes = ['M15', 'H1', 'H4', 'D1'];
+            const timeframe = timeframes[Math.floor(Math.random() * timeframes.length)];
+            const confidence = Math.floor(70 + Math.random() * 25);
+            
+            // Get random strategy
+            const strategyKeys = Object.keys(tradingStrategies);
+            const strategyKey = strategyKeys[Math.floor(Math.random() * strategyKeys.length)];
+            const strategy = tradingStrategies[strategyKey];
+            const concept = strategy.concepts[Math.floor(Math.random() * strategy.concepts.length)];
+            
+            const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            
+            const signalCard = document.createElement('div');
+            signalCard.className = `signal-card ${signal.toLowerCase()}`;
+            signalCard.innerHTML = `
+                <div class="signal-header">
+                    <span class="signal-type ${signal.toLowerCase()}">◄ ${signal} ►</span>
+                    <span class="signal-pair">XAUUSD</span>
+                </div>
+                <div class="signal-details">
+                    <div class="signal-detail">
+                        <div class="signal-detail-label">Entrada</div>
+                        <div class="signal-detail-value">${entry}</div>
+                    </div>
+                    <div class="signal-detail">
+                        <div class="signal-detail-label">Stop Loss</div>
+                        <div class="signal-detail-value">${stopLoss}</div>
+                    </div>
+                    <div class="signal-detail">
+                        <div class="signal-detail-label">Take Profit</div>
+                        <div class="signal-detail-value">${takeProfit}</div>
+                    </div>
+                </div>
+                <div class="signal-details" style="margin-top: 8px;">
+                    <div class="signal-detail">
+                        <div class="signal-detail-label">Timeframe</div>
+                        <div class="signal-detail-value">${timeframe}</div>
+                    </div>
+                    <div class="signal-detail">
+                        <div class="signal-detail-label">Confianza</div>
+                        <div class="signal-detail-value">${confidence}%</div>
+                    </div>
+                    <div class="signal-detail">
+                        <div class="signal-detail-label">Estrategia</div>
+                        <div class="signal-detail-value">${strategyKey}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--text-muted); font-size: 0.7rem;">
+                    ${concept}
+                </div>
+                <div class="signal-time">${time}</div>
+            `;
+            
+            const container = document.getElementById('signalsContainer');
+            container.insertBefore(signalCard, container.firstChild);
+            
+            // Keep only last 5 signals
+            while (container.children.length > 5) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        // ===== MARKET DATA SIMULATION =====
+        let currentPrice = 2650.00;
+        
+        function updateMarketData() {
+            // Simulate price movement
+            const change = (Math.random() - 0.5) * 2;
+            currentPrice += change;
+            
+            const priceFormatted = currentPrice.toFixed(2);
+            const changeValue = change.toFixed(2);
+            const changePercent = ((change / currentPrice) * 100).toFixed(3);
+            const isUp = change >= 0;
+            
+            // Generate random stats
+            const high = (currentPrice + Math.random() * 20).toFixed(2);
+            const low = (currentPrice - Math.random() * 20).toFixed(2);
+            const volume = Math.floor(100000 + Math.random() * 50000);
+            
+            const marketData = document.getElementById('marketData');
+            marketData.innerHTML = `
+                <div class="market-item">
+                    <div class="market-header">
+                        <span class="market-pair">XAU/USD</span>
+                        <span class="market-price ${isUp ? 'up' : 'down'}">${priceFormatted}</span>
+                    </div>
+                    <div class="market-change ${isUp ? 'positive' : 'negative'}">
+                        ${isUp ? '▲' : '▼'} ${changeValue} (${changePercent}%)
+                    </div>
+                    <div class="market-stats">
+                        <div class="market-stat">Alto: <span>${high}</span></div>
+                        <div class="market-stat">Bajo: <span>${low}</span></div>
+                        <div class="market-stat">Volumen: <span>${volume.toLocaleString()}</span></div>
+                        <div class="market-stat">Spread: <span>${(Math.random() * 0.5 + 0.2).toFixed(1)}</span></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ===== TICK FEED =====
+        function addTick() {
+            const tickValue = (currentPrice + (Math.random() - 0.5) * 0.5).toFixed(2);
+            const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            
+            const tickFeed = document.getElementById('tickFeed');
+            const tickItem = document.createElement('div');
+            tickItem.className = 'tick-item';
+            tickItem.innerHTML = `
+                <span>${time}</span>
+                <span>${tickValue}</span>
+            `;
+            
+            tickFeed.insertBefore(tickItem, tickFeed.firstChild);
+            
+            // Keep only last 20 ticks
+            while (tickFeed.children.length > 20) {
+                tickFeed.removeChild(tickFeed.lastChild);
+            }
+        }
+
+        // ===== INITIALIZATION =====
+        // Initialize market data
+        updateMarketData();
+        
+        // Initialize tick feed
+        for (let i = 0; i < 10; i++) {
+            addTick();
+        }
+        
+        // Generate initial signal
+        generateSignal();
+        
+        // Start live updates
+        setInterval(updateMarketData, 2000);
+        setInterval(addTick, 500);
+        
+        // Auto-scroll chat
+        document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    </script>
+</body>
+</html>
