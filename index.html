@@ -28,10 +28,10 @@
         }
         
         :root {
-            --bg-primary: #0e0e0e;
-            --bg-secondary: #141414;
-            --bg-tertiary: #1a1a1a;
-            --bg-card: #1f1f1f;
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-tertiary: #1e1e1e;
+            --bg-card: #1e1e1e;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
             --text-muted: #808080;
@@ -39,9 +39,13 @@
             --accent-dim: #8ab4f833;
             --buy-color: #4ade80;
             --sell-color: #f87171;
-            --border-radius: 30px;
+            --border-radius: 20px;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --neon-green: #00ff41;
+            --neon-green-dim: #00ff4133;
+            --panel-bg: #1a1a1a;
+            --dark-bg: #0a0a0a;
         }
         
         /* Tema Claro */
@@ -95,13 +99,13 @@
         .tradingview-section .tradingview-widget-container {
             height: calc(60vh - 60px) !important;
             width: 100% !important;
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
         }
         
         .tradingview-section #tradingview_chart {
             height: calc(60vh - 80px) !important;
-            border-radius: 24px;
+            border-radius: 20px;
         }
         
         /* Chat - debajo del gráfico */
@@ -381,7 +385,7 @@
         .message {
             margin-bottom: 12px;
             padding: 16px 20px;
-            border-radius: 24px;
+            border-radius: 20px;
             animation: fadeIn 0.3s ease;
             max-width: 80%;
             font-size: 0.95rem;
@@ -423,13 +427,14 @@
             padding: 16px 24px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--bg-tertiary);
+            border-radius: 0 0 20px 20px;
         }
         
         #chatInput {
             flex: 1;
             background: var(--bg-tertiary);
             border: none;
-            border-radius: 28px;
+            border-radius: 20px;
             color: var(--text-primary);
             padding: 16px 24px;
             font-family: 'Inter', sans-serif;
@@ -678,91 +683,19 @@
             }
         }
         
-        /* ===== MODO DISEÑO ===== */
-        .design-mode-active .main-panel,
-        .design-mode-active .side-panel,
-        .design-mode-active .chat-section,
-        .design-mode-active .signals-section,
-        .design-mode-active .tradingview-widget-container {
-            cursor: move !important;
-            outline: 2px dashed var(--neon-green) !important;
-            outline-offset: 4px !important;
-        }
         
-        .design-mode-active .resize-handle {
-            display: block !important;
-        }
         
-        .resize-handle {
-            display: none;
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: var(--neon-green);
-            border-radius: 50%;
-            cursor: se-resize;
-            z-index: 1000;
-            animation: pulse-handle 1s infinite;
-        }
         
-        .resize-handle.top-left { top: -7px; left: -7px; cursor: nw-resize; }
-        .resize-handle.top-right { top: -7px; right: -7px; cursor: ne-resize; }
-        .resize-handle.bottom-left { bottom: -7px; left: -7px; cursor: sw-resize; }
-        .resize-handle.bottom-right { bottom: -7px; right: -7px; cursor: se-resize; }
         
-        @keyframes pulse-handle {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.7; }
-        }
         
-        .design-indicator {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--neon-green);
-            color: var(--dark-bg);
-            padding: 10px 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            z-index: 9999;
-            border-radius: 5px;
-            box-shadow: 0 0 20px var(--neon-green);
-            animation: pulse 1s infinite;
-        }
         
-        .design-mode-active .design-indicator {
-            display: block;
-        }
         
-        .save-design-btn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--neon-green);
-            color: var(--dark-bg);
-            border: none;
-            padding: 15px 30px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            z-index: 9999;
-            border-radius: 5px;
-            box-shadow: 0 0 20px var(--neon-green);
-            transition: all 0.3s;
-        }
         
-        .save-design-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--neon-green);
-        }
         
-        .design-mode-active .save-design-btn {
-            display: block;
-        }
+        
+        
+        
+        
         
         .coordinates-modal {
             display: none;
@@ -816,97 +749,7 @@
             outline: 3px solid var(--neon-green) !important;
             outline-offset: 2px !important;
         }
-        
-        /* ===== MODO CONSTRUCTOR (Activo con clave) ===== */
-        body.constructor-mode .main-panel,
-        body.constructor-mode .side-panel,
-        body.constructor-mode .chat-section,
-        body.constructor-mode .signals-section,
-        body.constructor-mode .tradingview-widget-container {
-            cursor: move !important;
-            outline: 2px dashed var(--neon-green) !important;
-            outline-offset: 4px !important;
-            transition: outline 0.3s;
-        }
-        
-        body.constructor-mode .tradingview-widget-container {
-            cursor: se-resize !important;
-        }
-        
-        body.constructor-mode .chat-section {
-            cursor: se-resize !important;
-        }
-        
-        /* Indicador especial para modo constructor */
-        .constructor-indicator {
-            display: none;
-            position: fixed;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-            padding: 12px 40px;
-            font-weight: 700;
-            font-size: 1rem;
-            z-index: 9999;
-            border-radius: 25px;
-            box-shadow: 0 0 30px #00ff41;
-            animation: pulse-constructor 1s infinite;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        @keyframes pulse-constructor {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.05); }
-        }
-        
-        body.constructor-mode .constructor-indicator {
-            display: block;
-        }
-        
-        /* Botón verde mejorado para Guardar Diseño */
-        .save-design-btn {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #00ff41, #00cc33) !important;
-            color: #000 !important;
-            border: none;
-            padding: 18px 35px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            z-index: 9999;
-            border-radius: 30px;
-            box-shadow: 0 0 30px #00ff41, 0 5px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .save-design-btn:hover {
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 0 50px #00ff41, 0 10px 25px rgba(0,0,0,0.4);
-        }
-        
-        .save-design-btn:active {
-            transform: scale(0.98);
-        }
-        
-        body.constructor-mode .save-design-btn {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
+
         /* Modal de coordenadas mejorado */
         .coordinates-modal {
             display: none;
@@ -1421,75 +1264,7 @@
                 </select>
             </div>
         </div>
-            <div class="settings-group">
-                <span class="settings-label">Tema:</span>
-                <select class="settings-select" id="themeSelect" onchange="changeTheme()">
-                    <option value="matrix">Matrix (Predeterminado)</option>
-                    <option value="bw">Blanco y Negro</option>
-                    <option value="dark">Oscuro (Dark Mode)</option>
-                    <option value="light">Claro (Light Mode)</option>
-                    <option value="neon">Neon Night</option>
-                </select>
-            </div>
-            <div class="settings-group">
-                <span class="settings-label">Idioma:</span>
-                <input type="text" class="language-search" id="languageSearch" placeholder="Buscar idioma..." oninput="filterLanguages()">
-                <select class="settings-select" id="languageSelect" onchange="changeLanguage()">
-                    <option value="es">Español</option>
-                    <option value="en">English</option>
-                    <option value="pt">Português</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                    <option value="it">Italiano</option>
-                    <option value="ru">Русский</option>
-                    <option value="zh">中文</option>
-                    <option value="ja">日本語</option>
-                    <option value="ko">한국어</option>
-                    <option value="ar">العربية</option>
-                    <option value="hi">हिन्दी</option>
-                    <option value="tr">Türkçe</option>
-                    <option value="pl">Polski</option>
-                    <option value="nl">Nederlands</option>
-                    <option value="sv">Svenska</option>
-                    <option value="da">Dansk</option>
-                    <option value="fi">Suomi</option>
-                    <option value="no">Norsk</option>
-                    <option value="cs">Čeština</option>
-                    <option value="el">Ελληνικά</option>
-                    <option value="he">עברית</option>
-                    <option value="th">ไทย</option>
-                    <option value="vi">Tiếng Việt</option>
-                    <option value="id">Bahasa Indonesia</option>
-                    <option value="ms">Bahasa Melayu</option>
-                    <option value="tl">Tagalog</option>
-                    <option value="uk">Українська</option>
-                    <option value="hu">Magyar</option>
-                    <option value="ro">Română</option>
-                    <option value="bg">Български</option>
-                    <option value="sk">Slovenčina</option>
-                    <option value="hr">Hrvatski</option>
-                    <option value="sr">Српски</option>
-                    <option value="lt">Lietuvių</option>
-                    <option value="lv">Latviešu</option>
-                    <option value="et">Eesti</option>
-                    <option value="sl">Slovenščina</option>
-                    <option value="is">Íslenska</option>
-                    <option value="ca">Català</option>
-                    <option value="eu">Euskara</option>
-                    <option value="gl">Galego</option>
-                    <option value="af">Afrikaans</option>
-                    <option value="sw">Kiswahili</option>
-                    <option value="ml">മലയാളം</option>
-                    <option value="ta">தமிழ்</option>
-                    <option value="te">తెలుగు</option>
-                    <option value="bn">বাংলা</option>
-                    <option value="pa">ਪੰਜਾਬੀ</option>
-                    <option value="gu">ગુજરાતી</option>
-                    <option name="kn">ಕನ್ನಡ</option>
-                    <option value="mr">मराठी</option>
-                    <option value="ne">नेपाली</option>
-                    <option value="si">සිංහල</option>
-                    <option value="km">ខ្មែរ</option>
+រ</option>
                     <option value="lo">ລາວ</option>
                     <option value="my">မြန်မာ</option>
                     <option value="ka">ქართული</option>
@@ -1569,41 +1344,8 @@
     </div>
 
     <script>
-        // ===== FUNCIONES DE TEMA =====
-        function changeTheme() {
-            const theme = document.getElementById('themeSelect').value;
-            document.body.className = '';
-            if (theme !== 'matrix') {
-                document.body.classList.add('theme-' + theme);
-            }
-            localStorage.setItem('trading-chat-theme', theme);
-        }
-        
-        // Cargar tema guardado
-        const savedTheme = localStorage.getItem('trading-chat-theme');
-        if (savedTheme && savedTheme !== 'matrix') {
-            document.body.classList.add('theme-' + savedTheme);
-            document.getElementById('themeSelect').value = savedTheme;
-        }
-        
         // ===== FUNCIONES DE IDIOMA =====
         let currentLanguage = 'es';
-        
-        function filterLanguages() {
-            const search = document.getElementById('languageSearch').value.toLowerCase();
-            const select = document.getElementById('languageSelect');
-            const options = select.options;
-            
-            for (let i = 0; i < options.length; i++) {
-                const text = options[i].text.toLowerCase();
-                const value = options[i].value.toLowerCase();
-                if (text.includes(search) || value.includes(search)) {
-                    options[i].style.display = '';
-                } else {
-                    options[i].style.display = 'none';
-                }
-            }
-        }
         
         // Toggle Menú de Ajustes
         function toggleSettingsMenu() {
@@ -2640,30 +2382,7 @@
             document.getElementById('coordinatesModal').classList.add('show');
         }
         
-        // Generar salida CSS completa
-        function generateCSSOutput(designState) {
-            let css = '/* ============================================\n';
-            css += '   DISEÑO GUARDADO - Trading Chat IA\n';
-            css += '   Creador: Gustavo Javier Ferreira de Misiones\n';
-            css += '   Nacido el 18 de marzo de 2010 - Misiones, Argentina\n';
-            css += '   Un millón de profesionales ya lo sabe\n';
-            css += '   ============================================\n\n';
-            
-            css += '/* ----- PANEL PRINCIPAL (Chat + Señales) ----- */\n';
-            if (designState.mainPanel && (designState.mainPanel.transform || designState.mainPanel.x !== '0' || designState.mainPanel.y !== '0')) {
-                css += '.main-panel {\n';
-                if (designState.mainPanel.transform) css += `  transform: ${designState.mainPanel.transform};\n`;
-                css += `  position: relative;\n`;
-                css += '}\n\n';
-            }
-            
-            css += '/* ----- PANEL LATERAL (Mercado) ----- */\n';
-            if (designState.sidePanel && (designState.sidePanel.transform || designState.sidePanel.x !== '0' || designState.sidePanel.y !== '0')) {
-                css += '.side-panel {\n';
-                if (designState.sidePanel.transform) css += `  transform: ${designState.sidePanel.transform};\n`;
-                css += `  position: relative;\n`;
-                css += '}\n\n';
-            }
+        
             
             css += '/* ----- SECCIÓN DE CHAT ----- */\n';
             if (designState.chatSection && (designState.chatSection.width || designState.chatSection.height || designState.chatSection.transform)) {
@@ -2704,23 +2423,7 @@
             document.getElementById('coordinatesModal').classList.remove('show');
         }
         
-        // Copiar código CSS al portapapeles
-        function copyToClipboard() {
-            const cssCode = document.getElementById('coordinatesOutput').textContent;
-            navigator.clipboard.writeText(cssCode).then(function() {
-                alert('¡Código CSS copiado al portapapeles!\n\nGuarda este código para restaurar tu diseño cuando quieras.');
-            }, function(err) {
-                console.error('Error al copiar: ', err);
-                // Fallback para navegadores más antiguos
-                const textArea = document.createElement('textarea');
-                textArea.value = cssCode;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('¡Código CSS copiado! (modo alternativo)');
-            });
-        }
+        
         
         // Adaptar gráfico de TradingView al tamaño
         function resizeTradingViewChart() {
@@ -2779,9 +2482,6 @@
             });
         }
         
-        // Inicializar modo diseño
-        initDesignMode();
-        setupDesignModeListeners();
         
         // Guardar cuando se redimensiona la ventana
         window.addEventListener('resize', () => {
@@ -2834,29 +2534,12 @@
             padding: 20px;
             letter-spacing: 1px;
         ">
-            <span>Gustavo Javier Ferreira · Misiones, Argentina · 2010</span>
+            <span>Gustavo Javier Ferreira · Misiones, Argentina</span>
         </div>
     </footer>
     
-    <!-- Botón Guardar Diseño - Solo visible en Modo Constructor -->
-    <button class="save-design-btn" onclick="showCoordinates()">
-        GUARDAR DISEÑO
-    </button>
     
-    <!-- Indicador visual de Modo Constructor -->
-    <div class="constructor-indicator">
-        <span>MODO CONSTRUCTOR ACTIVADO</span>
-        <button onclick="deactivateConstructorMode();" style="margin-left: 15px; background: #ff0040; border: none; color: white; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-size: 0.8rem;">
-            SALIR
-        </button>
-    </div>
     
-    <!-- Panel lateral de admin (toggle) -->
-    <div class="admin-toggle" onclick="toggleAdminPanel()" title="Panel de Diseño">
-        DISEÑO
-    </div>
-    
-
     
 
 </body>
