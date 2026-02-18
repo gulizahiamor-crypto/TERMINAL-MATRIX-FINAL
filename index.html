@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -385,7 +385,7 @@
         .message {
             margin-bottom: 12px;
             padding: 16px 20px;
-            border-radius: 20px;
+            border-radius: 28px;
             animation: fadeIn 0.3s ease;
             max-width: 80%;
             font-size: 0.95rem;
@@ -1229,24 +1229,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- HEADER MINIMALISTA -->
-        <header>
-            <div class="logo">Trading<span>-Chat</span>-IA</div>
-            <div class="header-right">
-                <div class="status-indicator">
-                    <div class="status-dot"></div>
-                    <span id="statusText">SISTEMA ACTIVO</span>
-                </div>
-                <button class="settings-btn" onclick="toggleSettingsMenu()" title="Ajustes">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                    </svg>
-                </button>
-            </div>
-        </header>
-        
-        <!-- MENÚ DE AJUSTES (Dropdown) -->
+        <!-- PANEL PRINCIPAL -->
+        <div class=`"main-panel`">
         <div class="settings-menu" id="settingsMenu">
             <div class="settings-menu-header">
                 <span>Ajustes</span>
@@ -1265,19 +1249,13 @@
             </div>
         </div>
 រ</option>
-                    <option value="lo">ລາວ</option>
-                    <option value="my">မြန်မာ</option>
-                    <option value="ka">ქართული</option>
-                    <option value="am">አማርኛ</option>
-                    <option value="ha">Hausa</option>
-                    <option value="yo">Yorùbá</option>
-                    <option value="zu">Zulu</option>
+
                 </select>
             </div>
         </div>
         
         <!-- PANEL PRINCIPAL -->
-        <div class="main-panel">
+        <div class=`"main-panel`">
             <!-- TradingView Widget - ÁREA PRINCIPAL -->
             <div class="tradingview-section">
                 <div class="section-title" id="chartTitle">Análisis de Mercado XAUUSD</div>
@@ -1310,6 +1288,12 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Firma del creador -->
+                <div style="text-align: center; padding: 10px; color: #666; font-size: 0.7rem; border-top: 1px solid #333; margin-top: 10px;">
+                    Creado por Gustavo Javier Ferreira, 18 de marzo de 2010 - Misiones, Argentina
+                </div>
+                
                 <div class="chat-input-area">
                     <input type="text" id="chatInput" placeholder="Pregúntame lo que quieras sobre el mundo..." autocomplete="off">
                     <button class="btn" onclick="sendMessage()">Enviar</button>
@@ -2384,6 +2368,11 @@
         
         
             
+            
+            
+        function generateCSSOutput(designState) {
+            let css = '';
+            
             css += '/* ----- SECCIÓN DE CHAT ----- */\n';
             if (designState.chatSection && (designState.chatSection.width || designState.chatSection.height || designState.chatSection.transform)) {
                 css += '.chat-section {\n';
@@ -2538,9 +2527,107 @@
         </div>
     </footer>
     
+    <!-- ===== PANEL DE ADMINISTRACIÓN (Modo Constructor) ===== -->
+    <div id="adminStylesPanel" class="admin-styles-panel">
+        <div class="admin-panel-header">
+            <h3>⚙️ MODO CONSTRUCTOR</h3>
+            <button onclick="hideAdminPanel()" style="background:none;border:none;color:#00ff41;font-size:24px;cursor:pointer;">&times;</button>
+        </div>
+        <div class="admin-panel-content">
+            <p style="color:#00ff4188;margin-bottom:15px;">Arrastra y redimensiona los paneles. Usa el botón verde para guardar.</p>
+            
+            <button onclick="saveDesign()" style="
+                background: linear-gradient(135deg, #00ff41, #00cc33);
+                color: #000;
+                border: none;
+                padding: 15px 30px;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 15px;
+                box-shadow: 0 0 20px #00ff4166;
+                transition: transform 0.2s;
+            ">💾 GUARDAR DISEÑO</button>
+            
+            <button onclick="applyPermanentDesign()" style="
+                background: linear-gradient(135deg, #4a9eff, #0066cc);
+                color: #fff;
+                border: none;
+                padding: 12px 20px;
+                font-size: 14px;
+                border-radius: 6px;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 10px;
+            ">✅ APLICAR DISEÑO DEFINITIVO</button>
+            
+            <button onclick="deactivateConstructorMode()" style="
+                background: transparent;
+                color: #ff4141;
+                border: 1px solid #ff4141;
+                padding: 10px 20px;
+                font-size: 13px;
+                border-radius: 6px;
+                cursor: pointer;
+                width: 100%;
+            ">🔒 SALIR DEL MODO CONSTRUCTOR</button>
+        </div>
+    </div>
+    
+    <!-- ===== MODAL DE COORDENADAS CSS ===== -->
+    <div id="coordinatesModal" class="coordinates-modal">
+        <div class="coordinates-modal-content">
+            <div class="coordinates-modal-header">
+                <h3>📋 CÓDIGO CSS DEL DISEÑO</h3>
+                <button onclick="closeCoordinatesModal()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;">&times;</button>
+            </div>
+            <div class="coordinates-modal-body">
+                <pre id="coordinatesOutput" style="
+                    background: #0a0a0a;
+                    color: #00ff41;
+                    padding: 20px;
+                    border-radius: 8px;
+                    overflow-x: auto;
+                    font-size: 12px;
+                    max-height: 400px;
+                    overflow-y: auto;
+                    border: 1px solid #00ff4133;
+                "></pre>
+            </div>
+            <div class="coordinates-modal-footer">
+                <button onclick="copyCoordinates()" style="
+                    background: linear-gradient(135deg, #4a9eff, #0066cc);
+                    color: #fff;
+                    border: none;
+                    padding: 12px 25px;
+                    font-size: 14px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                ">📋 COPIAR CÓDIGO</button>
+                <button onclick="closeCoordinatesModal()" style="
+                    background: #333;
+                    color: #fff;
+                    border: none;
+                    padding: 12px 25px;
+                    font-size: 14px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                ">CERRAR</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+    
     
     
     
 
 </body>
 </html>
+
+
+
