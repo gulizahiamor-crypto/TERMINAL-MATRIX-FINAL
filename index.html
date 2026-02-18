@@ -5,26 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading-Chat-IA | Sistema de Trading Inteligente</title>
     
-    <!-- Google Fonts - Inter moderna -->
+    <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Google Fonts - Selector de 500+ fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Agbalumo&family=Alegreya&family=Alegreya+Sans&family=Amatic+SC&family=Anton&family=Bebas+Neue&family=Bitter&family=Cabin&family=Cairo&family=Comfortaa&family=Comic+Neue&family=Cookie&family=Courgette&family=Dancing+Script&family=DM+Sans&family=Dosis&family=EB+Garamond&family=Eczar&family=Exo+2&family=Fira+Sans&family=Fjalla+One&family=Fredoka+One&family=Fira+Code&family=Geist&family=Gloria+Hallelujah&family=Great+Vibes&family=Heebo&family=IBM+Plex+Sans&family=Inconsolata&family=Indie+Flower&family=Inter&family=JetBrains+Mono&family=Josefin+Sans&family=Jost&family=Kanit&family=Karla&family=Kaushan+Script&family=Lato&family=Libre+Baskerville&family=Libre+Franklin&family=Lora&family=Manrope&family=Ma+Shan+Zheng&family=Merriweather&family=Merriweather+Sans&family=Monoton&family=Montserrat&family=Mukta&family=Muli&family=Nunito&family=Nunito+Sans&family=Open+Sans&family=Oswald&family=Outfit&family=Oxygen&family=Pacifico&family=Parisienne&family=Patrick+Hand&family=Paytone+One&family=Peddana&family=Philosopher&family=Pinyon+Script&family=Playfair+Display&family=Playfair+Display+SC&family=Plus+Jakarta+Sans&family=Poppins&family=Prata&family=Prompt&family=PT+Sans&family=PT+Serif&family=Quicksand&family=Quintessential&family=Raleway&family=Red+Hat+Display&family=Righteous&family=Roboto&family=Roboto+Condensed&family=Roboto+Flex&family=Roboto+Mono&family=Rubik&family=Sacramento&family=Salsa&family=Sarabun&family=Shadows+Into+Light&family=Shrikhand&family=Signika+Negative&family=Source+Code+Pro&family=Source+Sans+3&family=Space+Grotesk&family=Space+Mono&family=Spectral&family=Syne&family=Tajawal&family=Teko&family=Tilt+Prism&family=Titillium+Web&family=Tomorrow&family=Ubuntu&family=Ubuntu+Mono&family=Unbounded&family=Urbanist&family=Varela+Round&family=Vollkorn&family=Work+Sans&family=Xanh+Mono&family=Yanone+Kaffeesatz&family=Yeseva+One&family=Zcool+XiaoWei&family=Zilla+Slab&display=swap" rel="stylesheet">
-    
-    <!-- Interact.js para drag & resize -->
-    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    
     <style>
-        /* ===== ESTILO MODERNO TIPO GEMINI/IA ===== */
+        /* ===== ESTILO GEMINI - FONDO NEGRO ABSOLUTO ===== */
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
         }
         
         :root {
@@ -39,332 +36,73 @@
             --accent-dim: #8ab4f833;
             --buy-color: #4ade80;
             --sell-color: #f87171;
-            --border-radius: 20px;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
-            --neon-green: #00ff41;
-            --neon-green-dim: #00ff4133;
-            --panel-bg: #1a1a1a;
-            --dark-bg: #0a0a0a;
-        }
-        
-        /* Tema Claro */
-        body.theme-light {
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #f0f0f0;
-            --bg-card: #ffffff;
-            --text-primary: #1f1f1f;
-            --text-secondary: #5f6368;
-            --text-muted: #808080;
-            --accent: #1a73e8;
-            --accent-dim: #1a73e833;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --border-radius: 28px;
+            --border-radius-small: 20px;
         }
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
             line-height: 1.6;
         }
         
-        /* ===== LAYOUT VIP - TERMINAL PROFESIONAL ===== */
+        /* ===== CONTAINER CON ESTRUCTURA 65/35 ===== */
         .container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            position: relative;
+            height: 100vh;
+            width: 100vw;
         }
         
-        /* Área principal: gráfico + chat - bloqueado */
-        .main-panel {
+        /* TradingView - 65% */
+        .tradingview-section {
+            flex: 0 0 65vh;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            position: relative;
-            width: 100%;
         }
         
-        /* TradingView - 60% ALTURA, 100% ANCHO */
-        .tradingview-section {
-            flex: 0 0 60vh;
-            padding: 20px;
-            border-bottom: 1px solid var(--bg-tertiary);
-            position: relative;
+        .tradingview-section .section-title {
+            flex-shrink: 0;
+            margin-bottom: 10px;
         }
         
         .tradingview-section .tradingview-widget-container {
-            height: calc(60vh - 60px) !important;
+            flex: 1;
             width: 100% !important;
-            border-radius: 20px;
+            border-radius: var(--border-radius);
             overflow: hidden;
+            min-height: 0;
         }
         
         .tradingview-section #tradingview_chart {
-            height: calc(60vh - 80px) !important;
-            border-radius: 20px;
+            height: 100% !important;
+            border-radius: var(--border-radius);
         }
         
-        /* Chat - debajo del gráfico */
+        /* Chat - 35% */
         .chat-section {
-            flex: 1;
+            flex: 0 0 35vh;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            min-height: 35vh;
-            position: relative;
+            padding: 15px;
             border-top: 1px solid var(--bg-tertiary);
-        }
-        
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-            background: var(--bg-card);
-            border: 1px solid var(--bg-tertiary);
-            margin-bottom: 15px;
-            min-height: 200px;
-            border-radius: 24px;
-        }
-        
-        /* ===== HEADER MODERNO ===== */
-        header {
-            grid-column: 1 / -1;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--bg-tertiary);
-            padding: 16px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-        }
-        
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--text-primary);
-        }
-        
-        .logo span {
-            color: var(--accent);
-            font-weight: 300;
-        }
-        
-        /* ===== HEADER MINIMALISTA ===== */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 25px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--bg-tertiary);
-        }
-        
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .settings-btn {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--text-muted);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-        
-        .settings-btn:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-        
-        /* Menú de Ajustes */
-        .settings-menu {
-            display: none;
-            position: absolute;
-            top: 70px;
-            right: 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--text-muted);
-            border-radius: 15px;
-            padding: 0;
-            min-width: 220px;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-        }
-        
-        .settings-menu.show {
-            display: block;
-            animation: fadeIn 0.2s ease;
-        }
-        
-        .settings-menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--bg-tertiary);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .settings-menu-item {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .settings-menu-item label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .settings-menu-item select {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--text-muted);
-            border-radius: 8px;
-            padding: 10px;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-        
-        .settings-menu-item select:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        /* Panel de Ajustes */
-        .settings-panel {
-            grid-column: 1 / -1;
-            background: var(--panel-bg);
-            border-bottom: 1px solid var(--text-muted);
-            padding: 10px 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .settings-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .settings-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .settings-select {
-            background: var(--dark-bg);
-            border: 1px solid var(--text-muted);
-            color: var(--text-primary);
-            padding: 8px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            cursor: pointer;
-            min-width: 150px;
-        }
-        
-        .settings-select:focus {
-            outline: none;
-            border-color: var(--text-primary);
-        }
-        
-        .language-search {
-            background: var(--dark-bg);
-            border: 1px solid var(--text-muted);
-            color: var(--text-primary);
-            padding: 8px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            width: 200px;
-        }
-        
-        .language-search:focus {
-            outline: none;
-            border-color: var(--text-primary);
-        }
-        
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.8rem;
-        }
-        
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--neon-green);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 10px var(--neon-green);
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* ===== PANEL PRINCIPAL (Gráfico + Chat) ===== */
-        .main-panel {
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid var(--text-primary);
-        }
-        
-        /* TradingView en área principal */
-        .tradingview-section {
-            flex: 0 0 auto;
-            padding: 20px;
-            border-bottom: 1px solid var(--text-primary);
-        }
-        
-        .tradingview-section .tradingview-widget-container {
-            height: 400px !important;
-        }
-        
-        /* ===== ÁREA DE CHAT ===== */
-        .chat-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            border-bottom: 1px solid var(--text-primary);
-            min-height: 50vh;
+            min-height: 0;
         }
         
         .section-title {
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-shrink: 0;
         }
         
         .section-title::before {
@@ -372,20 +110,23 @@
             color: var(--text-primary);
         }
         
+        /* Chat Messages con bordes redondeados 28px */
         .chat-messages {
             flex: 1;
             overflow-y: auto;
             padding: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--text-muted);
-            margin-bottom: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--bg-tertiary);
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            min-height: 0;
         }
         
-        /* ===== MENSAJES TIPO GEMINI - BURBUJAS REDONDEADAS ===== */
+        /* Mensajes con bordes 28px */
         .message {
             margin-bottom: 12px;
             padding: 16px 20px;
-            border-radius: 28px;
+            border-radius: var(--border-radius);
             animation: fadeIn 0.3s ease;
             max-width: 80%;
             font-size: 0.95rem;
@@ -420,23 +161,24 @@
             line-height: 1.6;
         }
         
-        /* ===== INPUT MINIMALISTA MODERNO ===== */
+        /* Input area */
         .chat-input-area {
             display: flex;
             gap: 12px;
-            padding: 16px 24px;
+            padding: 12px 16px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--bg-tertiary);
-            border-radius: 0 0 20px 20px;
+            border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+            flex-shrink: 0;
         }
         
         #chatInput {
             flex: 1;
             background: var(--bg-tertiary);
             border: none;
-            border-radius: 20px;
+            border-radius: var(--border-radius-small);
             color: var(--text-primary);
-            padding: 16px 24px;
+            padding: 12px 18px;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             outline: none;
@@ -444,7 +186,7 @@
         }
         
         #chatInput:focus {
-            box-shadow: var(--shadow-hover), 0 0 0 2px var(--accent);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 2px var(--accent);
         }
         
         #chatInput::placeholder {
@@ -455,7 +197,7 @@
             background: var(--accent);
             border: none;
             color: #fff;
-            padding: 14px 28px;
+            padding: 12px 24px;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             font-weight: 500;
@@ -466,201 +208,26 @@
         
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 px rgba(0, 0,8px 30 0, 0.4);
         }
         
-        /* ===== ÁREA DE SEÑALES ===== */
-        .signals-section {
-            padding: 20px;
-            min-height: 300px;
-        }
-        
-        /* ===== TARJETAS MODERNAS ===== */
-        .signal-card {
-            background: var(--bg-tertiary);
-            border: none;
-            padding: 16px;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-        }
-        
-        .signal-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-        
-        .signal-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            border-radius: var(--border-radius) 0 0 var(--border-radius);
-        }
-        
-        .signal-card.buy::before {
-            background: var(--buy-color);
-        }
-        
-        .signal-card.sell::before {
-            background: var(--sell-color);
-        }
-        
-        .signal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .signal-type {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-        
-        .signal-type.buy { color: var(--buy-color); }
-        .signal-type.sell { color: var(--sell-color); }
-        
-        .signal-pair {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-        
-        .signal-details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            font-size: 0.75rem;
-        }
-        
-        .signal-detail {
+        /* Firma */
+        .firma {
+            text-align: center;
             padding: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--text-muted);
-        }
-        
-        .signal-detail-label {
-            color: var(--text-muted);
-            margin-bottom: 3px;
-        }
-        
-        .signal-detail-value {
-            color: var(--text-primary);
-        }
-        
-        .signal-time {
+            color: #666;
             font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 10px;
-            text-align: right;
+            border-top: 1px solid #333;
+            flex-shrink: 0;
         }
         
-        .generate-btn {
-            width: 100%;
-            margin-top: 15px;
-        }
-        
-        /* ===== PANEL LATERAL MODERNO ===== */
-        .side-panel {
-            background: var(--bg-secondary);
-            padding: 20px;
-            overflow-y: auto;
-        }
-        
-        .market-data {
-            margin-top: 20px;
-        }
-        
-        .market-item {
-            padding: 12px;
-            border: 1px solid var(--text-muted);
-            margin-bottom: 8px;
-            font-size: 0.8rem;
-        }
-        
-        .market-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        
-        .market-pair {
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        
-        .market-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-        
-        .market-price.up { color: var(--buy-color); }
-        .market-price.down { color: var(--sell-color); }
-        
-        .market-change {
-            font-size: 0.75rem;
-        }
-        
-        .market-change.positive { color: var(--buy-color); }
-        .market-change.negative { color: var(--sell-color); }
-        
-        .market-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5px;
-            margin-top: 8px;
-            font-size: 0.7rem;
-        }
-        
-        .market-stat {
-            color: var(--text-muted);
-        }
-        
-        .market-stat span {
-            color: var(--text-secondary);
-        }
-        
-        .tick-container {
-            margin-top: 20px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--text-muted);
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .tick-title {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        
-        .tick-item {
-            font-size: 0.7rem;
-            padding: 3px 0;
-            border-bottom: 1px dotted var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .tick-item span:last-child {
-            color: var(--text-secondary);
-        }
-        
-        /* ===== SCROLLBAR ===== */
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
         }
         
         ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
+            background: var(--bg-secondary);
         }
         
         ::-webkit-scrollbar-thumb {
@@ -670,1825 +237,50 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-primary);
         }
-        
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 1fr auto;
-            }
-            
-            .side-panel {
-                border-top: 1px solid var(--text-primary);
-            }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        .coordinates-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--panel-bg);
-            border: 2px solid var(--neon-green);
-            padding: 30px;
-            z-index: 10000;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 50px var(--neon-green-dim);
-        }
-        
-        .coordinates-modal.show {
-            display: block;
-        }
-        
-        .coordinates-modal h3 {
-            color: var(--neon-green);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .coordinates-modal pre {
-            background: var(--dark-bg);
-            padding: 15px;
-            border: 1px solid var(--text-muted);
-            overflow-x: auto;
-            font-size: 0.8rem;
-            color: var(--text-primary);
-        }
-        
-        .coordinates-modal .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .design-mode-active .interact-active {
-            outline: 3px solid var(--neon-green) !important;
-            outline-offset: 2px !important;
-        }
-
-        /* Modal de coordenadas mejorado */
-        .coordinates-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--panel-bg);
-            border: 3px solid #00ff41;
-            padding: 40px;
-            z-index: 10000;
-            max-width: 700px;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 60px #00ff4144, 0 20px 50px rgba(0,0,0,0.5);
-        }
-        
-        .coordinates-modal.show {
-            display: block;
-            animation: modalIn 0.3s ease;
-        }
-        
-        @keyframes modalIn {
-            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        }
-        
-        .coordinates-modal h3 {
-            color: #00ff41;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 1.3rem;
-            text-shadow: 0 0 10px #00ff41;
-        }
-        
-        .coordinates-modal pre {
-            background: #0a0a0a;
-            padding: 20px;
-            border: 1px solid #00ff4144;
-            overflow-x: auto;
-            font-size: 0.75rem;
-            color: #00ff41;
-            border-radius: 8px;
-            line-height: 1.6;
-        }
-        
-        .coordinates-modal .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: #00ff41;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .coordinates-modal .close-btn:hover {
-            transform: rotate(90deg);
-            color: #ff0040;
-        }
-        
-        /* Credenciales destacadas */
-        footer .credits-highlight {
-            color: #00ff41;
-            font-weight: 700;
-            text-shadow: 0 0 10px #00ff41;
-        }
-        
-        /* ===== PANEL DE ESTILOS DEL ADMIN ===== */
-        .admin-styles-panel {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 280px;
-            background: linear-gradient(180deg, #1a1a2e 0%, #0d0d0d 100%);
-            border: 2px solid #00ff41;
-            border-radius: 0 15px 15px 0;
-            padding: 20px;
-            z-index: 10001;
-            box-shadow: 5px 0 30px #00ff4144;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .admin-styles-panel.show {
-            display: block;
-            animation: slideInLeft 0.4s ease;
-        }
-        
-        @keyframes slideInLeft {
-            from { transform: translateY(-50%) translateX(-100%); opacity: 0; }
-            to { transform: translateY(-50%) translateX(0); opacity: 1; }
-        }
-        
-        .admin-styles-panel h3 {
-            color: #00ff41;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-align: center;
-            border-bottom: 1px solid #00ff4144;
-            padding-bottom: 10px;
-        }
-        
-        .admin-section {
-            margin-bottom: 20px;
-        }
-        
-        .admin-section-title {
-            color: #00cc33;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .admin-section-title::before {
-            content: '◆';
-            color: #00ff41;
-        }
-        
-        .admin-control {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .admin-control label {
-            color: #00ff4188;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-        }
-        
-        .admin-control input[type="color"] {
-            width: 100%;
-            height: 35px;
-            border: 1px solid #00ff4144;
-            border-radius: 5px;
-            background: #0a0a0a;
-            cursor: pointer;
-        }
-        
-        .admin-control input[type="range"] {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #0a0a0a;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        
-        .admin-control input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #00ff41;
-            cursor: pointer;
-            box-shadow: 0 0 10px #00ff41;
-        }
-        
-        .admin-control select {
-            width: 100%;
-            padding: 10px;
-            background: #0a0a0a;
-            border: 1px solid #00ff4144;
-            border-radius: 5px;
-            color: #00ff41;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-        
-        .admin-control select:focus {
-            outline: none;
-            border-color: #00ff41;
-        }
-        
-        .admin-value {
-            color: #00ff41;
-            font-size: 0.75rem;
-            text-align: right;
-        }
-        
-        /* Color Picker Visual */
-        .color-picker-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .color-picker-wrapper input[type="color"] {
-            flex: 1;
-            height: 40px;
-            border: 2px solid #00ff4144;
-            border-radius: 8px;
-            background: #0a0a0a;
-            cursor: pointer;
-            padding: 2px;
-        }
-        
-        .color-picker-wrapper input[type="color"]:hover {
-            border-color: #00ff41;
-        }
-        
-        .color-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: #00cc33;
-            background: #0a0a0a;
-            padding: 5px 8px;
-            border-radius: 4px;
-            min-width: 70px;
-            text-align: center;
-        }
-        
-        /* Botón copiar mejorado */
-        .admin-btn.copy {
-            background: linear-gradient(135deg, #4a9eff, #0066cc);
-            color: #fff;
-            box-shadow: 0 0 20px #4a9eff44;
-        }
-        
-        .admin-btn.copy:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px #4a9eff;
-        }
-        
-        .admin-btn.apply {
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-            box-shadow: 0 0 20px #00ff4144;
-        }
-        
-        .admin-btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
-        
-        .admin-btn.apply {
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-            box-shadow: 0 0 20px #00ff4144;
-        }
-        
-        .admin-btn.apply:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px #00ff41;
-        }
-        
-        .admin-btn.reset {
-            background: transparent;
-            border: 1px solid #ff0040;
-            color: #ff0040;
-        }
-        
-        .admin-btn.reset:hover {
-            background: #ff0040;
-            color: #fff;
-        }
-        
-        /* Resize handles estilo Windows */
-        .resize-handle {
-            display: none;
-            position: absolute;
-            z-index: 100;
-        }
-        
-        body.constructor-mode .resize-handle {
-            display: block;
-        }
-        
-        .resize-handle-n {
-            top: -5px;
-            left: 10px;
-            right: 10px;
-            height: 10px;
-            cursor: n-resize;
-            background: linear-gradient(180deg, #00ff41 0%, transparent 100%);
-            opacity: 0.7;
-            border-radius: 5px 5px 0 0;
-        }
-        
-        .resize-handle-s {
-            bottom: -5px;
-            left: 10px;
-            right: 10px;
-            height: 10px;
-            cursor: s-resize;
-            background: linear-gradient(0deg, #00ff41 0%, transparent 100%);
-            opacity: 0.7;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        .resize-handle-e {
-            right: -5px;
-            top: 10px;
-            bottom: 10px;
-            width: 10px;
-            cursor: e-resize;
-            background: linear-gradient(90deg, #00ff41 0%, transparent 100%);
-            opacity: 0.7;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .resize-handle-w {
-            left: -5px;
-            top: 10px;
-            bottom: 10px;
-            width: 10px;
-            cursor: w-resize;
-            background: linear-gradient(270deg, #00ff41 0%, transparent 100%);
-            opacity: 0.7;
-            border-radius: 5px 0 0 5px;
-        }
-        
-        /* Esquinas para redimensionar diagonal */
-        .resize-handle-nw {
-            top: -5px;
-            left: -5px;
-            width: 20px;
-            height: 20px;
-            cursor: nw-resize;
-            background: #00ff41;
-            opacity: 0.7;
-            border-radius: 5px 0 0 0;
-        }
-        
-        .resize-handle-ne {
-            top: -5px;
-            right: -5px;
-            width: 20px;
-            height: 20px;
-            cursor: ne-resize;
-            background: #00ff41;
-            opacity: 0.7;
-            border-radius: 0 5px 0 0;
-        }
-        
-        .resize-handle-sw {
-            bottom: -5px;
-            left: -5px;
-            width: 20px;
-            height: 20px;
-            cursor: sw-resize;
-            background: #00ff41;
-            opacity: 0.7;
-            border-radius: 0 0 0 5px;
-        }
-        
-        .resize-handle-se {
-            bottom: -5px;
-            right: -5px;
-            width: 20px;
-            height: 20px;
-            cursor: se-resize;
-            background: #00ff41;
-            opacity: 0.7;
-            border-radius: 0 0 5px 0;
-        }
-        
-        /* Indicador visual de modo constructor */
-        .constructor-indicator {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-            padding: 12px 30px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 700;
-            border-radius: 30px;
-            z-index: 10000;
-            box-shadow: 0 0 30px #00ff41;
-            animation: pulse 2s infinite;
-        }
-        
-        .resize-handle-ne {
-            top: -8px;
-            right: -8px;
-            width: 20px;
-            height: 20px;
-            cursor: ne-resize;
-            background: #00ff41;
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        
-        .resize-handle-nw {
-            top: -8px;
-            left: -8px;
-            width: 20px;
-            height: 20px;
-            cursor: nw-resize;
-            background: #00ff41;
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        
-        .resize-handle-se {
-            bottom: -8px;
-            right: -8px;
-            width: 20px;
-            height: 20px;
-            cursor: se-resize;
-            background: #00ff41;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: pulse-handle 1s infinite;
-        }
-        
-        .resize-handle-sw {
-            bottom: -8px;
-            left: -8px;
-            width: 20px;
-            height: 20px;
-            cursor: sw-resize;
-            background: #00ff41;
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        
-        .resize-handle:hover {
-            opacity: 1 !important;
-            box-shadow: 0 0 15px #00ff41;
-        }
-        
-        /* Toggle del panel admin */
-        .admin-toggle {
-            display: none;
-            position: fixed;
-            left: 290px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #1a1a2e;
-            border: 2px solid #00ff41;
-            border-left: none;
-            border-radius: 0 10px 10px 0;
-            padding: 15px 8px;
-            cursor: pointer;
-            z-index: 10002;
-            color: #00ff41;
-            font-size: 0.8rem;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-        }
-        
-        body.constructor-mode .admin-toggle {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- PANEL PRINCIPAL -->
-        <div class=`"main-panel`">
-        <div class="settings-menu" id="settingsMenu">
-            <div class="settings-menu-header">
-                <span>Ajustes</span>
-                <button onclick="toggleSettingsMenu()" style="background:none;border:none;cursor:pointer;">&times;</button>
-            </div>
-            <div class="settings-menu-item">
-                <label>Idioma</label>
-                <select id="languageSelect" onchange="changeLanguage()">
-                    <option value="es">Español</option>
-                    <option value="en">English</option>
-                    <option value="pt">Português</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                    <option value="it">Italiano</option>
-                </select>
-            </div>
-        </div>
-រ</option>
-
-                </select>
+        <!-- TradingView - 65% -->
+        <div class="tradingview-section">
+            <div class="section-title">Analisis de Mercado XAUUSD</div>
+            <div class="tradingview-widget-container" id="tradingViewContainer">
+                <div id="tradingview_chart"></div>
             </div>
         </div>
         
-        <!-- PANEL PRINCIPAL -->
-        <div class=`"main-panel`">
-            <!-- TradingView Widget - ÁREA PRINCIPAL -->
-            <div class="tradingview-section">
-                <div class="section-title" id="chartTitle">Análisis de Mercado XAUUSD</div>
-                <div class="tradingview-widget-container" id="tradingViewContainer" style="height:400px; position: relative;">
-                    <div id="tradingview_chart"></div>
-                    <!-- Resize handles para Modo Constructor -->
-                    <div class="resize-handle resize-handle-n"></div>
-                    <div class="resize-handle resize-handle-s"></div>
-                    <div class="resize-handle resize-handle-e"></div>
-                    <div class="resize-handle resize-handle-w"></div>
-                    <div class="resize-handle resize-handle-ne"></div>
-                    <div class="resize-handle resize-handle-nw"></div>
-                    <div class="resize-handle resize-handle-se"></div>
-                    <div class="resize-handle resize-handle-sw"></div>
-                </div>
-            </div>
-            
-            <!-- CHAT SECTION - Debajo del gráfico -->
-            <div class="chat-section" id="chatSection" style="position: relative;">
-                <div class="section-title" id="chatTitle">Asistente de IA Universal</div>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message ai">
-                        <div class="message-time">Sistema</div>
-                        <div class="message-content">
-                            ▓▓▓ CONEXIÓN ESTABLECIDA ▓▓▓<br><br>
-                            Bienvenido al Sistema de IA Universal v1.0<br>
-                            Motor de conocimiento infinito activado.<br><br>
-                            Puedo responder sobre cualquier tema del mundo.<br>
-                            Pregúntame lo que quieras.
-                        </div>
+        <!-- Chat - 35% -->
+        <div class="chat-section" id="chatSection">
+            <div class="section-title">Asistente de IA</div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    <div class="message-time">Sistema</div>
+                    <div class="message-content">
+                        CONEXION ESTABLECIDA<br><br>
+                        Bienvenido al Sistema de IA v1.0<br>
+                        Preguntame lo que quieras.
                     </div>
                 </div>
-                
-                <!-- Firma del creador -->
-                <div style="text-align: center; padding: 10px; color: #666; font-size: 0.7rem; border-top: 1px solid #333; margin-top: 10px;">
-                    Creado por Gustavo Javier Ferreira, 18 de marzo de 2010 - Misiones, Argentina
-                </div>
-                
-                <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Pregúntame lo que quieras sobre el mundo..." autocomplete="off">
-                    <button class="btn" onclick="sendMessage()">Enviar</button>
-                </div>
-                <!-- Resize handles para chat -->
-                <div class="resize-handle resize-handle-n"></div>
-                <div class="resize-handle resize-handle-s"></div>
-                <div class="resize-handle resize-handle-e"></div>
-                <div class="resize-handle resize-handle-w"></div>
-                <div class="resize-handle resize-handle-ne"></div>
-                <div class="resize-handle resize-handle-nw"></div>
-                <div class="resize-handle resize-handle-se"></div>
-                <div class="resize-handle resize-handle-sw"></div>
-            </div>
-        </div>
-        
-        <!-- PANEL LATERAL - Solo datos de mercado -->
-        <div class="side-panel">
-            <div class="section-title" id="marketTitle">Mercado XAUUSD</div>
-            
-            <div class="market-data" id="marketData">
-                <!-- Datos del mercado se actualizan aquí -->
             </div>
             
-            <div class="tick-container">
-                <div class="tick-title" id="tickTitle">Flujo de Ticks en Vivo</div>
-                <div id="tickFeed">
-                    <!-- Ticks se muestran aquí -->
-                </div>
+            <!-- Firma -->
+            <div class="firma">
+                Creado por Gustavo Javier Ferreira, 18 de marzo de 2010 - Misiones, Argentina
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Preguntame lo que quieras..." autocomplete="off">
+                <button class="btn" onclick="sendMessage()">Enviar</button>
             </div>
         </div>
     </div>
 
-    <script>
-        // ===== FUNCIONES DE IDIOMA =====
-        let currentLanguage = 'es';
-        
-        // Toggle Menú de Ajustes
-        function toggleSettingsMenu() {
-            const menu = document.getElementById('settingsMenu');
-            menu.classList.toggle('show');
-        }
-        
-        // Cerrar menú al hacer click fuera
-        document.addEventListener('click', function(e) {
-            const menu = document.getElementById('settingsMenu');
-            const btn = document.querySelector('.settings-btn');
-            if (menu && !menu.contains(e.target) && !btn.contains(e.target)) {
-                menu.classList.remove('show');
-            }
-        });
-        
-        function changeLanguage() {
-            const lang = document.getElementById('languageSelect').value;
-            currentLanguage = lang;
-            localStorage.setItem('trading-chat-lang', lang);
-            updateInterface();
-        }
-        
-        // Cargar idioma guardado
-        const savedLang = localStorage.getItem('trading-chat-lang');
-        if (savedLang) {
-            document.getElementById('languageSelect').value = savedLang;
-            currentLanguage = savedLang;
-        }
-        
-        // ===== TRADUCCIONES DE INTERFAZ =====
-        const translations = {
-            es: {
-                title: 'Asistente de IA Universal',
-                inputPlaceholder: 'Pregúntame lo que quieras sobre el mundo...',
-                sendBtn: 'Enviar',
-                signalsTitle: 'Generador de Señales',
-                generateBtn: 'Generar Señal',
-                marketTitle: 'Mercado XAUUSD',
-                tickTitle: 'Flujo de Ticks en Vivo',
-                statusText: 'SISTEMA ACTIVO | MODO ONLINE',
-                credits: 'Desarrollado por Ferreira Gustavo Javier, IA sencilla desde casa por un menor de edad'
-            },
-            en: {
-                title: 'Universal AI Assistant',
-                inputPlaceholder: 'Ask me anything about the world...',
-                sendBtn: 'Send',
-                signalsTitle: 'Signal Generator',
-                generateBtn: 'Generate Signal',
-                marketTitle: 'XAUUSD Market',
-                tickTitle: 'Live Tick Flow',
-                statusText: 'SYSTEM ACTIVE | ONLINE MODE',
-                credits: 'Developed by Ferreira Gustavo Javier, simple AI from home by a minor'
-            },
-            pt: {
-                title: 'Assistente de IA Universal',
-                inputPlaceholder: 'Pergunte-me qualquer coisa sobre o mundo...',
-                sendBtn: 'Enviar',
-                signalsTitle: 'Gerador de Sinais',
-                generateBtn: 'Gerar Sinal',
-                marketTitle: 'Mercado XAUUSD',
-                tickTitle: 'Fluxo de Ticks ao Vivo',
-                statusText: 'SISTEMA ATIVO | MODO ONLINE',
-                credits: 'Desenvolvido por Ferreira Gustavo Javier, IA simples de casa por menor de idade'
-            },
-            fr: {
-                title: 'Assistant IA Universel',
-                inputPlaceholder: 'Demandez-moi tout sur le monde...',
-                sendBtn: 'Envoyer',
-                signalsTitle: 'Générateur de Signaux',
-                generateBtn: 'Générer un Signal',
-                marketTitle: 'Marché XAUUSD',
-                tickTitle: 'Flux de Ticks en Direct',
-                statusText: 'SYSTÈME ACTIF | MODE EN LIGNE',
-                credits: 'Développé par Ferreira Gustavo Javier, IA simple à la maison par un mineur'
-            },
-            de: {
-                title: 'Universaler KI-Assistent',
-                inputPlaceholder: 'Frage mich alles über die Welt...',
-                sendBtn: 'Senden',
-                signalsTitle: 'Signalgenerator',
-                generateBtn: 'Signal Generieren',
-                marketTitle: 'XAUUSD Markt',
-                tickTitle: 'Live Tick-Fluss',
-                statusText: 'SYSTEM AKTIV | ONLINE-MODUS',
-                credits: 'Entwickelt von Ferreira Gustavo Javier, einfache KI von zu Hause durch einen Minderjährigen'
-            }
-        };
-        
-        // Función para actualizar la interfaz
-        function updateInterface() {
-            const t = translations[currentLanguage] || translations.es;
-            
-            // Chat
-            const chatTitle = document.getElementById('chatTitle');
-            if (chatTitle) chatTitle.textContent = t.title;
-            
-            const chatInput = document.getElementById('chatInput');
-            if (chatInput) chatInput.placeholder = t.inputPlaceholder;
-            
-            // Signals
-            const signalsTitle = document.getElementById('signalsTitle');
-            if (signalsTitle) signalsTitle.textContent = t.signalsTitle;
-            
-            const genBtn = document.querySelector('.generate-btn');
-            if (genBtn) genBtn.textContent = t.generateBtn;
-            
-            // Market
-            const marketTitle = document.getElementById('marketTitle');
-            if (marketTitle) marketTitle.textContent = t.marketTitle;
-            
-            const tickTitle = document.getElementById('tickTitle');
-            if (tickTitle) tickTitle.textContent = t.tickTitle;
-            
-            // Status header
-            const statusText = document.getElementById('statusText');
-            if (statusText) statusText.textContent = t.statusText;
-            
-            // Credits
-            const creditsEl = document.getElementById('creditsText');
-            if (creditsEl) creditsEl.textContent = t.credits;
-        }
-        
-        // Inicializar interfaz
-        updateInterface();
-        
-        // ===== CONFIGURACIÓN API =====
-        const API_URL = '/api/chat';
-
-        // ===== BASE DE DATOS DE ESTRATEGIAS =====
-        const tradingStrategies = {
-            SMC: {
-                name: "Smart Money Concepts",
-                concepts: [
-                    "Order Blocks - Zonas de acumulación institucional",
-                    "Fair Value Gap - Espacios vacíos entre movimientos",
-                    "Liquidity Sweeps - Barridos de liquidez",
-                    "Change of Character - Cambio de estructura",
-                    "Break of Structure - Ruptura de estructura"
-                ],
-                responses: [
-                    "Según SMC, el precio está buscando liquidez antes de continuar.",
-                    "El concepto de Smart Money indica que los grandes participantes están acumulando.",
-                    "La estructura muestra un cambio de carácter.",
-                    "Los liquidity sweeps indican que el mercado está buscando órdenes de stop."
-                ]
-            },
-            ICT: {
-                name: "Inner Circle Trading",
-                concepts: [
-                    "Market Structure Shift - MSS",
-                    "Optimal Trade Entry - OTE",
-                    "Stop Hunt / Stop Run",
-                    "Daily/Weekly Highs/Lows",
-                    "Fibonacci confluences"
-                ],
-                responses: [
-                    "En ICT, busca el Optimal Trade Entry.",
-                    "El Market Structure Shift ha ocurrido.",
-                    "Los institucionales están corriendo los stops.",
-                    "La mejor configuración es esperar el fair value gap."
-                ]
-            },
-            PriceAction: {
-                name: "Price Action",
-                concepts: [
-                    "Engulfing Patterns",
-                    "Doji and Pin Bars",
-                    "Inside Bars",
-                    "Trend Lines and Channels",
-                    "Support and Resistance"
-                ],
-                responses: [
-                    "El price action muestra un posible engulfing.",
-                    "Un pin bar en zona de soporte indica reversa potencial.",
-                    "El inside bar sugiere consolidación.",
-                    "El precio está respetando las líneas de tendencia."
-                ]
-            }
-        };
-
-        // ===== SIMULATE AI RESPONSE =====
-        function simulateAIResponse(prompt) {
-            const lowerPrompt = prompt.toLowerCase();
-            let responses = [
-                "He analizado tu consulta. Como IA de conocimiento universal, puedo ayudarte con cualquier tema.",
-                "Gracias por tu pregunta. Estoy listo para responder sobre cualquier tema que necesites.",
-                "Interesante consulta. Como IA avanzada, tengo conocimiento sobre muchos temas del mundo."
-            ];
-            
-            // Detectar el tipo de consulta
-            if (lowerPrompt.includes('estrategia') || lowerPrompt.includes('trading') || lowerPrompt.includes('mercado')) {
-                responses = [
-                    "Para una operación exitosa, considera: 1) Identifica la estructura del mercado, 2) Busca zonas de liquidez, 3) Gestiona tu riesgo.",
-                    "Basándome en SMC e ICT, el mercado muestra señales de acumulación institucional.",
-                    "Implementa esta metodología: 1) Define la tendencia, 2) Identifica zonas clave, 3) Espera confirmación."
-                ];
-            }
-            
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-
-        // Send to Serverless Function
-        async function sendToGemini(prompt) {
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: 'Responde exclusivamente en ' + currentLanguage + '. No uses inglés a menos que el usuario lo pida. ' + prompt,
-                        language: currentLanguage
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('HTTP error: ' + response.status);
-                }
-                
-                const data = await response.json();
-                return data.response;
-            } catch (error) {
-                console.error('Error en API:', error);
-                return '[ERROR] Fallo de conexión: ' + error.message;
-            }
-        }
-
-        // ===== DETECTOR DE CLAVE SECRETA =====
-        const SECRET_KEY = 'misiones2026';
-        let constructorMode = false;
-        
-        function checkForSecretKey(message) {
-            const lowerMessage = message.toLowerCase().trim();
-            if (lowerMessage === SECRET_KEY) {
-                activateConstructorMode();
-                return true;
-            }
-            return false;
-        }
-        
-        function activateConstructorMode() {
-            constructorMode = true;
-            document.body.classList.add('constructor-mode');
-            document.body.classList.add('design-mode-active');
-            
-            // Mostrar mensaje de activación
-            addMessage('🔓 <strong>MODO CONSTRUCTOR ACTIVADO</strong><br><br>Ahora puedes:<br>• Arrastrar los paneles con el mouse<br>• Redimensionar el gráfico TradingView (bordes y esquinas)<br>• Redimensionar el asistente de trading<br>• Cambiar colores y tipografía en el panel lateral<br><br>Usa el botón verde "Guardar Diseño" o "Aplicar Diseño Definitivo" para guardar.', 'ai');
-            
-            // Habilitar interact.js para movimiento
-            enableConstructorInteractions();
-            
-            // Mostrar panel de administración
-            setTimeout(showAdminPanel, 500);
-        }
-        
-        function deactivateConstructorMode() {
-            constructorMode = false;
-            document.body.classList.remove('constructor-mode');
-            document.body.classList.remove('design-mode-active');
-            
-            // Ocultar panel de administración
-            hideAdminPanel();
-            
-            // Deshabilitar interact.js
-            disableConstructorInteractions();
-            
-            addMessage('🔒 <strong>MODO CONSTRUCTOR DESACTIVADO</strong><br><br>El diseño ha sido guardado.', 'ai');
-        }
-        
-        // ===== CHAT FUNCTIONALITY =====
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            // Verificar si es la clave secreta
-            if (checkForSecretKey(message)) {
-                input.value = '';
-                return;
-            }
-            
-            // Add user message
-            addMessage(message, 'user');
-            input.value = '';
-            
-            // Show loading message
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'message ai';
-            loadingDiv.id = 'loadingMessage';
-            loadingDiv.innerHTML = `
-                <div class="message-time">IA | Procesando...</div>
-                <div class="message-content">▓▓▓ Analizando...</div>
-            `;
-            document.getElementById('chatMessages').appendChild(loadingDiv);
-            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
-            
-            try {
-                const response = await sendToGemini(message);
-                
-                const loadingMsg = document.getElementById('loadingMessage');
-                if (loadingMsg) loadingMsg.remove();
-                
-                addMessage(response, 'ai');
-            } catch (error) {
-                const loadingMsg = document.getElementById('loadingMessage');
-                if (loadingMsg) loadingMsg.remove();
-                
-                const fallbackResponse = simulateAIResponse(message);
-                addMessage(fallbackResponse + '\n\n[NOTA: API no disponible, usando modo offline]', 'ai');
-            }
-        }
-
-        function addMessage(content, type) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + type;
-            messageDiv.innerHTML = `
-                <div class="message-time">${type === 'user' ? 'Usuario' : 'IA'} | ${time}</div>
-                <div class="message-content">${content}</div>
-            `;
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Enter key to send
-        document.getElementById('chatInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // ===== SIGNAL GENERATOR =====
-        function generateSignal() {
-            const signals = ['BUY', 'SELL'];
-            const signal = signals[Math.floor(Math.random() * signals.length)];
-            
-            const basePrice = 2650.00;
-            const variation = (Math.random() - 0.5) * 50;
-            const price = (basePrice + variation).toFixed(2);
-            
-            const entry = (parseFloat(price) + (signal === 'BUY' ? -5 : 5)).toFixed(2);
-            const stopLoss = (parseFloat(price) + (signal === 'BUY' ? -25 : 25)).toFixed(2);
-            const takeProfit = (parseFloat(price) + (signal === 'BUY' ? 40 : -40)).toFixed(2);
-            
-            const timeframes = ['M15', 'H1', 'H4', 'D1'];
-            const timeframe = timeframes[Math.floor(Math.random() * timeframes.length)];
-            const confidence = Math.floor(70 + Math.random() * 25);
-            
-            const strategyKeys = Object.keys(tradingStrategies);
-            const strategyKey = strategyKeys[Math.floor(Math.random() * strategyKeys.length)];
-            const strategy = tradingStrategies[strategyKey];
-            const concept = strategy.concepts[Math.floor(Math.random() * strategy.concepts.length)];
-            
-            const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            
-            const signalCard = document.createElement('div');
-            signalCard.className = 'signal-card ' + signal.toLowerCase();
-            signalCard.innerHTML = `
-                <div class="signal-header">
-                    <span class="signal-type ${signal.toLowerCase()}">◄ ${signal} ►</span>
-                    <span class="signal-pair">XAUUSD</span>
-                </div>
-                <div class="signal-details">
-                    <div class="signal-detail">
-                        <div class="signal-detail-label">Entrada</div>
-                        <div class="signal-detail-value">${entry}</div>
-                    </div>
-                    <div class="signal-detail">
-                        <div class="signal-detail-label">Stop Loss</div>
-                        <div class="signal-detail-value">${stopLoss}</div>
-                    </div>
-                    <div class="signal-detail">
-                        <div class="signal-detail-label">Take Profit</div>
-                        <div class="signal-detail-value">${takeProfit}</div>
-                    </div>
-                </div>
-                <div class="signal-details" style="margin-top: 8px;">
-                    <div class="signal-detail">
-                        <div class="signal-detail-label">Timeframe</div>
-                        <div class="signal-detail-value">${timeframe}</div>
-                    </div>
-                    <div class="signal-detail">
-                        <div class="signal-detail-label">Confianza</div>
-                        <div class="signal-detail-value">${confidence}%</div>
-                    </div>
-                    <div class="signal-detail">
-                        <div class="signal-detail-label">Estrategia</div>
-                        <div class="signal-detail-value">${strategyKey}</div>
-                    </div>
-                </div>
-                <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--text-muted); font-size: 0.7rem;">
-                    ${concept}
-                </div>
-                <div class="signal-time">${time}</div>
-            `;
-            
-            const container = document.getElementById('signalsContainer');
-            container.insertBefore(signalCard, container.firstChild);
-            
-            while (container.children.length > 5) {
-                container.removeChild(container.lastChild);
-            }
-        }
-
-        // ===== MARKET DATA SIMULATION =====
-        let currentPrice = 2650.00;
-        
-        function updateMarketData() {
-            const change = (Math.random() - 0.5) * 2;
-            currentPrice += change;
-            
-            const priceFormatted = currentPrice.toFixed(2);
-            const changeValue = change.toFixed(2);
-            const changePercent = ((change / currentPrice) * 100).toFixed(3);
-            const isUp = change >= 0;
-            
-            const high = (currentPrice + Math.random() * 20).toFixed(2);
-            const low = (currentPrice - Math.random() * 20).toFixed(2);
-            const volume = Math.floor(100000 + Math.random() * 50000);
-            
-            const marketData = document.getElementById('marketData');
-            if (marketData) {
-                marketData.innerHTML = `
-                    <div class="market-item">
-                        <div class="market-header">
-                            <span class="market-pair">XAU/USD</span>
-                            <span class="market-price ${isUp ? 'up' : 'down'}">${priceFormatted}</span>
-                        </div>
-                        <div class="market-change ${isUp ? 'positive' : 'negative'}">
-                            ${isUp ? '▲' : '▼'} ${changeValue} (${changePercent}%)
-                        </div>
-                        <div class="market-stats">
-                            <div class="market-stat">Alto: <span>${high}</span></div>
-                            <div class="market-stat">Bajo: <span>${low}</span></div>
-                            <div class="market-stat">Volumen: <span>${volume.toLocaleString()}</span></div>
-                            <div class="market-stat">Spread: <span>${(Math.random() * 0.5 + 0.2).toFixed(1)}</span></div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        // ===== TICK FEED =====
-        function addTick() {
-            const tickValue = (currentPrice + (Math.random() - 0.5) * 0.5).toFixed(2);
-            const time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            
-            const tickFeed = document.getElementById('tickFeed');
-            if (tickFeed) {
-                const tickItem = document.createElement('div');
-                tickItem.className = 'tick-item';
-                tickItem.innerHTML = `
-                    <span>${time}</span>
-                    <span>${tickValue}</span>
-                `;
-                
-                tickFeed.insertBefore(tickItem, tickFeed.firstChild);
-                
-                while (tickFeed.children.length > 20) {
-                    tickFeed.removeChild(tickFeed.lastChild);
-                }
-            }
-        }
-
-        // ===== INITIALIZATION =====
-        
-        // ===== INTERACT.JS - Redimensionamiento estilo Windows =====
-        // Se activa cuando el usuario escribe 'misiones2026' en el chat
-        let interactChat, interactTradingView;
-        
-        function enableConstructorInteractions() {
-            // Chat section - redimensionar desde cualquier borde o esquina
-            interactChat = interact('.chat-section')
-                .draggable({
-                    listeners: {
-                        move (event) {
-                            if (!constructorMode) return;
-                            const target = event.target;
-                            const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-                            const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-                            target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                            target.setAttribute('data-x', x);
-                            target.setAttribute('data-y', y);
-                        }
-                    }
-                })
-                .resizable({
-                    edges: { left: '.resize-handle-w', right: '.resize-handle-e', top: '.resize-handle-n', bottom: '.resize-handle-s' },
-                    corners: { left: '.resize-handle-nw', right: '.resize-handle-ne', top: '.resize-handle-nw', bottom: '.resize-handle-sw' },
-                    listeners: {
-                        move (event) {
-                            if (!constructorMode) return;
-                            let { x, y } = event.target.dataset;
-                            x = (parseFloat(x) || 0) + event.deltaRect.left;
-                            y = (parseFloat(y) || 0) + event.deltaRect.top;
-                            Object.assign(event.target.style, {
-                                width: event.rect.width + 'px',
-                                height: event.rect.height + 'px',
-                                transform: 'translate(' + x + 'px,' + y + 'px)'
-                            });
-                            event.target.dataset.x = x;
-                            event.target.dataset.y = y;
-                            
-                            // Guardar automáticamente
-                            saveDesignState();
-                        }
-                    },
-                    modifiers: [
-                        interact.modifiers.restrictEdges({
-                            outer: 'parent'
-                        }),
-                        interact.modifiers.restrictSize({
-                            min: { width: 300, height: 200 }
-                        })
-                    ]
-                });
-            
-            // TradingView - redimensionar desde cualquier borde o esquina
-            interactTradingView = interact('.tradingview-widget-container')
-                .resizable({
-                    edges: { left: '.resize-handle-w', right: '.resize-handle-e', top: '.resize-handle-n', bottom: '.resize-handle-s' },
-                    corners: { left: '.resize-handle-nw', right: '.resize-handle-ne', top: '.resize-handle-nw', bottom: '.resize-handle-sw' },
-                    listeners: {
-                        move (event) {
-                            if (!constructorMode) return;
-                            let { x, y } = event.target.dataset;
-                            x = (parseFloat(x) || 0) + event.deltaRect.left;
-                            y = (parseFloat(y) || 0) + event.deltaRect.top;
-                            Object.assign(event.target.style, {
-                                width: event.rect.width + 'px',
-                                height: event.rect.height + 'px'
-                            });
-                            event.target.dataset.x = x;
-                            event.target.dataset.y = y;
-                            
-                            // Actualizar gráfico TradingView
-                            setTimeout(resizeTradingViewChart, 50);
-                            
-                            // Guardar automáticamente
-                            saveDesignState();
-                        }
-                    },
-                    modifiers: [
-                        interact.modifiers.restrictSize({
-                            min: { width: 200, height: 150 }
-                        })
-                    ]
-                });
-        }
-        
-        function disableConstructorInteractions() {
-            if (interactChat) { interactChat.unset(); interactChat = null; }
-            if (interactTradingView) { interactTradingView.unset(); interactTradingView = null; }
-            
-            // Restaurar posiciones
-            document.querySelectorAll('[data-x][data-y]').forEach(el => {
-                el.style.transform = '';
-                el.removeAttribute('data-x');
-                el.removeAttribute('data-y');
-            });
-        }
-        
-        updateMarketData();
-        
-        for (let i = 0; i < 10; i++) {
-            addTick();
-        }
-        
-        generateSignal();
-        
-        setInterval(updateMarketData, 2000);
-        setInterval(addTick, 500);
-        
-        // ===== MODO DISEÑO =====
-        let designMode = false;
-        const DESIGN_STORAGE_KEY = 'trading-chat-design';
-        
-        // Verificar si hay un diseño guardado y estaba activo
-        function initDesignMode() {
-            const savedDesign = localStorage.getItem(DESIGN_STORAGE_KEY);
-            if (savedDesign) {
-                try {
-                    const designData = JSON.parse(savedDesign);
-                    applyDesignState(designData);
-                } catch (e) {
-                    console.error('Error al cargar diseño:', e);
-                }
-            }
-        }
-        
-        // Aplicar estado del diseño
-        function applyDesignState(designData) {
-            if (!designData) return;
-            
-            // Restaurar main-panel
-            if (designData.mainPanel) {
-                const mainPanel = document.querySelector('.main-panel');
-                if (mainPanel && designData.mainPanel.transform) {
-                    mainPanel.style.transform = designData.mainPanel.transform;
-                    mainPanel.setAttribute('data-x', designData.mainPanel.x || 0);
-                    mainPanel.setAttribute('data-y', designData.mainPanel.y || 0);
-                }
-            }
-            
-            // Restaurar side-panel
-            if (designData.sidePanel) {
-                const sidePanel = document.querySelector('.side-panel');
-                if (sidePanel && designData.sidePanel.transform) {
-                    sidePanel.style.transform = designData.sidePanel.transform;
-                    sidePanel.setAttribute('data-x', designData.sidePanel.x || 0);
-                    sidePanel.setAttribute('data-y', designData.sidePanel.y || 0);
-                }
-            }
-            
-            // Restaurar chat-section
-            if (designData.chatSection) {
-                const chatSection = document.querySelector('.chat-section');
-                if (chatSection) {
-                    if (designData.chatSection.width) chatSection.style.width = designData.chatSection.width;
-                    if (designData.chatSection.height) chatSection.style.height = designData.chatSection.height;
-                    if (designData.chatSection.transform) {
-                        chatSection.style.transform = designData.chatSection.transform;
-                        chatSection.setAttribute('data-x', designData.chatSection.x || 0);
-                        chatSection.setAttribute('data-y', designData.chatSection.y || 0);
-                    }
-                }
-            }
-            
-            // Restaurar signals-section
-            if (designData.signalsSection) {
-                const signalsSection = document.querySelector('.signals-section');
-                if (signalsSection) {
-                    if (designData.signalsSection.width) signalsSection.style.width = designData.signalsSection.width;
-                    if (designData.signalsSection.height) signalsSection.style.height = designData.signalsSection.height;
-                }
-            }
-            
-            // Restaurar gráfico TradingView
-            if (designData.tradingView) {
-                const tradingViewContainer = document.querySelector('.tradingview-widget-container');
-                if (tradingViewContainer) {
-                    if (designData.tradingView.width) tradingViewContainer.style.width = designData.tradingView.width;
-                    if (designData.tradingView.height) {
-                        tradingViewContainer.style.height = designData.tradingView.height;
-                        // Actualizar el contenedor interno del gráfico
-                        const chartDiv = document.getElementById('tradingview_chart');
-                        if (chartDiv) {
-                            chartDiv.style.height = designData.tradingView.height;
-                        }
-                    }
-                }
-            }
-            
-            // Adaptar el gráfico de TradingView al nuevo tamaño
-            setTimeout(() => resizeTradingViewChart(), 100);
-        }
-        
-        // Obtener estado actual del diseño
-        function getDesignState() {
-            const mainPanel = document.querySelector('.main-panel');
-            const sidePanel = document.querySelector('.side-panel');
-            const chatSection = document.querySelector('.chat-section');
-            const signalsSection = document.querySelector('.signals-section');
-            const tradingViewContainer = document.querySelector('.tradingview-widget-container');
-            
-            return {
-                mainPanel: {
-                    transform: mainPanel?.style.transform || '',
-                    x: mainPanel?.getAttribute('data-x') || 0,
-                    y: mainPanel?.getAttribute('data-y') || 0
-                },
-                sidePanel: {
-                    transform: sidePanel?.style.transform || '',
-                    x: sidePanel?.getAttribute('data-x') || 0,
-                    y: sidePanel?.getAttribute('data-y') || 0
-                },
-                chatSection: {
-                    width: chatSection?.style.width || '',
-                    height: chatSection?.style.height || '',
-                    transform: chatSection?.style.transform || '',
-                    x: chatSection?.getAttribute('data-x') || 0,
-                    y: chatSection?.getAttribute('data-y') || 0
-                },
-                signalsSection: {
-                    width: signalsSection?.style.width || '',
-                    height: signalsSection?.style.height || ''
-                },
-                tradingView: {
-                    width: tradingViewContainer?.style.width || '',
-                    height: tradingViewContainer?.style.height || ''
-                }
-            };
-        }
-        
-        // Guardar estado del diseño
-        function saveDesignState() {
-            const designState = getDesignState();
-            localStorage.setItem(DESIGN_STORAGE_KEY, JSON.stringify(designState));
-        }
-        
-        // Activar modo diseño
-        function activateDesignMode() {
-            designMode = true;
-            document.body.classList.add('design-mode-active');
-            saveDesignState();
-        }
-        
-        // Guardar diseño específico del modo constructor
-        function saveConstructorDesign() {
-            saveDesignState();
-            showCoordinates();
-            
-            // Mensaje de confirmación
-            addMessage('✅ <strong>DISEÑO GUARDADO</strong><br><br>Las posiciones han sido guardadas permanentemente.<br>El código CSS está disponible en el modal.', 'ai');
-        }
-        
-        // Desactivar modo diseño
-        function deactivateDesignMode() {
-            designMode = false;
-            document.body.classList.remove('design-mode-active');
-            saveDesignState();
-        }
-        
-        // Alternar modo diseño
-        function toggleDesignMode() {
-            if (designMode) {
-                deactivateDesignMode();
-            } else {
-                activateDesignMode();
-            }
-        }
-        
-        // ===== PANEL DE ESTILOS DEL ADMIN =====
-        function showAdminPanel() {
-            document.getElementById('adminStylesPanel').classList.add('show');
-        }
-        
-        function hideAdminPanel() {
-            document.getElementById('adminStylesPanel').classList.remove('show');
-        }
-        
-        function toggleAdminPanel() {
-            document.getElementById('adminStylesPanel').classList.toggle('show');
-        }
-        
-        function updateAdminPreview() {
-            const bgColor = document.getElementById('adminBgColor').value;
-            const borderColor = document.getElementById('adminBorderColor').value;
-            const textColor = document.getElementById('adminTextColor').value;
-            const neonColor = document.getElementById('adminNeonColor').value;
-            const fontSize = document.getElementById('adminFontSize').value;
-            const fontFamily = document.getElementById('adminFontFamily').value;
-            
-            // Actualizar valores visual
-            document.getElementById('fontSizeValue').textContent = fontSize + 'px';
-            document.getElementById('bgColorValue').textContent = bgColor;
-            document.getElementById('borderColorValue').textContent = borderColor;
-            document.getElementById('textColorValue').textContent = textColor;
-            document.getElementById('neonColorValue').textContent = neonColor;
-            
-            // Aplicar cambios en tiempo real
-            document.body.style.backgroundColor = bgColor;
-            document.body.style.color = textColor;
-            document.body.style.fontFamily = fontFamily;
-            document.body.style.fontSize = fontSize + 'px';
-            
-            // Aplicar a elementos principales
-            const container = document.querySelector('.container');
-            if (container) {
-                container.style.backgroundColor = bgColor;
-            }
-            
-            // Aplicar a paneles
-            document.querySelectorAll('.main-panel, .side-panel, .chat-section, .signals-section').forEach(el => {
-                el.style.backgroundColor = bgColor;
-                el.style.borderColor = borderColor;
-                el.style.color = textColor;
-            });
-        }
-        
-        // Generar y copiar CSS definitivo
-        function applyPermanentDesign() {
-            const bgColor = document.getElementById('adminBgColor').value;
-            const borderColor = document.getElementById('adminBorderColor').value;
-            const textColor = document.getElementById('adminTextColor').value;
-            const neonColor = document.getElementById('adminNeonColor').value;
-            const fontSize = document.getElementById('adminFontSize').value;
-            const fontFamily = document.getElementById('adminFontFamily').value;
-            
-            // Obtener posiciones actuales
-            const designState = getDesignState();
-            
-            // Generar CSS completo
-            let cssCode = `/* ============================================\n   DISEÑO DEFINITIVO - Trading Chat IA\n`;
-            cssCode += `   Creador: Gustavo Javier Ferreira de Misiones\n`;
-            cssCode += `   Nacido el 18 de marzo de 2010\n`;
-            cssCode += `   Un millón de profesionales ya lo sabe\n`;
-            cssCode += `   ============================================\n\n`;
-            
-            cssCode += `/* ----- IMPORTAR FUENTE DESDE GOOGLE FONTS ----- */\n`;
-            // Extraer nombre de fuente para Google Fonts
-            const fontName = fontFamily.split(',')[0].replace(/['"]/g, '').trim();
-            const fontUrl = fontName.replace(/ /g, '+');
-            cssCode += `@import url('https://fonts.googleapis.com/css2?family=${fontUrl}&display=swap');\n\n`;
-            
-            cssCode += `/* ----- VARIABLES DE COLOR ----- */\n`;
-            cssCode += `:root {\n`;
-            cssCode += `  --admin-bg: ${bgColor};\n`;
-            cssCode += `  --admin-border: ${borderColor};\n`;
-            cssCode += `  --admin-text: ${textColor};\n`;
-            cssCode += `  --admin-neon: ${neonColor};\n`;
-            cssCode += `  --admin-font-size: ${fontSize}px;\n`;
-            cssCode += `  --admin-font-family: ${fontFamily};\n`;
-            cssCode += `}\n\n`;
-            
-            cssCode += `/* ----- ESTILOS APLICADOS ----- */\n`;
-            cssCode += `body {\n  background-color: ${bgColor} !important;\n  color: ${textColor} !important;\n  font-family: ${fontFamily} !important;\n  font-size: ${fontSize}px !important;\n}\n\n`;
-            
-            cssCode += `.main-panel, .side-panel {\n  background-color: ${bgColor};\n  border-color: ${borderColor};\n}\n\n`;
-            
-            if (designState.chatSection && designState.chatSection.width) {
-                cssCode += `.chat-section {\n`;
-                cssCode += `  width: ${designState.chatSection.width};\n`;
-                if (designState.chatSection.height) cssCode += `  height: ${designState.chatSection.height};\n`;
-                cssCode += `}\n\n`;
-            }
-            
-            if (designState.signalsSection && designState.signalsSection.width) {
-                cssCode += `.signals-section {\n`;
-                if (designState.signalsSection.width) cssCode += `  width: ${designState.signalsSection.width};\n`;
-                if (designState.signalsSection.height) cssCode += `  height: ${designState.signalsSection.height};\n`;
-                cssCode += `}\n\n`;
-            }
-            
-            if (designState.tradingView && designState.tradingView.width) {
-                cssCode += `.tradingview-widget-container {\n`;
-                if (designState.tradingView.width) cssCode += `  width: ${designState.tradingView.width} !important;\n`;
-                if (designState.tradingView.height) cssCode += `  height: ${designState.tradingView.height} !important;\n`;
-                cssCode += `}\n\n`;
-            }
-            
-            // Bordes
-            cssCode += `/* ----- BORDES PERSONALIZADOS ----- */\n`;
-            cssCode += `.message, .signal-card, .market-item, .chat-messages {\n  border-color: ${borderColor} !important;\n}\n\n`;
-            
-            // Textos
-            cssCode += `/* ----- TEXTOS PERSONALIZADOS ----- */\n`;
-            cssCode += `.message-content, .signal-detail-value, .market-price, .logo, .section-title {\n  color: ${textColor} !important;\n}\n\n`;
-            
-            // Efectos neón
-            cssCode += `/* ----- EFECTOS NEÓN ----- */\n`;
-            cssCode += `.status-dot, .logo span, .section-title::before {\n  background-color: ${neonColor} !important;\n  box-shadow: 0 0 10px ${neonColor} !important;\n}\n\n`;
-            
-            // JSON Data
-            cssCode += `/* ============================================\n   JSON DATA (para restauración programática)\n`;
-            cssCode += `   ============================================\n\n`;
-            cssCode += JSON.stringify({
-                colors: { bg: bgColor, border: borderColor, text: textColor, neon: neonColor },
-                typography: { fontSize: fontSize, fontFamily: fontFamily },
-                layout: designState
-            }, null, 2);
-            
-            // Copiar al portapapeles
-            navigator.clipboard.writeText(cssCode).then(() => {
-                addMessage('✅ <strong>¡CÓDIGO COPIADO AL PORTAPAPELES!</strong><br><br>El código CSS está listo para pegar en tu proyecto.<br>También se ha guardado automáticamente.', 'ai');
-            }).catch(err => {
-                // Si falla, mostrar en modal
-                document.getElementById('coordinatesOutput').textContent = cssCode;
-                document.getElementById('coordinatesModal').classList.add('show');
-                addMessage('✅ <strong>DISEÑO DEFINITIVO APLICADO</strong><br><br>El código está en el modal. Cópialo manualmente.', 'ai');
-            });
-            
-            // Guardar en localStorage
-            localStorage.setItem('trading-chat-permanent-design', JSON.stringify({
-                colors: { bg: bgColor, border: borderColor, text: textColor, neon: neonColor },
-                typography: { fontSize: fontSize, fontFamily: fontFamily },
-                layout: designState
-            }));
-        }
-        
-        function resetAdminStyles() {
-            document.getElementById('adminBgColor').value = '#0a0a0a';
-            document.getElementById('adminBorderColor').value = '#00ff41';
-            document.getElementById('adminTextColor').value = '#00ff41';
-            document.getElementById('adminNeonColor').value = '#00ff41';
-            document.getElementById('adminFontSize').value = '14';
-            document.getElementById('adminFontFamily').value = "'Montserrat', sans-serif";
-            
-            document.getElementById('fontSizeValue').textContent = '14px';
-            document.getElementById('bgColorValue').textContent = '#0a0a0a';
-            document.getElementById('borderColorValue').textContent = '#00ff41';
-            document.getElementById('textColorValue').textContent = '#00ff41';
-            document.getElementById('neonColorValue').textContent = '#00ff41';
-            
-            // Restaurar estilos por defecto
-            document.body.style.backgroundColor = '';
-            document.body.style.color = '';
-            document.body.style.fontFamily = '';
-            document.body.style.fontSize = '';
-            
-            addMessage('ℹ️ Estilos restablecidos a los valores por defecto.', 'ai');
-        }
-        
-        // Cargar diseño permanente al inicio
-        function loadPermanentDesign() {
-            const saved = localStorage.getItem('trading-chat-permanent-design');
-            if (saved) {
-                try {
-                    const design = JSON.parse(saved);
-                    
-                    if (design.colors) {
-                        document.body.style.backgroundColor = design.colors.bg;
-                        document.body.style.color = design.colors.text;
-                    }
-                    
-                    if (design.layout) {
-                        applyDesignState(design.layout);
-                    }
-                } catch (e) {
-                    console.error('Error al cargar diseño permanente:', e);
-                }
-            }
-        }
-        
-        // Iniciar carga del diseño
-        loadPermanentDesign();
-        
-        // ===== INTERACT.JS - Solo activar en modo constructor =====
-        function enableConstructorInteractions() {
-            // Habilitar drag para main-panel
-            interactMainPanel = interact('.main-panel').draggable({
-                listeners: {
-                    move (event) {
-                        if (!constructorMode) return;
-                        const target = event.target;
-                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-                        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                        target.setAttribute('data-x', x);
-                        target.setAttribute('data-y', y);
-                    }
-                }
-            });
-            
-            // Habilitar drag para side-panel
-            interactSidePanel = interact('.side-panel').draggable({
-                listeners: {
-                    move (event) {
-                        if (!constructorMode) return;
-                        const target = event.target;
-                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-                        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-                        target.setAttribute('data-x', x);
-                        target.setAttribute('data-y', y);
-                    }
-                }
-            });
-            
-            // Habilitar resize para chat-section
-            interactChatSection = interact('.chat-section').resizable({
-                edges: { left: true, right: true, bottom: true, top: true },
-                listeners: {
-                    move (event) {
-                        if (!constructorMode) return;
-                        let { x, y } = event.target.dataset;
-                        x = (parseFloat(x) || 0) + event.deltaRect.left;
-                        y = (parseFloat(y) || 0) + event.deltaRect.top;
-                        Object.assign(event.target.style, {
-                            width: event.rect.width + 'px',
-                            height: event.rect.height + 'px',
-                            transform: 'translate(' + x + 'px,' + y + 'px)'
-                        });
-                        event.target.dataset.x = x;
-                        event.target.dataset.y = y;
-                    }
-                }
-            });
-            
-            // Habilitar resize para TradingView
-            interactTradingView = interact('.tradingview-widget-container').resizable({
-                edges: { left: true, right: true, bottom: true, top: true },
-                listeners: {
-                    move (event) {
-                        if (!constructorMode) return;
-                        let { x, y } = event.target.dataset;
-                        x = (parseFloat(x) || 0) + event.deltaRect.left;
-                        y = (parseFloat(y) || 0) + event.deltaRect.top;
-                        Object.assign(event.target.style, {
-                            width: event.rect.width + 'px',
-                            height: event.rect.height + 'px',
-                            transform: 'translate(' + x + 'px,' + y + 'px)'
-                        });
-                        event.target.dataset.x = x;
-                        event.target.dataset.y = y;
-                        setTimeout(resizeTradingViewChart, 50);
-                    }
-                }
-            });
-        }
-        
-        function disableConstructorInteractions() {
-            // Desconectar todos los interact
-            if (interactMainPanel) { interactMainPanel.unset(); interactMainPanel = null; }
-            if (interactSidePanel) { interactSidePanel.unset(); interactSidePanel = null; }
-            if (interactChatSection) { interactChatSection.unset(); interactChatSection = null; }
-            if (interactTradingView) { interactTradingView.unset(); interactTradingView = null; }
-            
-            // Restaurar posiciones originales
-            document.querySelectorAll('[data-x][data-y]').forEach(el => {
-                el.style.transform = '';
-                el.removeAttribute('data-x');
-                el.removeAttribute('data-y');
-            });
-        }
-        
-        // Guardar diseño y mostrar coordenadas
-        function saveDesign() {
-            saveDesignState();
-            showCoordinates();
-        }
-        
-        // Mostrar coordenadas en modal
-        function showCoordinates() {
-            const designState = getDesignState();
-            const cssOutput = generateCSSOutput(designState);
-            
-            document.getElementById('coordinatesOutput').textContent = cssOutput;
-            document.getElementById('coordinatesModal').classList.add('show');
-        }
-        
-        
-            
-            
-            
-        function generateCSSOutput(designState) {
-            let css = '';
-            
-            css += '/* ----- SECCIÓN DE CHAT ----- */\n';
-            if (designState.chatSection && (designState.chatSection.width || designState.chatSection.height || designState.chatSection.transform)) {
-                css += '.chat-section {\n';
-                if (designState.chatSection.width) css += `  width: ${designState.chatSection.width};\n`;
-                if (designState.chatSection.height) css += `  height: ${designState.chatSection.height};\n`;
-                if (designState.chatSection.transform) css += `  transform: ${designState.chatSection.transform};\n`;
-                css += '}\n\n';
-            }
-            
-            css += '/* ----- SECCIÓN DE SEÑALES ----- */\n';
-            if (designState.signalsSection && (designState.signalsSection.width || designState.signalsSection.height)) {
-                css += '.signals-section {\n';
-                if (designState.signalsSection.width) css += `  width: ${designState.signalsSection.width};\n`;
-                if (designState.signalsSection.height) css += `  height: ${designState.signalsSection.height};\n`;
-                css += '}\n\n';
-            }
-            
-            css += '/* ----- GRÁFICO TRADINGVIEW ----- */\n';
-            if (designState.tradingView && (designState.tradingView.width || designState.tradingView.height)) {
-                css += '.tradingview-widget-container {\n';
-                if (designState.tradingView.width) css += `  width: ${designState.tradingView.width} !important;\n`;
-                if (designState.tradingView.height) css += `  height: ${designState.tradingView.height} !important;\n`;
-                css += '}\n\n';
-            }
-            
-            css += '/* ============================================\n';
-            css += '   JSON DATA (Copia este JSON si necesitas\n';
-            css += '   restaurar el diseño programmatically)\n';
-            css += '   ============================================\n\n';
-            css += JSON.stringify(designState, null, 2);
-            
-            return css;
-        }
-        
-        // Cerrar modal de coordenadas
-        function closeCoordinatesModal() {
-            document.getElementById('coordinatesModal').classList.remove('show');
-        }
-        
-        
-        
-        // Adaptar gráfico de TradingView al tamaño
-        function resizeTradingViewChart() {
-            const container = document.querySelector('.tradingview-widget-container');
-            if (container) {
-                const width = container.offsetWidth;
-                const height = container.offsetHeight - 10;
-                
-                // Ajustar el div interno del gráfico
-                const chartDiv = document.getElementById('tradingview_chart');
-                if (chartDiv) {
-                    chartDiv.style.width = width + 'px';
-                    chartDiv.style.height = height + 'px';
-                }
-                
-                // Buscar y redimensionar el iframe del gráfico
-                const chartFrame = document.querySelector('#tradingview_chart iframe');
-                if (chartFrame) {
-                    chartFrame.style.width = width + 'px';
-                    chartFrame.style.height = height + 'px';
-                }
-            }
-        }
-        
-        // Event listener para teclado - Ctrl+Shift+D
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-                e.preventDefault();
-                toggleDesignMode();
-            }
-            // Cerrar modal con Escape
-            if (e.key === 'Escape') {
-                closeCoordinatesModal();
-            }
-        });
-        
-        // Guardar cambios cuando se redimensiona o mueve elementos
-        function setupDesignModeListeners() {
-            const elements = ['.main-panel', '.side-panel', '.chat-section', '.signals-section', '.tradingview-widget-container'];
-            
-            elements.forEach(selector => {
-                const element = document.querySelector(selector);
-                if (element) {
-                    element.addEventListener('dragmove', () => {
-                        if (designMode) saveDesignState();
-                    });
-                    element.addEventListener('resizemove', () => {
-                        if (designMode) {
-                            saveDesignState();
-                            if (selector === '.tradingview-widget-container') {
-                                setTimeout(resizeTradingViewChart, 50);
-                            }
-                        }
-                    });
-                }
-            });
-        }
-        
-        
-        // Guardar cuando se redimensiona la ventana
-        window.addEventListener('resize', () => {
-            if (designMode) {
-                saveDesignState();
-                resizeTradingViewChart();
-            }
-        });
-        
-        document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
-    </script>
-    
     <!-- TradingView Widget Script -->
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
     new TradingView.widget({
         width: "100%",
-        height: 420,
+        height: "100%",
         symbol: "XAUUSD",
         interval: "D",
         timezone: "America/Buenos_Aires",
@@ -2504,130 +296,60 @@
     });
     </script>
     
+    <script>
+        // ===== CHAT FUNCTIONALITY =====
+        function sendMessage() {
+            var input = document.getElementById('chatInput');
+            var message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Show loading message
+            var loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message ai';
+            loadingDiv.id = 'loadingMessage';
+            loadingDiv.innerHTML = '<div class="message-time">IA | Procesando...</div><div class="message-content">Analizando...</div>';
+            document.getElementById('chatMessages').appendChild(loadingDiv);
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+            
+            // Simulate AI response
+            setTimeout(function() {
+                var loadingMsg = document.getElementById('loadingMessage');
+                if (loadingMsg) loadingMsg.remove();
+                
+                var responses = [
+                    "He analizado tu consulta. Como IA, puedo ayudarte con trading y mercados financieros.",
+                    "Gracias por tu pregunta. Estoy listo para responder sobre analisis tecnico y estrategias de trading.",
+                    "Interesante consulta. Basandome en Smart Money Concepts, el mercado muestra senales claras."
+                ];
+                
+                var response = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(response, 'ai');
+            }, 1500);
+        }
 
-    
-    <!-- ===== CRÉDITOS MODERNOS ===== -->
-    <footer style="
-        background: var(--bg-secondary);
-        border-top: 1px solid var(--bg-tertiary);
-        padding: 25px;
-        text-align: center;
-        margin-top: 20px;
-        box-shadow: 0 -5px 30px #00ff4133;
-    ">
-        <div style="
-            font-family: 'Inter', sans-serif;
-            color: #666;
-            font-size: 0.75rem;
-            text-align: center;
-            padding: 20px;
-            letter-spacing: 1px;
-        ">
-            <span>Gustavo Javier Ferreira · Misiones, Argentina</span>
-        </div>
-    </footer>
-    
-    <!-- ===== PANEL DE ADMINISTRACIÓN (Modo Constructor) ===== -->
-    <div id="adminStylesPanel" class="admin-styles-panel">
-        <div class="admin-panel-header">
-            <h3>⚙️ MODO CONSTRUCTOR</h3>
-            <button onclick="hideAdminPanel()" style="background:none;border:none;color:#00ff41;font-size:24px;cursor:pointer;">&times;</button>
-        </div>
-        <div class="admin-panel-content">
-            <p style="color:#00ff4188;margin-bottom:15px;">Arrastra y redimensiona los paneles. Usa el botón verde para guardar.</p>
+        function addMessage(content, type) {
+            var messagesContainer = document.getElementById('chatMessages');
+            var time = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
             
-            <button onclick="saveDesign()" style="
-                background: linear-gradient(135deg, #00ff41, #00cc33);
-                color: #000;
-                border: none;
-                padding: 15px 30px;
-                font-size: 16px;
-                font-weight: bold;
-                border-radius: 8px;
-                cursor: pointer;
-                width: 100%;
-                margin-bottom: 15px;
-                box-shadow: 0 0 20px #00ff4166;
-                transition: transform 0.2s;
-            ">💾 GUARDAR DISEÑO</button>
+            var messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + type;
+            messageDiv.innerHTML = '<div class="message-time">' + (type === 'user' ? 'Usuario' : 'IA') + ' | ' + time + '</div><div class="message-content">' + content + '</div>';
             
-            <button onclick="applyPermanentDesign()" style="
-                background: linear-gradient(135deg, #4a9eff, #0066cc);
-                color: #fff;
-                border: none;
-                padding: 12px 20px;
-                font-size: 14px;
-                border-radius: 6px;
-                cursor: pointer;
-                width: 100%;
-                margin-bottom: 10px;
-            ">✅ APLICAR DISEÑO DEFINITIVO</button>
-            
-            <button onclick="deactivateConstructorMode()" style="
-                background: transparent;
-                color: #ff4141;
-                border: 1px solid #ff4141;
-                padding: 10px 20px;
-                font-size: 13px;
-                border-radius: 6px;
-                cursor: pointer;
-                width: 100%;
-            ">🔒 SALIR DEL MODO CONSTRUCTOR</button>
-        </div>
-    </div>
-    
-    <!-- ===== MODAL DE COORDENADAS CSS ===== -->
-    <div id="coordinatesModal" class="coordinates-modal">
-        <div class="coordinates-modal-content">
-            <div class="coordinates-modal-header">
-                <h3>📋 CÓDIGO CSS DEL DISEÑO</h3>
-                <button onclick="closeCoordinatesModal()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;">&times;</button>
-            </div>
-            <div class="coordinates-modal-body">
-                <pre id="coordinatesOutput" style="
-                    background: #0a0a0a;
-                    color: #00ff41;
-                    padding: 20px;
-                    border-radius: 8px;
-                    overflow-x: auto;
-                    font-size: 12px;
-                    max-height: 400px;
-                    overflow-y: auto;
-                    border: 1px solid #00ff4133;
-                "></pre>
-            </div>
-            <div class="coordinates-modal-footer">
-                <button onclick="copyCoordinates()" style="
-                    background: linear-gradient(135deg, #4a9eff, #0066cc);
-                    color: #fff;
-                    border: none;
-                    padding: 12px 25px;
-                    font-size: 14px;
-                    border-radius: 6px;
-                    cursor: pointer;
-                ">📋 COPIAR CÓDIGO</button>
-                <button onclick="closeCoordinatesModal()" style="
-                    background: #333;
-                    color: #fff;
-                    border: none;
-                    padding: 12px 25px;
-                    font-size: 14px;
-                    border-radius: 6px;
-                    cursor: pointer;
-                ">CERRAR</button>
-            </div>
-        </div>
-    </div>
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
 
+        // Enter key to send
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
 </body>
 </html>
-    
-    
-    
-    
-
-</body>
-</html>
-
-
-
