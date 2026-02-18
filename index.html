@@ -19,11 +19,6 @@
             box-sizing: border-box;
         }
         
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
-        
         :root {
             --bg-primary: #000000;
             --bg-secondary: #0a0a0a;
@@ -33,11 +28,15 @@
             --text-secondary: #b0b0b0;
             --text-muted: #808080;
             --accent: #8ab4f8;
-            --accent-dim: #8ab4f833;
-            --buy-color: #4ade80;
-            --sell-color: #f87171;
             --border-radius: 28px;
             --border-radius-small: 20px;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
         
         body {
@@ -45,11 +44,10 @@
             background-color: var(--bg-primary);
             color: var(--text-primary);
             height: 100vh;
-            overflow: hidden;
             line-height: 1.6;
         }
         
-        /* ===== CONTAINER CON ESTRUCTURA 65/35 ===== */
+        /* ===== CONTAINER FLEX 65/35 ===== */
         .container {
             display: flex;
             flex-direction: column;
@@ -59,10 +57,11 @@
         
         /* TradingView - 65% */
         .tradingview-section {
-            flex: 0 0 65vh;
+            flex: 0 0 65%;
             padding: 15px;
             display: flex;
             flex-direction: column;
+            min-height: 0;
         }
         
         .tradingview-section .section-title {
@@ -72,20 +71,20 @@
         
         .tradingview-section .tradingview-widget-container {
             flex: 1;
-            width: 100% !important;
+            width: 100%;
             border-radius: var(--border-radius);
             overflow: hidden;
             min-height: 0;
         }
         
         .tradingview-section #tradingview_chart {
-            height: 100% !important;
+            height: 100%;
             border-radius: var(--border-radius);
         }
         
         /* Chat - 35% */
         .chat-section {
-            flex: 0 0 35vh;
+            flex: 0 0 35%;
             display: flex;
             flex-direction: column;
             padding: 15px;
@@ -110,7 +109,7 @@
             color: var(--text-primary);
         }
         
-        /* Chat Messages con bordes redondeados 28px */
+        /* Chat Messages - ANCHO COMPLETO */
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -119,10 +118,10 @@
             border: 1px solid var(--bg-tertiary);
             margin-bottom: 10px;
             border-radius: var(--border-radius);
-            min-height: 0;
+            min-height: 100px;
         }
         
-        /* Mensajes con bordes 28px */
+        /* Mensajes */
         .message {
             margin-bottom: 12px;
             padding: 16px 20px;
@@ -161,7 +160,7 @@
             line-height: 1.6;
         }
         
-        /* Input area */
+        /* Input area - PROFESIONAL */
         .chat-input-area {
             display: flex;
             gap: 12px;
@@ -199,13 +198,14 @@
             background: var(--accent);
             border: none;
             color: #fff;
-            padding: 12px 24px;
+            padding: 14px 28px;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             border-radius: 30px;
             transition: all 0.3s;
+            flex-shrink: 0;
         }
         
         .btn:hover {
